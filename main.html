@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Follow</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fmt.css">
+</head>
+<body>
+    <header>
+
+    </header>
+    <div class="map-content">
+        <div class="side-menu">
+            <div class="menu-side">
+                <img src="img/menuSideImg.png" class="menu-side-img" alt="1">
+            </div>
+            <div class="menu-item">
+                <div class="user-picture">
+                    <img src="img/userPicTmp.png" alt="Your avatar">
+                    <div class="user-overly"></div>
+                    <h3>UserName</h3>
+                    <a href="#" class="my-btn" onclick="jumpAndClose('tips','my-slide-down','my-slide-down-re')"></a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <div class="menu-option">
+                            <div class="overly">
+                                <a href="#" class="my-btn" onclick="jumpAndClose('info','my-fade','my-fade-reverse')"></a>
+                            </div>
+                            <img src="img/menuTmp1.png" class="option-img" alt="1">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-option">
+                            <div class="overly">
+                                <a href="#" class="my-btn" onclick="jumpClose('info','my-fade','my-fade-reverse')"></a>
+                            </div>
+                            <img src="img/menuTmp2.png" class="option-img" alt="1">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-option">
+                            <div class="overly">
+                                <a href="#" class="my-btn" onclick="jump('info','my-fade','my-fade-reverse')"></a>
+                            </div>
+                            <img src="img/menuTmp3.png" class="option-img" alt="1">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="menu-option">
+                            <div class="overly">
+                                <a href="#" class="my-btn"></a>
+                            </div>
+                            <img src="img/menuTmp4.png" class="option-img" alt="1">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="map-region">
+            <div class="jump-window window-warning" id="tips">
+                <div class="tip-close" onclick="jumpClose('tips','my-slide-down','my-slide-down-re')"><img src="img/close-icon-black.png" class="abs-center" alt=""></div>
+                <div class="msg-board" id="msgBoard"><p id="msg" class="abs-center"></p></div>
+            </div>
+            <div class="jump-window abs-center window-md" id="info">
+                <img src="img/3.jpg" class="img-responsive" alt="2">
+                <a class="glyphicon glyphicon-remove b-close" onclick="jumpClose('info','my-fade','my-fade-reverse')"></a>
+            </div>
+            <div class="map-header">
+                <img src="img/menuTmp2.png" class="logo" alt="logo">
+                <ul class="my-nav">
+                    <li>
+                        <div>
+                            <span>option1</span>
+                            <div onclick="notice.showDialog('Hello\n Someone followed you path just now')"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span>option2</span>
+                            <div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span>option3</span>
+                            <div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span>option4</span>
+                            <div></div>
+                        </div>
+                    </li>
+                </ul>
+
+                <input type="text" class="form-control film-search" placeholder="输入电影名来搜索...">
+            </div>
+            <div id="googleMap"></div>
+            <div id="mapOptions">
+                <div>
+                    <img src="img/addBtn.png" alt="1" title="Add new place" onclick="changeMode('add')">
+                    <img src="img/addBtn.png" alt="1" onclick="changeMode('look')">
+                    <img src="img/addBtn.png" alt="1" onclick="changeMode('route')">
+                    <img src="img/addBtn.png" alt="1" onclick="changeMode('other')">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBzE9xAESye6Kde-3hT-6B90nfwUkcS8Yw&sensor=true">
+    </script>
+    <script src="js/fmt.js"></script>
+    <script>
+        var p_x,p_y;
+        var map;
+        var myCenter = new google.maps.LatLng(46.195042108660154,126.73828125);
+        function initialize()
+        {
+            var mapProp = {
+                center:myCenter,
+                zoom:5,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+            map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            google.maps.event.addListener(map,'click',function (event) {
+                if(mode==="add") placeMaker(event.latLng);
+            });
+        }
+        function placeMaker(location) {
+            p_x = location.lat();
+            p_y = location.lng();
+            notice.showDialog("You clicked the position marked \nx: "+p_x+" y: "+p_y);
+            var marker = new google.maps.Marker({
+                position:location,
+                map:map,
+            });
+            google.maps.event.addListener(marker,'dblclick',function () {
+                if(mode==='add') {
+                    marker.setVisible(false);
+                    notice.showDialog("Marker deleted!")
+                }
+            });
+            google.maps.event.addListener(marker,'click',function () {
+                if(mode==='add') notice.showDialog("You have selected this marker with position:\n\
+                    X: "+marker.position.lat()+" Y: "+marker.position.lng()+"\
+                    \nClick here to complete film info!","addNewPlace")
+            })
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</body>
+</html>
