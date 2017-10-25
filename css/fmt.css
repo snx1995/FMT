@@ -190,6 +190,9 @@ input{
     width: 90%;
     padding: 0 10px 10px 10px;
 }
+.menu-item::-webkit-scrollbar{
+    display: none;
+}
 .side-menu{
     position: absolute;
     top: 0;
@@ -367,9 +370,29 @@ input{
     background-color: rgb(244,244,244);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.window-header h1{
+    color: white;
+    display: inline-block;
+    width: 100%;
+    line-height: 100%;
+    text-align: center;
+}
+.window-header{
+    width: 100%;
+    height: 10%;
+    background-color: #00b3ee;
+}
+.movieInfoContent{
+    width: 100%;
+    height: 90%;
+    padding: 30px 20px 20px 20px;
+    overflow: auto;
+}
+.movieInfoContent::-webkit-scrollbar{
+    display: none;
+}
 .jump-window{
     z-index: 100;
-    padding: 30px 20px 20px 30px;
     background-color: #fff;
     visibility: hidden;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -420,6 +443,14 @@ input{
     max-width: 600px;
     min-height: 350px;
     max-height: 400px;
+}
+.window-lg{
+    width: 90%;
+    height: 90%;
+    min-width: 700px;
+    max-width: 1000px;
+    min-height: 700px;
+    max-height: 700px;
 }
 .window-radius{
     border-radius: 8px;
@@ -510,10 +541,8 @@ input{
     text-align: center;
     display: inline-block;
     position: absolute;
-    width: 20%;
+    width: 300px;
     height: 40px;
-    min-width: 50px;
-    max-width: 300px;
     right: 20px;
     border-radius: 20px;
     top: 0;
@@ -706,4 +735,75 @@ input{
     height: 100%;
     background-color: rgba(255,255,255,0.5);
     visibility: hidden;
+}
+.search-result{
+    overflow: auto;
+    padding-top: 40px;
+    width: 320px;
+    height: 90%;
+    position: absolute;
+    top: 80px;
+    right: 0;
+}
+.search-result::-webkit-scrollbar{
+    display: none;
+}
+.result-item{
+    padding: 2px 2px 2px 2px;
+    width: 100%;
+    height: 80px;
+}
+.result-item:hover{
+    background-color: rgb(244,244,244);
+}
+.result-item:active{
+    background-color: white;
+}
+@keyframes result-sld {
+    from{
+        top: -100%;
+        opacity: 0;
+    }
+    to{
+        top: 80px;
+        opacity: 1;
+    }
+}
+@keyframes result-sld-re {
+    from{
+        top: 80px;
+        opacity: 1;
+    }
+    to{
+        top: -100%;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes result-sld {
+    from{
+        top: -100%;
+        opacity: 0;
+    }
+    to{
+        top: 80px;
+        opacity: 1;
+    }
+}
+@-webkit-keyframes result-sld-re {
+    from{
+        top: 80px;
+        opacity: 1;
+    }
+    to{
+        top: -100%;
+        opacity: 0;
+    }
+}
+.result-sld{
+    animation: result-sld 0.5s;
+    -webkit-animation: result-sld 0.5s;
+}
+.result-sld-re{
+    animation: result-sld-re 0.5s;
+    -webkit-animation: result-sld-re 0.5s;
 }
