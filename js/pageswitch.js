@@ -38,7 +38,7 @@
 				me.sections = me.element.find(me.selectors.sections);
 				me.section = me.sections.find(me.selectors.section);
 
-				me.direction = me.settings.direction == "vertical" ? true : false;
+				me.direction = me.settings.direction === "vertical";
 				me.pagesCount = me.pagesCount();
 				me.index = (me.settings.index >= 0 && me.settings.index < me.pagesCount) ? me.settings.index : 0;
 
@@ -60,7 +60,7 @@
 			},
 			/*说明：获取滑动的宽度（横屏滑动）或高度（竖屏滑动）*/
 			switchLength : function(){
-				return this.direction == 1 ? this.element.height() : this.element.width();
+				return this.direction === 1 ? this.element.height() : this.element.width();
 			},
 			/*说明：向前滑动即上一页*/
 			prve : function(){
@@ -141,9 +141,9 @@
 				if(me.settings.keyboard){
 					$(window).keydown(function(e){
 						var keyCode = e.keyCode;
-						if(keyCode == 37 || keyCode == 38){
+						if(keyCode === 37 || keyCode === 38){
 							me.prve();
-						}else if(keyCode == 39 || keyCode == 40){
+						}else if(keyCode === 39 || keyCode === 40){
 							me.next();
 						}
 					});

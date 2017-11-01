@@ -10,14 +10,6 @@ body{
 input{
     text-align: center;
 }
-.rst-sld{
-    animation: rst-sld 0.5s;
-    -webkit-animation: rst-sld 0.5s;
-}
-.rst-sld-re{
-    animation: rst-sld-re 0.5s;
-    -webkit-animation: rst-sld-re 0.5s;
-}
 .main{
     min-width: 100%;
     min-height: 100%;
@@ -321,22 +313,6 @@ input{
     right: 0;
     width: 320px;
     height: 400px;
-}
-.my-fade{
-    animation: my-fade 0.5s;
-    -webkit-animation:  my-fade 0.5s;
-}
-.my-fade-reverse{
-    animation: my-fade-reverse 0.5s;
-    -webkit-animation:  my-fade-reverse 0.5s;
-}
-.my-slide-down{
-    animation: slide-down 0.5s;
-    -webkit-animation: slide-down 0.5s;
-}
-.my-slide-down-re{
-    animation: slide-down-re 0.5s;
-    -webkit-animation: slide-down-re 0.5s;
 }
 .b-btn{
     text-align: center;
@@ -661,14 +637,6 @@ input{
     background-color: rgba(255,255,255,0.5);
     visibility: hidden;
 }
-.result-sld{
-    animation: result-sld 0.5s;
-    -webkit-animation: result-sld 0.5s;
-}
-.result-sld-re{
-    animation: result-sld-re 0.5s;
-    -webkit-animation: result-sld-re 0.5s;
-}
 .movieInfoContent td{
     font-size: 16px;
 }
@@ -757,14 +725,6 @@ input{
     width: 100%;
     text-align: center
 }
-.side-sld{
-    animation: side-sld 0.5s;
-    -webkit-animation: side-sld 0.5s;
-}
-.side-sld-re{
-    animation: side-sld-re 0.5s;
-    -webkit-animation: side-sld-re 0.5s;
-}
 .route-browser{
     position: absolute;
     top: 100px;
@@ -812,7 +772,6 @@ input{
     padding: 0;
     margin: 0;
 }
-
 #container,.sections,.section{
     height: 100%;
     position: relative;
@@ -826,23 +785,23 @@ input{
     background-position: 50% 50%;
 }
 #section0{
-    background-image: url(/SE/img/interstellar.jpg);
+    background-image: url(../img/interstellar.jpg);
     color: #fff;
     text-shadow:1px 1px 1px #333;
 }
 #section1{
     color: #fff;
     text-shadow:1px 1px 1px #333;
-    background-image: url(/SE/img/transformer.jpg);
+    background-image: url(../img/transformer.jpg);
 }
 #section2{
-    background-image: url(/SE/img/transformers.png);
+    background-image: url(../img/transformers.png);
     color: #fff;
     text-shadow:1px 1px 1px #666;
 }
 #section3{
     color: #008283;
-    background-image: url(/SE/img/3.jpg);
+    background-image: url(../img/AboutTime2.png);
     text-shadow:1px 1px 1px #fff;
 }
 .left{

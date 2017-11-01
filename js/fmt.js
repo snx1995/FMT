@@ -155,8 +155,8 @@ function showSearchResult(data) {
     sresult.innerHTML = rs;
     jump('searchResult','result-sld');
 }
-function checkInput(w){
-    var h = "ThisIsTheHelpInformation";
-    var x = document.getElementById('searchHelp');
-    x.innerHTML=w;
+function playAnimation(id,cn) {
+    var el = document.getElementById(id);
+    el.style.visibility='visible';
+    el.classList.add(cn);
 }
