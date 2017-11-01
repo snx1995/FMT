@@ -1,106 +1,22 @@
-@-webkit-keyframes my-fade {
-    from{
-        transform: scale(0.1);
-        -webkit-transform: scale(0.1);
-        opacity: 0;
-    }
-    to{
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        opacity: 1;
-    }
-}
-@keyframes my-fade {
-    from{
-        transform: scale(0.1);
-        -webkit-transform: scale(0.1);
-        opacity: 0;
-    }
-    to{
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        opacity: 1;
-    }
-}
-@keyframes my-fade-reverse {
-    from{
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        opacity: 1;
-    }
-    to{
-        transform: scale(0.1);
-        -webkit-transform: scale(0.1);
-        opacity: 0;
-    }
-}
-@-webkit-keyframes my-fade-reverse {
-    from{
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        opacity: 1;
-    }
-    to{
-        transform: scale(0.1);
-        -webkit-transform: scale(0.1);
-        opacity: 0;
-    }
-}
-@keyframes slide-down {
-    from{
-        opacity: 0;
-        top: 0;
-    }
-    to{
-        opacity: 1;
-        top: 140px;
-    }
-}
-@-webkit-keyframes slide-down {
-    from{
-        opacity: 0;
-        top: 0;
-    }
-    to{
-        opacity: 1;
-        top: 140px;
-    }
-}
-@keyframes slide-down-re {
-    from{
-        opacity: 1;
-        top: 140px;
-        -webkit-transform: scale(0.9);
-    }
-    to{
-        opacity: 0;
-        top: 0;
-        -webkit-transform: scale(0.9);
-    }
-}
-@-webkit-keyframes slide-down-re {
-    from{
-        opacity: 1;
-        top: 140px;
-        -webkit-transform: scale(0.9);
-
-    }
-    to{
-        opacity: 0;
-        top: 0;
-        -webkit-transform: scale(0.9);
-    }
+@import "effects.css";
+html,body{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 body{
-    height: 100%;
-    width: 100%;
-}
-html{
-    height: 100%;
-    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 input{
     text-align: center;
+}
+.rst-sld{
+    animation: rst-sld 0.5s;
+    -webkit-animation: rst-sld 0.5s;
+}
+.rst-sld-re{
+    animation: rst-sld-re 0.5s;
+    -webkit-animation: rst-sld-re 0.5s;
 }
 .main{
     min-width: 100%;
@@ -194,6 +110,7 @@ input{
     display: none;
 }
 .side-menu{
+    z-index: 200;
     position: absolute;
     top: 0;
     left: -315px;
@@ -203,7 +120,7 @@ input{
 }
 .map-region{
     position: absolute;
-    left: 0px;
+    left: 0;
     top: 0;
     height: 100%;
     min-width: 100%;
@@ -378,9 +295,10 @@ input{
     text-align: center;
 }
 .window-header{
+    border-radius: inherit;
     width: 100%;
-    height: 10%;
-    background-color: #00b3ee;
+    height: 8%;
+    background-color: rgba(200,200,200,0.8);
 }
 .movieInfoContent{
     width: 100%;
@@ -396,6 +314,13 @@ input{
     background-color: #fff;
     visibility: hidden;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.search-help{
+    position: absolute;
+    top: 90px;
+    right: 0;
+    width: 320px;
+    height: 400px;
 }
 .my-fade{
     animation: my-fade 0.5s;
@@ -640,7 +565,7 @@ input{
 }
 #mapOptions{
     border-radius: 20px;
-    z-index: 100;
+    z-index: 99;
     width: 300px;
     height: 40px;
     position: absolute;
@@ -736,9 +661,21 @@ input{
     background-color: rgba(255,255,255,0.5);
     visibility: hidden;
 }
+.result-sld{
+    animation: result-sld 0.5s;
+    -webkit-animation: result-sld 0.5s;
+}
+.result-sld-re{
+    animation: result-sld-re 0.5s;
+    -webkit-animation: result-sld-re 0.5s;
+}
+.movieInfoContent td{
+    font-size: 16px;
+}
 .search-result{
+    background-color: rgba(256,256,256,0.6);
     overflow: auto;
-    padding-top: 40px;
+    padding: 40px 10px 10px 10px;
     width: 320px;
     height: 90%;
     position: absolute;
@@ -748,62 +685,201 @@ input{
 .search-result::-webkit-scrollbar{
     display: none;
 }
-.result-item{
-    padding: 2px 2px 2px 2px;
-    width: 100%;
-    height: 80px;
+.my-item{
+    opacity: 0.8;
+    overflow: hidden;
+    margin: 20px auto;
+    position: relative;
+    background-color: rgba(210,210,210,1);
+    border-radius: 8px;
+    transition: transform 0.3s;
+    -webkit-transition: -webkit-transform 0.3s;
 }
-.result-item:hover{
-    background-color: rgb(244,244,244);
+.item-route{
+    width: 80%;
+    height: 180px;
 }
-.result-item:active{
+.item-result{
+    width: 300px;
+    height: 120px;
+}
+.my-item:hover{
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+}
+.my-item:active{
+    transform: scale(1);
+    -webkit-transform: scale(1);
+}
+.item-route img{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+.item-route img+div{
+    width: 75%;
+    height: 160px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background-color: white;
+    border-radius: inherit
 }
-@keyframes result-sld {
-    from{
-        top: -100%;
-        opacity: 0;
-    }
-    to{
-        top: 80px;
-        opacity: 1;
-    }
+.item-result img{
+    width: 140px;
+    height: 120px;
+    position: absolute;
+    top: 0;
+    right: 0
 }
-@keyframes result-sld-re {
-    from{
-        top: 80px;
-        opacity: 1;
-    }
-    to{
-        top: -100%;
-        opacity: 0;
-    }
+.item-result img+div{
+    width: 190px;
+    height: 100px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border-radius: inherit
 }
-@-webkit-keyframes result-sld {
-    from{
-        top: -100%;
-        opacity: 0;
-    }
-    to{
-        top: 80px;
-        opacity: 1;
-    }
+.item-result h4{
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center
 }
-@-webkit-keyframes result-sld-re {
-    from{
-        top: 80px;
-        opacity: 1;
-    }
-    to{
-        top: -100%;
-        opacity: 0;
-    }
+.item-result span{
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    text-align: center
 }
-.result-sld{
-    animation: result-sld 0.5s;
-    -webkit-animation: result-sld 0.5s;
+.side-sld{
+    animation: side-sld 0.5s;
+    -webkit-animation: side-sld 0.5s;
 }
-.result-sld-re{
-    animation: result-sld-re 0.5s;
-    -webkit-animation: result-sld-re 0.5s;
+.side-sld-re{
+    animation: side-sld-re 0.5s;
+    -webkit-animation: side-sld-re 0.5s;
+}
+.route-browser{
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 900px;
+    height: 85%;
+    background-color: rgba(256,256,256,0.8);
+}
+.route-browser .window-header+div{
+    padding-left: 50px;
+    padding-top: 5px;
+    width: 100%;
+    height: 36px;
+    background-color: rgba(256,256,256,0.95);
+}
+.items-content{
+    visibility: inherit;
+    overflow: auto;
+    width: 85%;
+    margin-left: 50px;
+    height: 85%;
+}
+.items-content::-webkit-scrollbar{
+    display: none;
+}
+.route-browser input{
+    float: left;
+}
+.route-browser label{
+    color: #8c8c8c;
+    margin-right: 10px;
+    margin-left: 10px;
+    float: left;
+}
+.route-input{
+    width: 30%;
+    height: 25px;
+    margin-left: 20px;
+}
+.my-radio{
+    width: 18px;
+    height: 18px;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#container,.sections,.section{
+    height: 100%;
+    position: relative;
+}
+#section0,
+#section1,
+#section2,
+#section3{
+    background-color: #000;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+#section0{
+    background-image: url(/SE/img/interstellar.jpg);
+    color: #fff;
+    text-shadow:1px 1px 1px #333;
+}
+#section1{
+    color: #fff;
+    text-shadow:1px 1px 1px #333;
+    background-image: url(/SE/img/transformer.jpg);
+}
+#section2{
+    background-image: url(/SE/img/transformers.png);
+    color: #fff;
+    text-shadow:1px 1px 1px #666;
+}
+#section3{
+    color: #008283;
+    background-image: url(/SE/img/3.jpg);
+    text-shadow:1px 1px 1px #fff;
+}
+.left{
+    float: left;
+}
+.pages{
+    position:fixed;
+    list-style: none;
+}
+.vertical.pages{
+    right: 10px;
+    top: 50%;
+}
+.horizontal.pages{
+    left: 50%;
+    bottom: 10px;
+}
+.pages li{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 10px 5px;
+    cursor: pointer;
+}
+.horizontal.pages li{
+    display: inline-block;
+    vertical-align: middle;
+}
+.pages li.active{
+    width: 14px;
+    height: 14px;
+    border: 2px solid #FFFE00;
+    background: none;
+    margin-left: 0;
+}
+.slide{
+    transform: translateX(0);
+    transition: all ease-in-out 500ms;
 }

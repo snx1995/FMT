@@ -7,30 +7,34 @@
     <link rel="stylesheet" href="css/fmt.css">
 </head>
 <body>
-    <div class="main">
-        <img src="img/AboutTime2.png" class="img-responsive mainPic" alt="mainPic">
-        <div class="slide-side">
-            <div class="buttons">
-                <button class="b-default b-md" onclick="jump('log','my-fade','my-fade-reverse')">Let's GO!</button>
+    <div id="container" data-PageSwitch>
+        <div class="sections">
+            <div class="section active" id="section0">
             </div>
-        </div>
-        <div class="mainTitle">
-            <h1>Follow Movie to Travel</h1>
-        </div>
-        <div class="jump-window abs-center window-md window-radius" id="log">
-            <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('log','my-fade','my-fade-reverse')"></a>
-            <h1>请登录或注册</h1>
-                <form action="#">
-                    <input type="text" name="userName" class="form-control log-input" placeholder="用户名">
-                    <input type="text" name="passwd" class="form-control log-input" placeholder="密码">
-                    <input type="text" name="passwdcfm" class="form-control log-input" placeholder="确认密码（注册必填）">
-                </form>
-            <div style="margin: 0 auto;width: 210px">
-                <button class="b-default b-md">登录</button>
-                <button class="b-default b-md">注册</button>
+            <div class="section" id="section1">
+            </div>
+            <div class="section" id="section2">
+            </div>
+            <div class="section" id="section3">
             </div>
         </div>
     </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/pageswitch.js"></script>
+    <script type="text/javascript">
+        $("#container").PageSwitch({
+            index: 0,    //页面开始的索引，0是第一页。
+            easing:"linear",   //动画效果。  ease
+            duration:500,      //动画执行时间
+            loop:true,         //是否循环切换
+            pagination:true,   //是否进行分页
+            keybosrd:true,     //是否出发键盘事件
+            direction : "vertical",    //滑动方向：vertical（竖版）。horizontal（横板）
+            callback:function(){
+                $("h1").addClass("slide");
+            }
+        });
+    </script>
     <script src="js/fmt.js"></script>
 </body>
 </html>

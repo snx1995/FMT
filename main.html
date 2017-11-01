@@ -34,7 +34,7 @@
                     <li>
                         <div class="menu-option">
                             <div class="overly">
-                                <a href="#" class="my-btn" onclick="jumpClose('info','my-fade','my-fade-reverse')"></a>
+                                <a href="#" class="my-btn" onclick="jumpClose('info','my-fade-reverse')"></a>
                             </div>
                             <img src="img/menuTmp2.png" class="option-img" alt="1">
                         </div>
@@ -42,7 +42,7 @@
                     <li>
                         <div class="menu-option">
                             <div class="overly">
-                                <a href="#" class="my-btn" onclick="jump('info','my-fade','my-fade-reverse')"></a>
+                                <a href="#" class="my-btn" onclick="jump('info','my-fade')"></a>
                             </div>
                             <img src="img/menuTmp3.png" class="option-img" alt="1">
                         </div>
@@ -50,7 +50,7 @@
                     <li>
                         <div class="menu-option">
                             <div class="overly">
-                                <a href="#" class="my-btn"></a>
+                                <a href="#" class="my-btn" onclick="jump('routeBrowser','side-sld',true)"></a>
                             </div>
                             <img src="img/menuTmp4.png" class="option-img" alt="1">
                         </div>
@@ -59,11 +59,53 @@
             </div>
         </div>
         <div class="map-region">
+            <div class="jump-window route-browser window-radius" id="routeBrowser">
+                <div class="window-header">
+                    <h1>浏览路线</h1>
+                    <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('routeBrowser','side-sld-re')"></a>
+                </div>
+                <div>
+                    <form>
+                        <input type="text" class="form-control input-sm route-input" placeholder="搜地点">
+                        <input type="text" class="form-control input-sm route-input" placeholder="搜电影">
+                        <label for="mine">我的</label>
+                        <input type="radio" class="my-radio" checked name="routeKind" value="mine" id="mine">
+                        <label for="all">所有人</label>
+                        <input type="radio" class="my-radio" name="routeKind" value="all" id="all">
+                    </form>
+                </div>
+                <div class="items-content">
+                    <div class="my-item item-route">
+                        <img src="img/3.jpg" alt="">
+                        <div></div>
+                    </div>
+                    <div class="my-item item-route">
+                        <img src="img/3.jpg" alt="">
+                        <div></div>
+                    </div>
+                    <div class="my-item item-route">
+                        <img src="img/3.jpg" alt="">
+                        <div></div>
+                    </div>
+                    <div class="my-item item-route">
+                        <img src="img/3.jpg" alt="">
+                        <div></div>
+                    </div>
+                    <div class="my-item item-route">
+                        <img src="img/3.jpg" alt="">
+                        <div></div>
+                    </div>
+                    <div class="my-item item-route">
+                        <img src="img/3.jpg" alt="">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
             <div class="jump-window search-result" id="searchResult">
             </div>
             <div class="jump-window window-lg abs-center" id="movieInfo">
                 <div class="window-header">
-                    <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('movieInfo','my-fade','my-fade-reverse')"></a>
+                    <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('movieInfo','my-fade-reverse')"></a>
                     <h1>Movie Info</h1>
                 </div>
                 <div class="movieInfoContent">
@@ -83,7 +125,7 @@
                             <td id="movieGenres">动作，科幻，悬疑</td>
                         </tr>
                         <tr>
-                            <td>国家：</td>
+                            <td>地区：</td>
                             <td id="movieCountry">欧美</td>
                         </tr>
                         <tr>
@@ -115,11 +157,13 @@
                 </div>
             </div>
             <div class="jump-window window-warning" id="tips">
-                <div class="tip-close" onclick="jumpClose('tips','my-slide-down','my-slide-down-re')"><img src="img/close-icon-black.png" class="abs-center" alt=""></div>
+                <div class="tip-close" onclick="jumpClose('tips','my-slide-down-re')">
+                    <img src="img/close-icon-black.png" class="abs-center" alt="">
+                </div>
                 <div class="msg-board" id="msgBoard"><p id="msg" class="abs-center"></p></div>
             </div>
             <div class="jump-window abs-center window-md" id="info">
-                <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('info','my-fade','my-fade-reverse')"></a>
+                <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('info','my-fade-reverse',true)"></a>
                 <form action="addNewFilmInfo">
                     <h2>在这里发生了那些情节呢？</h2>
                     <div class="filmPic">
@@ -136,6 +180,7 @@
                     </div>
                 </form>
             </div>
+            <div class="jump-window search-help" id="searchHelp"></div>
             <div class="map-header">
                 <img src="img/menuTmp2.png" class="logo" alt="logo">
                 <ul class="my-nav">
@@ -164,8 +209,7 @@
                         </div>
                     </li>
                 </ul>
-
-                <input type="text"  class="form-control film-search" id="search" placeholder="输入电影名/导演/主演..来搜索...">
+                <input type="text" onfocus="jump('searchHelp','rst-sld')" class="form-control film-search" id="search" placeholder="输入电影名/导演/主演..来搜索...">
             </div>
             <div id="googleMap"></div>
             <div id="shade"></div>
@@ -184,9 +228,7 @@
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBXUVPlSWsNh2fpMJYsjur-zHd8n04vDVM&sensor=true">
     </script>
     <script src="js/fmt.js"></script>
-
     <script>
-
         var map;
         var myCenter = new google.maps.LatLng(46.195042108660154,126.73828125);
         var prePath = new google.maps.Polyline();

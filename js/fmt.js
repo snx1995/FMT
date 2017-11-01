@@ -9,34 +9,37 @@ search.addEventListener('keydown',function () {
     if(event.keyCode === 13){
         var m = document.getElementById('search').value;
         searchMovie(m);
+        jumpClose('searchHelp','rst-sld-re');
     }
 });
-function jump(id,effect1,effect2){
+function jump(id,effect1,enableOverly){
     var w = document.getElementById(id);
-    if(effect2!==undefined) w.classList.remove(effect2);
     w.classList.add(effect1);
     w.style.visibility="visible";
-    if(id==='info'){
-        var m =document.getElementById("shade");
+    function windowOpen(){
+        this.style.visibility='visible';
+        this.classList.remove(effect1);
+    }
+    w.addEventListener('animationend',windowOpen);
+    w.removeEventListener('animationend',function () {
+    });
+    if(enableOverly===true){
+        var m = document.getElementById("shade");
         m.style.visibility='visible';
     }
-
 }
-function jumpClose(id,effect1,effect2) {
+function jumpClose(id,effect2) {
     var w = document.getElementById(id);
-    w.classList.remove(effect1);
-    if(effect2!==undefined){
-        w.classList.add(effect2);
-        w.addEventListener("animationend",function () {
-            if(w.classList.contains(effect2)){
-                w.style.visibility="hidden";
-                if(id==='info'){
-                    var m =document.getElementById("shade");
-                    m.style.visibility='hidden';
-                }
-            }
-        })
+    w.classList.add(effect2);
+    function windowClose(){
+        this.style.visibility='hidden';
+        this.classList.remove(effect2);
     }
+    w.addEventListener('animationend',windowClose);
+    w.removeEventListener('animationend',function () {
+    });
+    var m =document.getElementById("shade");
+    m.style.visibility='hidden';
 }
 function jumpAndClose(id,effect1,effect2){
     var w = document.getElementById(id);
@@ -66,14 +69,14 @@ notice = {
                 case "addNewPlace":
                     document.getElementById("pos_x").value = p_x;
                     document.getElementById("pos_y").value = p_y;
-                    jump('info','my-fade','my-fade-reverse');
+                    jump('info','my-fade');
                     break;
                 default:
-                    jumpClose('tips','my-slide-down','my-slide-down-re');
+                    jumpClose('tips','my-slide-down-re');
                     break;
             }
         };
-        jump('tips','my-slide-down','my-slide-down-re');
+        jump('tips','my-slide-down');
     }
 };
 function changeMode(mod) {
@@ -103,7 +106,7 @@ function getMovieInfo(id) {
 }
 function confirmMovie(){
     movieSelected = movieDisplay;
-    jumpClose('movieInfo','my-fade','my-fade-reverse');
+    jumpClose('movieInfo','my-fade-reverse');
     notice.showDialog("\nYou selected :"+movieSelected.title);
 }
 function showMovieInfo(data){
@@ -120,18 +123,12 @@ function showMovieInfo(data){
         d += i===0? data.casts[0].name:(", "+data.casts[i].name);
     }
     document.getElementById("movieCasts").innerHTML = d;
-    for(i=0;i<data.countries.length;i++){
-        d += i===0? data.countries[0]:("/"+data.countries[i]);
-    }
     document.getElementById('movieYear').innerHTML = data.year;
     document.getElementById('movieSummary').innerHTML = data.summary;
-    d="";
-    for(i=0;i<data.genres.length;i++){
-        d += i===0? data.genres[0]:("/"+data.genres[i]);
-    }
-    document.getElementById('movieGenres').innerHTML = d;
+    document.getElementById('movieGenres').innerHTML = data.genres.join('/');
+    document.getElementById('movieCountry').innerHTML = data.countries.join('/');
     document.getElementById('moviePic').src = data.images.medium;
-    jump('movieInfo','my-fade','my-fade-reverse');
+    jump('movieInfo','my-fade');
     movieDisplay = data;
 }
 function searchMovie(key){
@@ -144,20 +141,22 @@ function searchMovie(key){
 function showSearchResult(data) {
     var sresult = document.getElementById('searchResult');
     var fid;
-    var rs = " <a class=\"btn glyphicon glyphicon-remove b-close\" onclick=\"jumpClose('searchResult','result-sld','result-sld-re')\"></a>";
+    var rs = "<a class=\"btn glyphicon glyphicon-remove b-close\" onclick=\"jumpClose('searchResult','result-sld-re')\"></a>";
     for(var i=0;i<data.subjects.length;i++){
         fid = data.subjects[i].id;
-        rs+="<div class='result-item' onclick='getMovieInfo(this.id)' id='"+fid+"'>" +
-            "<table class='table'>" +
-            "<tr><td rowspan='2'><img src='" +data.subjects[i].images.small+
-            "' alt='图片加载失败:(' style='width: 75px;height: 75px;' rel='v:image'></td>" +
-            "<td>" + data.subjects[i].title+
-            "</td></tr>" +
-            "<tr><td>" + data.subjects[i].genres.join('/')+
-            "</td></tr>"+
-            "</table>" +
+        rs+="<div class='my-item item-result' onclick='getMovieInfo(this.id)' id='"+fid+"'>" +
+            "<img alt='图片加载失败' src='"+data.subjects[i].images.medium+"'>"+
+            "<div><h4>" + data.subjects[i].title+"</h4>"+
+            "<span>" +data.subjects[i].genres.join('/')+
+            "</span>"+
+            "</div>"+
             "</div>"
     }
     sresult.innerHTML = rs;
-    jump('searchResult','result-sld','result-sld-re');
+    jump('searchResult','result-sld');
+}
+function checkInput(w){
+    var h = "ThisIsTheHelpInformation";
+    var x = document.getElementById('searchHelp');
+    x.innerHTML=w;
 }
