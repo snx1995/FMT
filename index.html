@@ -5,10 +5,6 @@
     <title>Follow Movie to Travel</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/fmt.css">
-    <style>
-
-
-    </style>
 </head>
 <body>
     <div id="container" data-PageSwitch>
@@ -45,7 +41,8 @@
                             <button class="b-btn b-default b-lg" id="signup">注册</button>
                             <button class="b-btn b-default b-lg pull-right" id="login">登录</button>
                         </div>
-                        <div style="position: absolute;top: 0;left: 0;background-color: rgba(0,0,0,0.5);visibility: hidden;width: 100%;height: 100%" id="loginOverly">
+                        <div id="loginOverly">
+                            <h3 style="color: white;width: 100%;text-align: center;display: inline-block;height: 50px;" id="loginMsg">登陆中...</h3>
                             <img src="img/loading.gif" class="abs-center" style="width: 100px;height: 100px">
                         </div>
                     </div>
@@ -56,59 +53,6 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/pageswitch.js"></script>
     <script type="text/javascript">
-        var signup = document.getElementById("signup");
-        var login = document.getElementById("login");
-        signup.addEventListener("click",function () {
-            var username = document.getElementById('userName').value;
-            var passwd = document.getElementById('password').value;
-            var passwdre = document.getElementById("passwordRe").value;
-            var tip1 = document.getElementById("ustip");
-            var tip2 = document.getElementById("pdtip");
-            var tip3 = document.getElementById("pdrtip");
-            var regx1 = /^[a-zA-Z0-9]{1,25}$/;
-            var regx2 = /^[a-zA-Z0-9]{6,16}$/;
-            function tips(i,msg) {
-                if(i===1){
-                    tip1.innerText = msg;
-                    tip2.innerText = "";
-                    tip3.innerText = "";
-                    document.getElementById('userName').focus();
-                }
-                else if(i===2){
-                    tip1.innerText = "";
-                    tip2.innerText = msg;
-                    tip3.innerText = "";
-                    document.getElementById('password').focus();
-                }
-                else if(i===3){
-                    tip1.innerText = "";
-                    tip2.innerText = "";
-                    tip3.innerText = msg;
-                    document.getElementById('passwordRe').focus();
-                }
-                else{
-                    tip1.innerText = "";
-                    tip2.innerText = "";
-                    tip3.innerText = "";
-                }
-            }
-            if(username === "") tips(1,"用户名不能为空！！");
-            else if(!regx1.test(username)) tips(1,"用户名必须为长度为25以下的英文字母或数字！！");
-            else if(passwd === "") tips(2,"密码不能为空！！");
-            else if(!regx2.test(passwd)) tips(2,"密码必须为6~16位英文字母或数字！！");
-            else if(passwdre === "") tips(3,"请确认密码！！");
-            else if(passwdre !== passwd) tips(3,"两次输入不一致！！");
-            else{
-                tips(4);
-                document.getElementById("loginOverly").style.visibility = "visible";
-            }
-        });
-        login.addEventListener("click",function () {
-            var username = document.getElementById('userName');
-            var passwd = document.getElementById('password');
-            alert("Welcome back "+username.value);
-        });
-
         $("#container").PageSwitch({
             index: 0,    //页面开始的索引，0是第一页。
             easing:"linear",   //动画效果。  ease
@@ -123,5 +67,6 @@
         });
     </script>
     <script src="js/fmt.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
