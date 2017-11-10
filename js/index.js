@@ -44,7 +44,7 @@ signup.addEventListener("click",function () {
         tips(4);
         enLoginOverly(true);
         var signupXhr = new XMLHttpRequest();
-        signupXhr.open("GET","signup.php",true);
+        signupXhr.open("GET","signup.php?username="+username+"&password="+passwd,true);
         signupXhr.onreadystatechange = function () {
             if(signupXhr.readyState===4 && signupXhr.status ===200){
                 if(signupXhr.responseText === "success"){
