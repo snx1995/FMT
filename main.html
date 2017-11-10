@@ -165,7 +165,7 @@
             <div class="jump-window abs-center window-md window-radius" style="background-color: rgba(255,255,255,0.8);" id="info">
                 <div class="window-header">
                     <h1>在这里发生了那些情节呢？</h1>
-                    <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('info','my-fade-reverse',true)"></a>
+                    <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('info','my-fade-reverse')"></a>
                 </div>
                 <div class="window-content" style="background-color: rgba(255,255,255,0)">
                     <h2 id="selectedFilm" style="display: block;width: 100%;height: 50px;text-align: center;line-height: 50px">机器人九号</h2>
@@ -183,7 +183,7 @@
                     </div>
                     <input type="text" id="keyword" class="form-control input-lg bg-transparent" style="margin-top: 20px;" placeholder="输入关键词，以空格分割">
                     <div style="width: 100%;padding-top: 20px;">
-                        <button class="b-btn b-blue b-md" style="margin:auto;">确认</button>
+                        <button class="b-btn b-blue b-md " onclick="addNewPoint()">确认</button>
                     </div>
 
                 </div>

@@ -3,7 +3,7 @@ var p_x,p_y;
 var route = [];
 var movieSelected = null;
 var movieDisplay = null;
-var username;
+var username = document.getElementById("username").innerText;
 
 function jump(id,effect1,enableOverly){
     var w = document.getElementById(id);
@@ -62,6 +62,7 @@ notice = {
                 case "addNewPlace":
                     document.getElementById("pos_x").value = p_x;
                     document.getElementById("pos_y").value = p_y;
+                    document.getElementById("selectedFilm").innerText = movieSelected.title;
                     document.getElementById("newFilmPic").src = movieSelected.images.medium;
                     jump('info','my-fade');
                     break;
@@ -167,4 +168,26 @@ function routePointsDropDown(){
         }
     }
 
+}
+
+function addNewPoint() {
+    var offsetx = document.getElementById("pos_x").value;
+    var offsety = document.getElementById("pos_y").value;
+    var filmid = movieSelected.id;
+    var placeDescription = document.getElementById("placeDescription").value;
+    var storyDetails = document.getElementById("storyDetails").value;
+    var keyword = document.getElementById("keyword").value;
+    var xhr = new XMLHttpRequest();
+    var request = "addNewPoint.php?offsetX="+offsetx+"&offsetY="+offsety+"&filmid="+filmid+"&placeDescription="+
+            placeDescription+"&storyDetails="+storyDetails+"&keyword="+keyword+"&username="+username;
+    xhr.open("GET",request,true);
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState===4&&xhr.status===200){
+            if(xhr.responseText==="success"){
+                notice.showDialog("添加成功！")
+                jumpClose("info","my-fade-reverse")
+            }
+        }
+    };
+    xhr.send();
 }

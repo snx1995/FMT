@@ -19,7 +19,7 @@
             <div class="user-picture">
                 <img src="img/userPicTmp.png" alt="Your avatar">
                 <div class="user-overly"></div>
-                <h3>
+                <h3 id="username">
                     <?php
                         $username = $_GET["username"];
                         echo $username;
@@ -182,15 +182,14 @@
                             <input type="text" id="pos_x" class="form-control input-md" readonly style="float: left;width: 35%;margin-left: 10px;">
                             <input type="text" id="pos_y" class="form-control input-md" readonly style="float: left;width: 35%;margin-left: 10px;">
                         </div>
-                        <input type="text" class="form-control input-lg bg-transparent" style="margin-top: 20px;" placeholder="Place description here...">
-                        <textarea id="storyDetails" class="form-control bg-transparent" cols="30" rows="7" style="width: 100%;" placeholder="The story details here..."></textarea>
+                        <input type="text" class="form-control input-lg bg-transparent" id="placeDescription" style="margin-top: 20px;" placeholder="Place description here...">
+                        <textarea id="storyDetails" class="form-control bg-transparent" id="storyDetails" cols="30" rows="7" style="width: 100%;" placeholder="The story details here..."></textarea>
                     </div>
                 </div>
-                <input type="text" id="keyword" class="form-control input-lg bg-transparent" style="margin-top: 20px;" placeholder="输入关键词，以空格分割">
+                <input type="text" id="keyword" class="form-control input-lg bg-transparent" id="keyword" style="margin-top: 20px;" placeholder="输入关键词，以空格分割">
                 <div style="width: 100%;padding-top: 20px;">
-                    <button class="b-btn b-blue b-md" style="margin:auto;">确认</button>
+                    <button style="margin:auto;display: block" class="b-btn b-blue b-md" onclick="addNewPoint()">确认</button>
                 </div>
-
             </div>
 
         </div>
