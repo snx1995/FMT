@@ -289,8 +289,18 @@ input{
 .window-header{
     border-radius: inherit;
     width: 100%;
-    height: 8%;
+    height: 70px;
     background-color: rgba(200,200,200,0.8);
+}
+.window-content{
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 0;
+    height: 85%;
+    padding: 20px 20px 20px 20px;
+}
+.window-content::-webkit-scrollbar{
+    display: none;
 }
 .movieInfoContent{
     width: 100%;
@@ -316,8 +326,38 @@ input{
 }
 .b-btn{
     text-align: center;
+    line-height: 100%;
     text-decoration: none;
-    display: inline-block;
+    display: block;
+}
+.b-lg{
+    font-size: 24px;
+    width: 120px;
+    height: 60px;
+}
+.b-default{
+    background-color: rgba(0,179,238,0);
+    color: rgba(256,256,256,0.8);
+    border: 2px solid rgba(256,256,256,0.8);
+    border-radius: 6px;
+}
+.b-blue{
+    background-color: rgba(0,179,238,0);
+    color: rgba(0,179,238,0.8);
+    border: 2px solid rgba(0,179,238,0.8);
+    border-radius: 6px;
+}
+.b-blue:hover{
+    background-color: rgba(0,179,238,0.3);
+}
+.b-blie:active{
+    background-color: rgba(0,179,238,0.1);
+}
+.b-default:hover{
+    background-color: rgba(0,179,238,0.3);
+}
+.b-default:active{
+    background-color: rgba(0,179,238,0.1);
 }
 .b-btn-light{
     width: 50px;
@@ -337,13 +377,21 @@ input{
     bottom: 0;
     right: 0;
 }
-.window-md{
+.window-sm{
     width: 50%;
     height: 50%;
     min-width: 400px;
     max-width: 600px;
     min-height: 350px;
     max-height: 400px;
+}
+.window-md{
+    width: 70%;
+    height: 70%;
+    min-width: 550px;
+    max-width: 750px;
+    min-height: 500px;
+    max-height: 600px;
 }
 .window-lg{
     width: 90%;
@@ -521,21 +569,8 @@ input{
     text-align: center;
     width: 100%;
 }
-.b-default{
-    background-color: rgba(0,179,238,0);
-    display: inline-block;
-    border: 2px solid #00b3ee;
-    text-align: center;
-    line-height: 100%;
-    border-radius: 6px;
-}
-.b-default:hover{
-    background-color: rgba(0,179,238,0.3);
-}
-.b-default:active{
-    background-color: rgba(0,179,238,0.1);
-}
 .b-md{
+    font-size: 18px;
     width: 100px;
     height: 40px;
 }
@@ -599,7 +634,7 @@ input{
 .filmInfo{
     margin-left: 10px;
     width: 60%;
-    height: 80%;
+    height: 100%;
     float: left;
 }
 .filmPic img{
@@ -613,14 +648,6 @@ input{
 }
 .filmInfo span{
     font-size: 16px;
-}
-#pos_y + input{
-    position: relative;
-    top: 10px;
-}
-#pos_y + input+input{
-    position: relative;
-    top: 20px;
 }
 .filmInfo button{
     position: absolute;
@@ -654,6 +681,7 @@ input{
     display: none;
 }
 .my-item{
+    cursor: pointer;
     opacity: 0.8;
     overflow: hidden;
     margin: 20px auto;
@@ -787,22 +815,18 @@ input{
 #section0{
     background-image: url(../img/interstellar.jpg);
     color: #fff;
-    text-shadow:1px 1px 1px #333;
 }
 #section1{
     color: #fff;
-    text-shadow:1px 1px 1px #333;
     background-image: url(../img/transformer.jpg);
 }
 #section2{
     background-image: url(../img/transformers.png);
     color: #fff;
-    text-shadow:1px 1px 1px #666;
 }
 #section3{
     color: #008283;
     background-image: url(../img/AboutTime2.png);
-    text-shadow:1px 1px 1px #fff;
 }
 .left{
     float: left;
@@ -842,3 +866,57 @@ input{
     transform: translateX(0);
     transition: all ease-in-out 500ms;
 }
+.login-board{
+    width: 400px;
+    height: 450px;
+    position: absolute;
+    top: 50%;
+    right: 100px;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.3)
+}
+.login-board h1{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: white
+}
+.login-board h1+div{
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.login-board input{
+    color: white;
+    background-color: rgba(256,256,256,0.2);
+}
+.login-board span{
+    font-size: 10px;
+    color: red;
+    width: 100%;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.login-board h1+div div{
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.bg-transparent{
+    background-color: rgba(255,255,255,0);
+}
+#newFilmPic{
+    width: 35%;
+    height: 100%;
+    float: left
+}
+#newFilmPic+div{
+    float: left;
+    width: 60%;
+    margin-left: 10px;
+}
+

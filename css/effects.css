@@ -255,6 +255,23 @@
         -webkit-transform: scale(1);
     }
 }
+@-webkit-keyframes rotate {
+    0%{
+        -webkit-transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
 
 .side-sld{
     animation: side-sld 0.5s;
@@ -300,4 +317,7 @@
     animation: drop-down 0.5s;
     -webkit-animation: drop-down 0.5s;
 }
-
+.rotate{
+    animation: rotate 1s linear infinite;
+    -webkit-animation: rotate linear 1s infinite;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Php test</title>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+		function load(){
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET','/info.php',true);
+			xhr.onreadystatechange = function (){
+				if(xhr.readyState==4){
+					document.getElementById('test').innerText = xhr.responseText;
+				}
+			}
+			xhr.send();
+		}
+	</script>
+</head>
+<body>
+	<h1 id='test'>这是默认文本</h1>
+	<button onclick="load()">get</button>
+</body>
+</html>

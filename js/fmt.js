@@ -3,15 +3,8 @@ var p_x,p_y;
 var route = [];
 var movieSelected = null;
 var movieDisplay = null;
+var username;
 
-var search = document.getElementById('search');
-search.addEventListener('keydown',function () {
-    if(event.keyCode === 13){
-        var m = document.getElementById('search').value;
-        searchMovie(m);
-        jumpClose('searchHelp','rst-sld-re');
-    }
-});
 function jump(id,effect1,enableOverly){
     var w = document.getElementById(id);
     w.classList.add(effect1);
@@ -69,6 +62,7 @@ notice = {
                 case "addNewPlace":
                     document.getElementById("pos_x").value = p_x;
                     document.getElementById("pos_y").value = p_y;
+                    document.getElementById("newFilmPic").src = movieSelected.images.medium;
                     jump('info','my-fade');
                     break;
                 default:
@@ -138,6 +132,9 @@ function searchMovie(key){
         success:showSearchResult
     });
 }
+function imgLoadError(el) {
+    el.src='img/imgLoadError.png';
+}
 function showSearchResult(data) {
     var sresult = document.getElementById('searchResult');
     var fid;
@@ -145,7 +142,7 @@ function showSearchResult(data) {
     for(var i=0;i<data.subjects.length;i++){
         fid = data.subjects[i].id;
         rs+="<div class='my-item item-result' onclick='getMovieInfo(this.id)' id='"+fid+"'>" +
-            "<img alt='图片加载失败' src='"+data.subjects[i].images.medium+"'>"+
+            "<img alt='图片加载失败' onerror='imgLoadError(this)' src='"+data.subjects[i].images.medium+"'>"+
             "<div><h4>" + data.subjects[i].title+"</h4>"+
             "<span>" +data.subjects[i].genres.join('/')+
             "</span>"+
@@ -159,4 +156,15 @@ function playAnimation(id,cn) {
     var el = document.getElementById(id);
     el.style.visibility='visible';
     el.classList.add(cn);
+}
+var entered = false;
+function routePointsDropDown(){
+    if(!entered){
+        entered = true;
+        var points = document.getElementsByClassName('route-point');
+        for(var i=0;i<points.length;i++){
+
+        }
+    }
+
 }
