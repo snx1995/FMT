@@ -1,3 +1,5 @@
+
+
 var signup = document.getElementById("signup");
 var login = document.getElementById("login");
 signup.addEventListener("click",function () {
@@ -51,6 +53,10 @@ signup.addEventListener("click",function () {
                     enLoginOverly(false,"注册成功，正在登陆...",function () {
                         window.location.href="gomain.php?username="+username;
                     });
+                }else{
+                    enLoginOverly(false,signupXhr.responseText,function () {
+                        document.getElementById("loginOverly").style.visibility = "hidden";
+                    });
                 }
             }
         };
@@ -72,7 +78,7 @@ login.addEventListener("click",function () {
             }else{
                 enLoginOverly(false,loginXhr.responseText,function () {
                     document.getElementById("loginOverly").style.visibility = "hidden";
-            });
+                });
             }
         }
     };

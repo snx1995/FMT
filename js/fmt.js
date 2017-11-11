@@ -76,8 +76,21 @@ notice = {
 };
 function changeMode(mod) {
     mode = mod;
-    notice.showDialog("\nSwitch mode to "+mod+'\n');
-    if(mode!=='add')movieSelected = null;
+    switch(mode){
+        case "add":
+            PointsOnMap.show();
+            break;
+        case "look":
+            PointsOnMap.show();
+            break;
+        case "route":
+            PointsOnMap.clear();
+            break;
+        case "other":
+            break;
+        default:
+            break;
+    }
 }
 function showRoute(mp) {
     var points = [];
@@ -184,10 +197,56 @@ function addNewPoint() {
     xhr.onreadystatechange = function () {
         if(xhr.readyState===4&&xhr.status===200){
             if(xhr.responseText==="success"){
-                notice.showDialog("添加成功！")
+                notice.showDialog("\n添加成功！\n")
                 jumpClose("info","my-fade-reverse")
+                PointsOnMap.show();
             }
         }
     };
     xhr.send();
 }
+
+var PointsOnMap = {
+    points:[],
+    clear:function (){
+        for(var i=0;i<this.points.length;i++){
+            this.points[i].setVisible(false);
+        }
+    },
+    push:function (p) {
+        this.points.push(p);
+    },
+    show:function () {
+        for(var i=0;i<this.points.length;i++){
+            this.points[i].setVisible(true);
+        }
+    }
+};
+
+function point(id,posx,posy,user,m){
+    this.id=id;
+    this.posx=posx;
+    this.posy=posy;
+    this.user=user;
+    this.marker=new google.maps.Marker({
+        position:new google.maps.LatLng(posx,posy),
+        map:m,
+    });
+    this.setVisible=function (b) {
+        this.marker.setVisible(b);
+    }
+}
+
+function showPoints(m){
+    $.ajax({
+        url:"getAllPoints.php",
+        dataType:"json",
+        success:function (data){
+            for(var i=0;i<data.length;i++){
+                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                PointsOnMap.push(p);
+            }
+        }
+    })
+}
+

@@ -16,10 +16,10 @@
         die("Connection failed: ".$conn->connect_error);
     }
 
-    $username = $_GET["username"];
+    $user = $_GET["username"];
     $password = $_GET["password"];
 
-    $sql = "select password from users where username='".$username."'";
+    $sql = "select password from users where username='".$user."'";
     $result = $conn->query($sql);
     $realpasswd = "";
     if($result->num_rows>0){

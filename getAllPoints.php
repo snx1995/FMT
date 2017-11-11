@@ -1,11 +1,4 @@
-<!doctype html>
-<html>
-<head>
-    <title>Php mysql test</title>
-    <meta charset="utf-8">
-</head>
-<body>
-    <?php
+ <?php
     /**
      * Created by IntelliJ IDEA.
      * User: Snxt
@@ -26,15 +19,19 @@
     $sql = "select * from points";
     $result = $conn->query($sql);
 
+    $json = array();
+
     if($result->num_rows>0){
         while($row = $result->fetch_assoc()){
-            echo "<p> id:".$row["id"]." posx: ".$row["posx"]." posy: ".$row["posy"]." user: ".$row["user"]."</p>";
+            $point = array(
+                "id"=>$row["id"],
+                "posx"=>$row["posx"],
+                "posy"=>$row["posy"],
+                "user"=>$row["user"],
+            );
+            $json[]=$point;
         }
-    }else{
-        echo "0 results";
     }
-    $conn->close();
-    ?>
-</body>
-</html>
 
+    $conn->close();
+    echo json_encode($json);
