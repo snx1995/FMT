@@ -5,12 +5,13 @@
  * Date: 2017/11/10
  * Time: 14:58
  */
-    $servername = "localhost";
+   $servername = "localhost";
     $username = "root";
-    $password = "950714";
+    $password = "zk199707021";
     $dbname = "fmt";
 
     $conn = new mysqli($servername,$username,$password,$dbname);
+   
 
     if($conn->connect_error){
         die("Connection failed: ".$conn->connect_error);
