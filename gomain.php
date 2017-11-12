@@ -231,10 +231,10 @@
             <div id="shade"></div>
             <div id="mapOptions">
                 <div>
-                    <img src="img/exploreBtn.png" alt="1" onclick="changeMode('look')" title="浏览模式">
-                    <img src="img/routeBtn.png" alt="1" onclick="changeMode('route')" title="路径模式">
-                    <img src="img/addBtn.png" alt="1" onclick="changeMode('other')">
-                    <img src="img/addBtn2.png" alt="1" onclick="changeMode('add')" title="标记新的地点">
+                    <img src="img/exploreBtn.png" alt="1" onclick="changeMode('look',pointsAdded)" title="浏览模式">
+                    <img src="img/routeBtn.png" alt="1" onclick="changeMode('route',pointsAdded)" title="路径模式">
+                    <img src="img/addBtn.png" alt="1" onclick="changeMode('other',pointsAdded)" title="备用按钮">
+                    <img src="img/addBtn2.png" alt="1" onclick="changeMode('add',pointsAdded)" title="标记新的地点">
                 </div>
             </div>
         </div>
@@ -248,6 +248,18 @@
         var map;
         var myCenter = new google.maps.LatLng(46.195042108660154,126.73828125);
         var prePath = new google.maps.Polyline();
+        var pointsAdded = {
+            points:[],
+            push:function (p) {
+                this.points.push(p);
+            },
+            clear:function () {
+                for(var i=0;i<this.points.length;i++){
+                    this.points[i].setVisible(false);
+                }
+                this.points=[];
+            }
+        };
         function initialize()
         {
             var mapProp = {
@@ -274,7 +286,9 @@
             var marker = new google.maps.Marker({
                 position:location,
                 map:map,
+                icon:"img/markerCL.png"
             });
+            pointsAdded.push(marker);
             google.maps.event.addListener(marker,'dblclick',function () {
                 if(mode==='add') {
                     marker.setVisible(false);

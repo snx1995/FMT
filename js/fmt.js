@@ -74,7 +74,7 @@ notice = {
         jump('tips','my-slide-down');
     }
 };
-function changeMode(mod) {
+function changeMode(mod,p) {
     mode = mod;
     switch(mode){
         case "add":
@@ -82,11 +82,14 @@ function changeMode(mod) {
             break;
         case "look":
             PointsOnMap.show();
+            p.clear();
             break;
         case "route":
             PointsOnMap.clear();
+            p.clear();
             break;
         case "other":
+            p.clear();
             break;
         default:
             break;
@@ -230,11 +233,17 @@ function point(id,posx,posy,user,m){
     this.user=user;
     this.marker=new google.maps.Marker({
         position:new google.maps.LatLng(posx,posy),
-        map:m,
+        id:this.id,
+        user:this.user,
+        map:m
     });
     this.setVisible=function (b) {
         this.marker.setVisible(b);
-    }
+    };
+    var marker = this.marker;
+    google.maps.event.addListener(marker,"click",function () {
+            getAllStories(marker.id,marker.map,marker);
+    })
 }
 
 function showPoints(m){
@@ -243,9 +252,69 @@ function showPoints(m){
         dataType:"json",
         success:function (data){
             for(var i=0;i<data.length;i++){
-                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
-                PointsOnMap.push(p);
+                    var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                    PointsOnMap.push(p);
             }
         }
     })
 }
+var contentString = "";
+
+var infowindow  = new google.maps.InfoWindow({
+    content: "If you see this, something goes wrong..."
+});
+filmTitle="";
+function getFilmTitle(id) {
+    var title="not accepted";
+    $.ajax({
+        url: "https://api.douban.com/v2/movie/subject/"+id,
+        async:false,
+        dataType:"jsonp",
+        success:function (d) {
+            title = d.title;
+        }
+    });
+    return title;
+}
+
+function getAllStories(id,map,marker) {
+    $.ajax({
+        url:"getStories.php?id="+id,
+        dataType:"json",
+        success:function (data) {
+            contentString = "<div id='infoWindow'>" +
+                "<h2 id='infoTitle'>这里发生了"+data.length+"个故事："+
+                "</h2>" +
+                "<div class='info-window-content'>";
+            for(var i=0;i<data.length;i++){
+                contentString+= "<div class='story-item'>" +
+                    "<h4>" + getFilmTitle(data[i].filmid)+"<a style='font-size: 14px;cursor: hand;'>详情>></a>"+
+                    "</h4>" +
+                    "<p>" +data[i].placedes+
+                    "</p>" +
+                    "<p>" +data[i].keywords+
+                    "</p>" +
+                    "</div>";
+            }
+            contentString+="</div>" +
+                "<div style='width: 100%'>" +
+                "<button class='b-btn b-blue b-md' style='margin: 10px auto;display: block'>我知道新的故事~</button>" +
+                "</div>" +
+                "</div>";
+            infowindow.setContent(contentString);
+            infowindow.open(map,marker);
+        }
+    })
+}
+
+
+function getAllPaths(){
+    $.ajax({
+        url:"getAllPaths.php",
+        dataType:"json",
+        success:function (data){
+
+        }
+    });
+}
+

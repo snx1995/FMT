@@ -12,6 +12,10 @@
 
     $conn = new mysqli($servername,$username,$password,$dbname);
 
+    if($conn->connect_error){
+        die("Connection failed: ".$conn->connect_error);
+    }
+
     $posx = $_GET["offsetX"];
     $posy = $_GET["offsetY"];
     $filmid = $_GET["filmid"];
@@ -20,9 +24,6 @@
     $keyword = $_GET["keyword"];
     $user = $_GET["username"];
 
-    if($conn->connect_error){
-        die("Connection failed: ".$conn->connect_error);
-    }
     $sql = "insert into points(posx,posy,user)values(".$posx.",".$posy.",'".$user."')";
     if($conn->query($sql) !== true){
         echo 'Insert into points error: '.$conn->error;
