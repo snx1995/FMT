@@ -8,13 +8,36 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-    <button data-window="1">test1</button>
-    <button data-window="2">test2</button>
-    <button data-window="3">test3</button>
-    <button data-window="4">test4</button>
-    <button data-window="5">test5</button>
-    <button onclick="jump()">show</button>
 
+
+
+    <div style="width: 120%;height: 120%;background-image: url('img/3.jpg');position:relative;top: 0;left: 0;" id="dynamicPic"></div>
+    <span id="mousePosition" style="position: absolute;top: 50%;left: 50%"></span>
+
+    <script>
+        function mousePosition(ev) {
+            if(ev.pageX || ev.pageY){
+                return {x:ev.pageX-document.body.clientWidth/2, y:ev.pageY-document.body.clientHeight/2};
+            }
+            return {
+                x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                y:ev.clientY + document.body.scrollTop - document.body.clientTop
+            };
+        }
+        function mp() {
+            return{x:document.body.clientWidth,y:document.body.clientHeight};
+        }
+        document.onmousemove = mouseMove;
+        function mouseMove(ev) {
+            ev = ev||window.event;
+            var mousePos = mousePosition(ev);
+            document.getElementById("mousePosition").innerText = "X : " + mousePos.x +", Y : "+mousePos.y;
+            var d =document.getElementById("dynamicPic");
+            d.style.top = -mousePos.y/10-100+"px";
+            d.style.left = -mousePos.x/10-100+"px";
+        }
+    </script>
+    <script src="js/fmt.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/effectsCtrl.js"></script>
 </body>

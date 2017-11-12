@@ -50,9 +50,23 @@
             </div>
         </div>
     </div>
+    <script src="js/fmt.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/pageswitch.js"></script>
     <script type="text/javascript">
+        function mousePosition(ev) {
+            /*
+            * 获取鼠标定位，相对于窗口中间
+            * */
+            if(ev.pageX || ev.pageY){
+                return {x:ev.pageX-document.body.clientWidth/2, y:ev.pageY-document.body.clientHeight/2};
+            }
+            return {
+                x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                y:ev.clientY + document.body.scrollTop - document.body.clientTop
+            };
+        }
         $("#container").PageSwitch({
             index: 0,    //页面开始的索引，0是第一页。
             easing:"linear",   //动画效果。  ease
@@ -66,11 +80,6 @@
             }
         });
     </script>
-    <script src="js/fmt.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/effectsCtrl.js"></script>
-    <script>
-        showPoints();
-    </script>
+
 </body>
 </html>

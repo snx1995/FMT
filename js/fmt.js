@@ -200,6 +200,8 @@ function addNewPoint() {
                 notice.showDialog("\n添加成功！\n")
                 jumpClose("info","my-fade-reverse")
                 PointsOnMap.show();
+            }else{
+                notice.showDialog(xhr.responseText);
             }
         }
     };
@@ -249,4 +251,3 @@ function showPoints(m){
         }
     })
 }
-
