@@ -249,4 +249,3 @@ function showPoints(m){
         }
     })
 }
-
