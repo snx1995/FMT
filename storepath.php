@@ -7,7 +7,7 @@
  */
     $servername = "localhost";
     $username = "root";
-    $password = "950714";
+    $password = "123qweASD";
     $dbname = "fmt";
     $conn = new mysqli($servername,$username,$password,$dbname);
     if($conn->connect_error){
@@ -16,7 +16,6 @@
     $pathinfo=$_GET["pathinfo"];
     $user=$_GET["user"];
     $pathdes=$_GET["pathdes"];
-
     $sql="insert into path(pathinfo,user,pathdes)values('".$pathinfo."','".$user."','".$pathdes."')";
     if($conn->query($sql)===true){
         echo "success";
