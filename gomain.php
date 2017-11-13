@@ -193,30 +193,40 @@
                 </div>
 
             </div>
+            <div class="jump-window abs-center window-radius window-path" id="addNewPath">
+                <div class="window-header" style="height: 50px">
+                    <h3>简单描述一下您的路线吧~</h3>
+                    <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('addNewPath','my-fade-reverse',true)"></a>
+                </div>
+                <div class="window-content">
+                    <textarea class="form-control" id="newPathDesc" cols="30" rows="3" placeholder="说点什么吧"></textarea>
+                    <button class="b-btn b-grey b-md" style="display: block;margin: 30px auto;" onclick="route.submit()">写好了~</button>
+                </div>
+            </div>
             <div class="map-header">
                 <img src="img/menuTmp2.png" class="logo" alt="logo">
                 <ul class="my-nav">
                     <li>
                         <div>
-                            <span>option1</span>
+                            <span>个人中心</span>
                             <div onclick="notice.showDialog('Hello\n Someone followed you path just now')"></div>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span>option2</span>
+                            <span>我的地点</span>
                             <div onclick="jump('info','my-fade',true)"></div>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span>option3</span>
+                            <span>我的路线</span>
                             <div></div>
                         </div>
                     </li>
                     <li>
                         <div>
-                            <span>option4</span>
+                            <span>关于FMT</span>
                             <div></div>
                         </div>
                     </li>
@@ -231,10 +241,10 @@
             <div id="shade"></div>
             <div id="mapOptions">
                 <div>
-                    <img src="img/exploreBtn.png" alt="1" onclick="changeMode('look')" title="浏览模式">
-                    <img src="img/routeBtn.png" alt="1" onclick="changeMode('route')" title="路径模式">
-                    <img src="img/addBtn.png" alt="1" onclick="changeMode('other')">
-                    <img src="img/addBtn2.png" alt="1" onclick="changeMode('add')" title="标记新的地点">
+                    <img src="img/exploreBtn.png" alt="1" onclick="changeMode('exploring',pointsAdded)" title="浏览模式">
+                    <img src="img/routeBtn.png" alt="1" onclick="changeMode('route',pointsAdded)" title="路径模式">
+                    <img src="img/addBtn.png" alt="1" onclick="changeMode('other',pointsAdded)" title="备用按钮">
+                    <img src="img/addBtn2.png" alt="1" onclick="changeMode('add',pointsAdded)" title="标记新的地点">
                 </div>
             </div>
         </div>
@@ -248,6 +258,18 @@
         var map;
         var myCenter = new google.maps.LatLng(46.195042108660154,126.73828125);
         var prePath = new google.maps.Polyline();
+        var pointsAdded = {
+            points:[],
+            push:function (p) {
+                this.points.push(p);
+            },
+            clear:function () {
+                for(var i=0;i<this.points.length;i++){
+                    this.points[i].setVisible(false);
+                }
+                this.points=[];
+            }
+        };
         function initialize()
         {
             var mapProp = {
@@ -274,11 +296,14 @@
             var marker = new google.maps.Marker({
                 position:location,
                 map:map,
+                icon:"img/markerCL.png",
+                animation:google.maps.Animation.DROP
             });
+            pointsAdded.push(marker);
             google.maps.event.addListener(marker,'dblclick',function () {
                 if(mode==='add') {
                     marker.setVisible(false);
-                    notice.showDialog("Marker deleted!")
+                    notice.showDialog("\nMarker deleted!\n")
                 }else if(mode==='route'){
                     if(arrayContains(route,marker)===-1){
                         route.push(marker);

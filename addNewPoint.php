@@ -12,6 +12,10 @@
 
     $conn = new mysqli($servername,$username,$password,$dbname);
 
+    if($conn->connect_error){
+        die("Connection failed: ".$conn->connect_error);
+    }
+
     $posx = $_GET["offsetX"];
     $posy = $_GET["offsetY"];
     $filmid = $_GET["filmid"];
@@ -19,10 +23,8 @@
     $story = $_GET["storyDetails"];
     $keyword = $_GET["keyword"];
     $user = $_GET["username"];
+    $filmtitle = $_GET["filmtitle"];
 
-    if($conn->connect_error){
-        die("Connection failed: ".$conn->connect_error);
-    }
     $sql = "insert into points(posx,posy,user)values(".$posx.",".$posy.",'".$user."')";
     if($conn->query($sql) !== true){
         echo 'Insert into points error: '.$conn->error;
@@ -38,8 +40,8 @@
         echo "0 results";
     }
 
-    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid)values".
-        "(".$filmid.",'".$place."','".$story."','".$keyword."','".$user."',".$pointid.")";
+    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid,filmtitle)values".
+        "(".$filmid.",'".$place."','".$story."','".$keyword."','".$user."',".$pointid.",'".$filmtitle."')";
 
     if($conn->query($sql) !== true){
         echo 'Insert into stories error: '.$conn->error;

@@ -1,6 +1,5 @@
 var mode = "";
 var p_x,p_y;
-var route = [];
 var movieSelected = null;
 var movieDisplay = null;
 var username = document.getElementById("username").innerText;
@@ -66,6 +65,9 @@ notice = {
                     document.getElementById("newFilmPic").src = movieSelected.images.medium;
                     jump('info','my-fade');
                     break;
+                case "addNewPath":
+                    jump("addNewPath","my-fade");
+                    break;
                 default:
                     jumpClose('tips','my-slide-down-re');
                     break;
@@ -74,21 +76,31 @@ notice = {
         jump('tips','my-slide-down');
     }
 };
-function changeMode(mod) {
+function changeMode(mod,p) {
     mode = mod;
     switch(mode){
         case "add":
+            notice.showDialog("\nSwitch mode to add.\n");
             PointsOnMap.show();
+            route.clear();
             break;
-        case "look":
-            PointsOnMap.show();
+        case "exploring":
+            notice.showDialog("\nSwitch mode to exploring.\n");
+            showPoints(map);
+            route.clear();
+            p.clear();
             break;
         case "route":
-            PointsOnMap.clear();
+            notice.showDialog("\nSwitch mode to route.\n");
+            p.clear();
             break;
         case "other":
+            notice.showDialog("\n这是备用按钮\n");
+            route.clear();
+            p.clear();
             break;
         default:
+            notice.showDialog("\n错误参数!\n");
             break;
     }
 }
@@ -117,7 +129,7 @@ function confirmMovie(){
     jumpClose('movieInfo','my-fade-reverse');
     notice.showDialog("\nYou selected :"+movieSelected.title);
 }
-function showMovieInfo(data){
+function showMovieInfo(data,type){
     document.getElementById('movieTitle').innerHTML = data.title;
     var d = "";
     for(var i=0;i<data.directors.length;i++){
@@ -187,20 +199,30 @@ function addNewPoint() {
     var offsetx = document.getElementById("pos_x").value;
     var offsety = document.getElementById("pos_y").value;
     var filmid = movieSelected.id;
+    var filmtitle = movieSelected.title;
     var placeDescription = document.getElementById("placeDescription").value;
     var storyDetails = document.getElementById("storyDetails").value;
     var keyword = document.getElementById("keyword").value;
     var xhr = new XMLHttpRequest();
     var request = "addNewPoint.php?offsetX="+offsetx+"&offsetY="+offsety+"&filmid="+filmid+"&placeDescription="+
-            placeDescription+"&storyDetails="+storyDetails+"&keyword="+keyword+"&username="+username;
+            placeDescription+"&storyDetails="+storyDetails+"&keyword="+keyword+"&username="+username+"&filmtitle="+filmtitle;
     xhr.open("GET",request,true);
     xhr.onreadystatechange = function () {
         if(xhr.readyState===4&&xhr.status===200){
             if(xhr.responseText==="success"){
+<<<<<<< HEAD
                 notice.showDialog("\n添加成功！\n")
                 jumpClose("info","my-fade-reverse")
                 PointsOnMap.show();
             }else{
+=======
+                notice.showDialog("\n添加成功！\n");
+                jumpClose("info","my-fade-reverse");
+                showPoints(map);
+                pointsAdded.clear();
+            }
+            else{
+>>>>>>> c78d2cf22940104fd7ac5a9481341f3bcc1485cf
                 notice.showDialog(xhr.responseText);
             }
         }
@@ -210,6 +232,9 @@ function addNewPoint() {
 
 var PointsOnMap = {
     points:[],
+    delete:function (){
+      this.points=[];
+    },
     clear:function (){
         for(var i=0;i<this.points.length;i++){
             this.points[i].setVisible(false);
@@ -225,18 +250,101 @@ var PointsOnMap = {
     }
 };
 
+var route = {
+    points:[],
+    myPath:null,
+    prePath:new google.maps.Polyline(),
+    setMap:function () {
+        var pos =[];
+        for(var i=0;i<this.points.length;i++){
+            if(this.points[i]) pos.push(this.points[i].marker.position);
+        }
+        this.myPath =new google.maps.Polyline({
+            path:pos,
+            strokeColor:"#00b3ee",
+            strokeOpacity:0.8,
+            strokeWeight:2
+        });
+        this.prePath.setVisible(false);
+        this.myPath.setMap(map);
+        this.prePath=this.myPath;
+    },
+    addPoint:function (p) {
+        this.points.push(p);
+        this.setMap();
+        if(this.points.length>1){
+            notice.showDialog("\n点击这里可以提交您的路线~\n","addNewPath");
+        }else{
+            notice.showDialog("\n请继续选择地点~\n");
+        }
+    },
+    removePoint:function (p){
+        for(var i=0;i<this.points.length;i++){
+            if(this.points[i]===p){
+                this.points[i]=null;
+                break;
+            }
+        }
+        this.setMap();
+    },
+    clear:function () {
+        this.prePath.setVisible(false);
+        this.points=[];
+    },
+    submit:function (){
+        var pathinfo = "";
+        var pathdes = document.getElementById("newPathDesc").value;
+        for(var i=0;i<this.points.length;i++){
+            pathinfo+=this.points[i].id;
+        }
+        $.ajax({
+            url:"storepath.php",
+            data:{
+                pathinfo:pathinfo,
+                user:username,
+                pathdes:pathdes
+            },
+            success:function (){
+                notice.showDialog("\n添加成功~\n");
+                jumpClose("addNewPath","my-fade-reverse");
+            }
+        })
+    }
+};
 function point(id,posx,posy,user,m){
     this.id=id;
     this.posx=posx;
     this.posy=posy;
     this.user=user;
+    this.inRoute = false;
     this.marker=new google.maps.Marker({
         position:new google.maps.LatLng(posx,posy),
-        map:m,
+        id:this.id,
+        user:this.user,
+        map:m
     });
     this.setVisible=function (b) {
         this.marker.setVisible(b);
-    }
+    };
+    var p = this;
+    var marker = this.marker;
+    google.maps.event.addListener(marker,"click",function () {
+            getAllStories(marker.id,marker.map,marker);
+    });
+    google.maps.event.addListener(marker,"dblclick",function () {
+        infowindow.close();
+        if(mode==="add"){
+
+        }else if(mode==="route"){
+            if(!p.marker.inRoute){
+                p.marker.inRoute=true;
+                route.addPoint(p);
+            }else{
+                p.marker.inRoute=false;
+                route.removePoint(p);
+            }
+        }
+    })
 }
 
 function showPoints(m){
@@ -244,10 +352,63 @@ function showPoints(m){
         url:"getAllPoints.php",
         dataType:"json",
         success:function (data){
+            PointsOnMap.delete();
             for(var i=0;i<data.length;i++){
-                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
-                PointsOnMap.push(p);
+                    var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                    PointsOnMap.push(p);
             }
         }
     })
 }
+var contentString = "";
+
+var infowindow  = new google.maps.InfoWindow({
+    content: "If you see this, something goes wrong..."
+});
+
+function getAllStories(id,map,marker) {
+    $.ajax({
+        url:"getStories.php?id="+id,
+        dataType:"json",
+        success:function (data) {
+            contentString = "<div id='infoWindow'>" +
+                "<h2 id='infoTitle'>这里发生了"+data.length+"个故事："+
+                "</h2>" +
+                "<div class='info-window-content'>";
+            for(var i=0;i<data.length;i++){
+                var filmid = data[i].filmid;
+                contentString+= "<div class='story-item'>" +
+                    "<h4>在<strong>" + data[i].filmtitle+"</strong>中，<a style='font-size: 14px;cursor: hand;' onclick='getMovieInfo(" +filmid+
+                    ")'>电影详情>></a>"+
+                    "</h4>" +
+                    "<p>" +data[i].placedes+
+                    "</p>" +
+                    "<p>" +data[i].keywords+
+                    "</p>" +
+                    "<a>更多>></a>"+
+                    "</div>";
+            }
+            contentString+="</div>" +
+                "<div style='width: 100%'>" +
+                "<button class='b-btn b-grey b-md' style='margin: 10px auto;display: block'>我知道新的故事~</button>" +
+                "</div>" +
+                "</div>";
+            infowindow.setContent(contentString);
+            infowindow.open(map,marker);
+        }
+    })
+}function addNewStory(pointid) {
+
+}
+
+
+function getAllPaths(){
+    $.ajax({
+        url:"getAllPaths.php",
+        dataType:"json",
+        success:function (data){
+
+        }
+    });
+}
+
