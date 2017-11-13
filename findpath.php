@@ -44,6 +44,7 @@ while($row = $result->fetch_assoc())//循环所有路径
      $path=array(
          "points"=>$points,
          "user"=>$row["user"],
+         "pathdes"=>$row["pathdes"],
      );
      $paths[$pathnum]= $path;
      $pathnum=$pathnum+1;
