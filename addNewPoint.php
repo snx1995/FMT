@@ -23,6 +23,7 @@
     $story = $_GET["storyDetails"];
     $keyword = $_GET["keyword"];
     $user = $_GET["username"];
+    $filmtitle = $_GET["filmtitle"];
 
     $sql = "insert into points(posx,posy,user)values(".$posx.",".$posy.",'".$user."')";
     if($conn->query($sql) !== true){
@@ -39,8 +40,8 @@
         echo "0 results";
     }
 
-    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid)values".
-        "(".$filmid.",'".$place."','".$story."','".$keyword."','".$user."',".$pointid.")";
+    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid,filmtitle)values".
+        "(".$filmid.",'".$place."','".$story."','".$keyword."','".$user."',".$pointid.",'".$filmtitle."')";
 
     if($conn->query($sql) !== true){
         echo 'Insert into stories error: '.$conn->error;

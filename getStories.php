@@ -34,7 +34,8 @@
                 "detailds"=>$row["details"],
                 "keywords"=>$row["keywords"],
                 "user"=>$row["user"],
-                "pointid"=>$row["pointid"]
+                "pointid"=>$row["pointid"],
+                "filmtitle"=>$row["filmtitle"]
             );
             $stories[]=$story;
         }

@@ -10,6 +10,9 @@ body{
 input{
     text-align: center;
 }
+textarea{
+    border-radius: 10px;
+}
 .main{
     min-width: 100%;
     min-height: 100%;
@@ -286,6 +289,13 @@ input{
     line-height: 100%;
     text-align: center;
 }
+.window-header h3{
+    color: white;
+    display: inline-block;
+    width: 100%;
+    line-height: 100%;
+    text-align: center;
+}
 .window-header{
     border-radius: inherit;
     width: 100%;
@@ -346,6 +356,18 @@ input{
     color: rgba(0,179,238,0.8);
     border: 2px solid rgba(0,179,238,0.8);
     border-radius: 6px;
+}
+.b-grey{
+    background-color: rgba(100,100,100,0);
+    color: rgba(100,100,100,0.8);
+    border: 2px solid rgba(100,100,100,0.8);
+    border-radius: 6px;
+}
+.b-grey:hover{
+    background-color: rgba(100,100,100,0.3);
+}
+.b-grey:active{
+    background-color: rgba(100,100,100,0.1);
 }
 .b-blue:hover{
     background-color: rgba(0,179,238,0.3);
@@ -962,5 +984,12 @@ input{
 }
 .story-item{
     margin-top: 10px;
-    border: 1px solid rgb(244,244,244);
+    padding: 0 20px 10px 20px;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 10px;
+}
+.window-path{
+    overflow: hidden;
+    width: 500px;
+    height: 250px;
 }
