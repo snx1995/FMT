@@ -64,31 +64,39 @@ signup.addEventListener("click",function () {
     }
 });
 login.addEventListener("click",function () {
-    var username = document.getElementById('userName');
-    var passwd = document.getElementById('password');
-    var loginXhr = new XMLHttpRequest();
-    loginXhr.open("GET","login.php?username="+username.value+"&password="+passwd.value,true);
-    enLoginOverly(true);
-    loginXhr.onreadystatechange = function () {
-        if(loginXhr.readyState===4&&loginXhr.status===200){
-            if(loginXhr.responseText==="success"){
-                enLoginOverly(false,"登陆成功，正在跳转...",function () {
-                    window.location.href="gomain.php?username="+username.value;
-                });
-            }else{
-                enLoginOverly(false,loginXhr.responseText,function () {
-                    document.getElementById("loginOverly").style.visibility = "hidden";
-                });
+    var username = document.getElementById('userName').value;
+    var passwd = document.getElementById('password').value;
+    if(username==""||passwd==""){
+        enLoginOverly(true,"用户名密码错误!!",function () {
+            document.getElementById("loginOverly").style.visibility = "hidden";
+        });
+    }else{
+        var loginXhr = new XMLHttpRequest();
+        loginXhr.open("GET","login.php?username="+username+"&password="+passwd,true);
+        enLoginOverly(true);
+        loginXhr.onreadystatechange = function () {
+            if(loginXhr.readyState===4&&loginXhr.status===200){
+                if(loginXhr.responseText==="success"){
+                    enLoginOverly(false,"登陆成功，正在跳转...",function () {
+                        window.location.href="gomain.php?username="+username.value;
+                    });
+                }else{
+                    enLoginOverly(false,loginXhr.responseText,function () {
+                        document.getElementById("loginOverly").style.visibility = "hidden";
+                    });
+                }
             }
-        }
-    };
-    loginXhr.send();
+        };
+        loginXhr.send();
+    }
+
 });
 
 function enLoginOverly(enable,msg,callback){
     if(enable){
         document.getElementById("loginMsg").innerText = msg===undefined? "登陆中...":msg;
         document.getElementById("loginOverly").style.visibility = "visible";
+        if(callback) setTimeout(callback,1000);
     }
     else{
         document.getElementById("loginMsg").innerText = msg===undefined? "登陆中...":msg;

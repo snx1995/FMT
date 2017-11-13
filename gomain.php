@@ -79,31 +79,8 @@
                         <input type="radio" class="my-radio" name="routeKind" value="all" id="all">
                     </form>
                 </div>
-                <div class="items-content">
-                    <div class="my-item item-route">
-                        <img src="img/3.jpg" alt="">
-                        <div></div>
-                    </div>
-                    <div class="my-item item-route">
-                        <img src="img/3.jpg" alt="">
-                        <div></div>
-                    </div>
-                    <div class="my-item item-route">
-                        <img src="img/3.jpg" alt="">
-                        <div></div>
-                    </div>
-                    <div class="my-item item-route">
-                        <img src="img/3.jpg" alt="">
-                        <div></div>
-                    </div>
-                    <div class="my-item item-route">
-                        <img src="img/3.jpg" alt="">
-                        <div></div>
-                    </div>
-                    <div class="my-item item-route">
-                        <img src="img/3.jpg" alt="">
-                        <div></div>
-                    </div>
+                <div class="items-content" id="paths">
+
                 </div>
             </div>
             <div class="jump-window search-result" id="searchResult">
@@ -175,7 +152,7 @@
                 <div class="window-content" style="background-color: rgba(255,255,255,0)">
                     <h2 id="selectedFilm" style="display: block;width: 100%;height: 50px;text-align: center;line-height: 50px">机器人九号</h2>
                     <div style="width: 100%;height: 60%;">
-                        <img src="img/3.jpg" onerror="imgLoadError(this)" id="newFilmPic">
+                        <img src="img/3.jpg" onerror="imgLoadError(this)" class="story-pic" id="newFilmPic">
                         <div>
                             <div style="width: 100%;height: 30px">
                                 <span style="font-size: 18px;float: left;text-align: center">坐标：</span>
@@ -193,15 +170,51 @@
                 </div>
 
             </div>
+            <div class="jump-window abs-center window-md window-radius" style="background-color: rgba(255,255,255,0.8);" id="newStory">
+                <div class="window-header">
+                    <h1>你知道的新故事是什么呢？</h1>
+                    <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('newStory','my-fade-reverse',true)"></a>
+                </div>
+                <div class="window-content" style="background-color: rgba(255,255,255,0)">
+                    <h2 id="filmOfStory" style="display: block;width: 100%;height: 50px;text-align: center;line-height: 50px">机器人九号</h2>
+                    <div style="width: 100%;height: 60%;">
+                        <img src="img/3.jpg" onerror="imgLoadError(this)" class="story-pic" id="filmPicOfStory">
+                        <div>
+                            <div style="width: 100%;height: 30px">
+                                <span style="font-size: 18px;float: left;text-align: center">坐标：</span>
+                                <input type="text" id="pos_xNew" class="form-control input-md" readonly style="float: left;width: 35%;margin-left: 10px;">
+                                <input type="text" id="pos_yNew" class="form-control input-md" readonly style="float: left;width: 35%;margin-left: 10px;">
+                            </div>
+                            <input type="text" class="form-control input-lg bg-transparent" id="placeDescriptionNew" style="margin-top: 20px;" placeholder="Place description here...">
+                            <textarea class="form-control bg-transparent" id="storyDetailsNew" cols="30" rows="7" style="width: 100%;" placeholder="The story details here..."></textarea>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control input-lg bg-transparent" id="keywordNew" style="margin-top: 20px;" placeholder="输入关键词，以空格分割">
+                    <div style="width: 100%;padding-top: 20px;">
+                        <button style="margin:auto;display: block" class="b-btn b-blue b-md" onclick="confirmNewStory()">确认</button>
+                    </div>
+                </div>
+
+            </div>
             <div class="jump-window abs-center window-radius window-path" id="addNewPath">
                 <div class="window-header" style="height: 50px">
                     <h3>简单描述一下您的路线吧~</h3>
                     <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('addNewPath','my-fade-reverse',true)"></a>
                 </div>
                 <div class="window-content">
-                    <textarea class="form-control" id="newPathDesc" cols="30" rows="3" placeholder="说点什么吧"></textarea>
+                    <textarea class="form-control" id="newPathDesc" cols="30" rows="5" placeholder="说点什么吧"></textarea>
                     <button class="b-btn b-grey b-md" style="display: block;margin: 30px auto;" onclick="route.submit()">写好了~</button>
                 </div>
+            </div>
+            <div class="jump-window movie-select" id="movieSelect">
+                <h4 id="movieInUse">If you see this, something goes wrong. Refresh and try again.</h4>
+            </div>
+            <div class="story-detail" id="storyDetailWindow">
+                <h3></h3>
+                <h5></h5>
+                <span></span>
+                <p></p>
+                <span></span>
             </div>
             <div class="map-header">
                 <img src="img/menuTmp2.png" class="logo" alt="logo">
@@ -219,8 +232,8 @@
                         </div>
                     </li>
                     <li>
-                        <div>
-                            <span>我的路线</span>
+                        <div onclick="getAllPaths()">
+                            <span>路线</span>
                             <div></div>
                         </div>
                     </li>
@@ -255,6 +268,7 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
+        document.onmousemove = storyDetailsWindow;
         var map;
         var myCenter = new google.maps.LatLng(46.195042108660154,126.73828125);
         var prePath = new google.maps.Polyline();
@@ -280,6 +294,7 @@
             map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
             showPoints(map);
             google.maps.event.addListener(map,'click',function (event) {
+                infowindow.close();
                 if(mode==="add"){
                     if(movieSelected!==null)
                         placeMaker(event.latLng);

@@ -3,6 +3,7 @@ var p_x,p_y;
 var movieSelected = null;
 var movieDisplay = null;
 var username = document.getElementById("username").innerText;
+var allpaths=null;
 
 function jump(id,effect1,enableOverly){
     var w = document.getElementById(id);
@@ -105,6 +106,7 @@ function changeMode(mod,p) {
     }
 }
 function showRoute(mp) {
+    /*无效方法，已废弃*/
     var points = [];
     for(var i =0;i<route.length;i++){
         points.push(route[i].position);
@@ -126,8 +128,9 @@ function getMovieInfo(id) {
 }
 function confirmMovie(){
     movieSelected = movieDisplay;
+    document.getElementById('movieInUse').innerHTML = "已选择：<strong>"+movieSelected.title+"</strong>";
+    jump("movieSelect","movie-select-drop");
     jumpClose('movieInfo','my-fade-reverse');
-    notice.showDialog("\nYou selected :"+movieSelected.title);
 }
 function showMovieInfo(data,type){
     document.getElementById('movieTitle').innerHTML = data.title;
@@ -240,6 +243,14 @@ var PointsOnMap = {
         for(var i=0;i<this.points.length;i++){
             this.points[i].setVisible(true);
         }
+    },
+    getPoint:function (id){
+        for(var i=0;i<this.points.length;i++){
+            if(this.points[i].id==id){
+                return this.points[i];
+            }
+        }
+        return null;
     }
 };
 
@@ -288,7 +299,7 @@ var route = {
         var pathinfo = "";
         var pathdes = document.getElementById("newPathDesc").value;
         for(var i=0;i<this.points.length;i++){
-            pathinfo+=this.points[i].id;
+            if(this.points[i])pathinfo+=this.points[i].id;
         }
         $.ajax({
             url:"storepath.php",
@@ -302,6 +313,9 @@ var route = {
                 jumpClose("addNewPath","my-fade-reverse");
             }
         })
+    },
+    push:function (p) {
+        this.points.push(p);
     }
 };
 function point(id,posx,posy,user,m){
@@ -370,6 +384,7 @@ function getAllStories(id,map,marker) {
                 "<div class='info-window-content'>";
             for(var i=0;i<data.length;i++){
                 var filmid = data[i].filmid;
+                var storyid = data[i].storyid;
                 contentString+= "<div class='story-item'>" +
                     "<h4>在<strong>" + data[i].filmtitle+"</strong>中，<a style='font-size: 14px;cursor: hand;' onclick='getMovieInfo(" +filmid+
                     ")'>电影详情>></a>"+
@@ -378,30 +393,134 @@ function getAllStories(id,map,marker) {
                     "</p>" +
                     "<p>" +data[i].keywords+
                     "</p>" +
-                    "<a>更多>></a>"+
+                    "<a onmouseenter='showStoryDetail(" + storyid +
+                    ")' onmouseleave='hideStoryDetails()'>更多>></a>"+
                     "</div>";
             }
             contentString+="</div>" +
                 "<div style='width: 100%'>" +
-                "<button class='b-btn b-grey b-md' style='margin: 10px auto;display: block'>我知道新的故事~</button>" +
+                "<button class='b-btn b-grey b-md' style='margin: 10px auto;display: block' onclick='addNewStory("+id +
+                ")'>我知道新的故事~</button>" +
                 "</div>" +
                 "</div>";
             infowindow.setContent(contentString);
             infowindow.open(map,marker);
         }
     })
-}function addNewStory(pointid) {
-
 }
-
-
 function getAllPaths(){
     $.ajax({
-        url:"getAllPaths.php",
+        url:"findpath.php",
         dataType:"json",
         success:function (data){
-
+            allpaths = data;
+            var pathContent = document.getElementById("paths");
+            var pathsInner = "";
+            for(var i=0;i<data.length;i++){
+                pathsInner+="<div class='item-route'>" +
+                    "<h3>Contributed by <strong>" + data[i].user +
+                    "</strong></h3>" +
+                    "<h5>路径中共有" + data[i].points.length +
+                    "个地点，他说这条路线：</h5>"+
+                    "<p style='font-size: 16px'>" + data[i].pathdes+
+                    "</p>" +
+                    "<a class='pull-right' onclick='pathShowOnMap(" +i+
+                    ")'>Show on map>></a>"+
+                    "</div>"
+            }
+            pathContent.innerHTML = pathsInner;
+            jump('routeBrowser','side-sld');
         }
     });
 }
+function pathShowOnMap(p){
+    route.clear();
+    var path = allpaths[p];
+    for(var i=0;i<path.points.length;i++){
+        route.push(PointsOnMap.getPoint(path.points[i].id));
+    }
+    route.setMap();
+    map.setCenter(PointsOnMap.getPoint(path.points[0].id).marker.position);
+}
+var pointIdOfNewStory=undefined;
+function addNewStory(pointid) {
+    var p = PointsOnMap.getPoint(pointid);
+    pointIdOfNewStory=pointid;
+    if(movieSelected){
+        if(p){
+            document.getElementById("filmOfStory").innerText=movieSelected.title;
+            document.getElementById("pos_xNew").value = p.posx;
+            document.getElementById("pos_yNew").value = p.posy;
+            document.getElementById("filmPicOfStory").src = movieSelected.images.medium;
+            jump("newStory","my-fade");
+        }else{
+            alert("p is null");
+        }
+    }else{
+        notice.showDialog("\n请先选择电影~\n")
+    }
 
+
+}
+function confirmNewStory(){
+    $.ajax({
+        url:"addNewStory.php",
+        data:{
+            pointid:pointIdOfNewStory,
+            filmid:movieSelected.id,
+            placedes:document.getElementById("placeDescriptionNew").value,
+            details:document.getElementById("storyDetailsNew").value,
+            keywords:document.getElementById("storyDetailsNew").value,
+            user:username,
+            filmtitle:movieSelected.title
+        },
+        dataType:"text",
+        success:function (data) {
+            if(data==="success"){
+                notice.showDialog("\n添加成功！\n");
+                jumpClose("newStory","my-fade-reverse");
+                getAllStories(pointIdOfNewStory,map,PointsOnMap.getPoint(pointIdOfNewStory).marker);
+            }
+            else{
+                notice.showDialog(data);
+            }
+        }
+    })
+}
+
+function showStoryDetail(storyid) {
+    var story=null;
+    $.ajax({
+        url:"getStoryBySId.php?storyid="+storyid,
+        dataType:"json",
+        async:false,
+        success:function (data) {
+            story=data;
+        }
+    });
+    $("#storyDetailWindow h3").text(story.filmtitle);
+    $("#storyDetailWindow h5").text("by "+story.user);
+    $("#storyDetailWindow h5+span").text("关于地点："+story.placedes);
+    $("#storyDetailWindow p").text("故事："+story.details);
+    $("#storyDetailWindow p+span").text("关键词："+story.keywords);
+    $("#storyDetailWindow").css("visibility","visible");
+}
+function hideStoryDetails() {
+    $("#storyDetailWindow").css("visibility","hidden");
+}
+function mouseAbsPos(ev) {
+    if(ev.pageX || ev.pageY){
+        return {x:ev.pageX, y:ev.pageY};
+    }
+    return {
+        x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:ev.clientY + document.body.scrollTop - document.body.clientTop
+    };
+}
+function storyDetailsWindow(ev){
+    ev = ev||window.event;
+    var mousePos = mouseAbsPos(ev);
+    var swin = document.getElementById("storyDetailWindow");
+    swin.style.top = (mousePos.y-2)+"px";
+    swin.style.left = (mousePos.x+2)+"px";
+}

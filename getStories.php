@@ -29,9 +29,10 @@
     if($result->num_rows>0){
         while ($row=$result->fetch_assoc()){
             $story = array(
+                "storyid"=>$row["storyid"],
                 "filmid"=>$row["filmid"],
                 "placedes"=>$row["placedes"],
-                "detailds"=>$row["details"],
+                "details"=>$row["details"],
                 "keywords"=>$row["keywords"],
                 "user"=>$row["user"],
                 "pointid"=>$row["pointid"],
