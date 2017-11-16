@@ -14,7 +14,7 @@ textarea{
     border-radius: 10px;
 }
 a:hover{
-    cursor: hand;
+    cursor: pointer;
 }
 .main{
     min-width: 100%;
@@ -282,7 +282,7 @@ a:hover{
     left: 0;
     width: 100%;
     height: 80px;
-    background-color: rgb(244,244,244);
+    background-color: rgb(42,42,42);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .window-header h1{
@@ -741,13 +741,16 @@ a:hover{
 }
 .item-route{
     padding: 20px 20px 20px 20px;
-    margin-top: 10px;
+    margin: 10px auto;
     border-radius: 10px;
     border: 1px solid rgb(100,100,100);
     width: 80%;
     min-height: 180px;
     max-height: 300px;
     overflow: auto;
+}
+.item-route a{
+    cursor: pointer;
 }
 .item-result{
     width: 300px;
@@ -1038,3 +1041,120 @@ a:hover{
     left: 0;
     bottom: 0;
 }
+.f-options{
+    float: left;
+    width: 90px;
+    height: 80px;
+    margin-left: 30px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.f-options div{
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    top:80px;
+    left: 0;
+    background-color: rgb(10,175,241);
+    transition: top 0.3s;
+}
+.f-options.active{
+    background-color: rgb(44,44,44);
+}
+.f-options.active div{
+    top: 70px;
+}
+.f-options:hover div{
+    top: 70px;
+}
+.f-options h3{
+    padding:  0 0 0 0;
+    margin: 0 0 0 0;
+    font-size: 18px;
+    color: rgb(184,184,184);
+    width: 100%;
+    line-height: 80px;
+    text-align: center;
+    cursor: default;
+}
+.f-options:hover h3{
+    color: rgb(255,255,255);
+}
+.f-header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: rgb(42,42,42);
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+}
+.adapter{
+    width: 100%;
+    height: 100%;
+    position: relative
+}
+.f-logo{
+    margin-left: 40px;
+    width: 350px;
+    height: 80px;
+    margin-right: 40px;
+    float: left
+}
+.f-user{
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin: 25px 25px 25px 25px;
+    background-color: white;
+}
+.f-user:hover{
+    background-color: #646464;
+}
+.f-user:active{
+    background-color: white;
+}
+.f-user img{
+    width: 100%;
+    height: 100%;
+}
+.f-search{
+    position: relative;
+    overflow: hidden;
+    width: 250px;
+    height: 40px;
+    float: right;
+    margin: 20px 0 20px 20px;
+}
+.f-search input{
+    border-radius: 20px;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: #343434;
+    background: linear-gradient(#444,#505050,#444);
+}
+.f-search div{
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+}
+.f-search div:hover{
+    background-color: #646464;
+}.f-search div:active{
+     background-color: white;
+ }
+.f-search div img{
+    width: 100%;
+    height: 100%;
+}
+
+

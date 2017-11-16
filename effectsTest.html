@@ -3,48 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <title>EffectsTest</title>
-
+    <style>
+        .f-options{
+             float: left;
+             width: 90px;
+             height: 80px;
+             margin-left: 30px;
+             position: relative;
+             top: 0;
+             left: 0;
+         }
+        .f-options div{
+            width: 100%;
+            height: 10px;
+            position: absolute;
+            top:80px;
+            left: 0;
+            background-color: rgb(10,175,241);
+            transition: top 0.3s;
+        }
+        .f-options.active{
+            background-color: rgb(44,44,44);
+        }
+        .f-options.active div{
+            top: 70px;
+        }
+        .f-options:hover div{
+            top: 70px;
+        }
+        .f-options h3{
+            padding:  0 0 0 0;
+            margin: 0 0 0 0;
+            font-size: 18px;
+            color: rgb(184,184,184);
+            width: 100%;
+            line-height: 80px;
+            text-align: center;
+            cursor: default;
+        }
+        .f-options:hover h3{
+            color: rgb(255,255,255);
+        }
+        .f-header{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: rgb(42,42,42);
+            box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            overflow: hidden;
+        }
+        .adapter{
+            width: 100%;
+            height: 100%;
+            position: relative
+        }
+        .f-logo{
+            margin-left: 40px;
+            width: 350px;
+            height: 80px;
+            margin-right: 40px;
+            float: left
+        }
+        .f-user{
+            float: right;
+            width: 30px;
+            height: 30px;
+            margin: 25px 25px 25px 25px;
+            background-color: white;
+        }
+        .f-user:hover{
+            background-color: #646464;
+        }
+        .f-user:active{
+            background-color: white;
+        }
+        .f-user img{
+            width: 100%;
+            height: 100%;
+        }
+        .f-search{
+            position: relative;
+            overflow: hidden;
+            width: 250px;
+            height: 40px;
+            float: right;
+            margin: 20px 0 20px 20px;
+        }
+        .f-search input{
+            border-radius: 20px;
+            color: white;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: #343434;
+            background: linear-gradient(#444,#505050,#444);
+        }
+        .f-search div{
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: white;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+        .f-search div:hover{
+            background-color: #646464;
+        }.f-search div:active{
+             background-color: white;
+         }
+        .f-search div img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
     <link rel="stylesheet" href="css/fmt.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
-
-
-
-    <div style="width: 120%;height: 120%;background-image: url('img/3.jpg');position:relative;top: 0;left: 0;" id="dynamicPic"></div>
-    <span id="mousePosition" style="position: absolute;top: 50%;left: 50%"></span>
-
-    <script>
-        function mousePosition(ev) {
-            if(ev.pageX || ev.pageY){
-                return {x:ev.pageX-document.body.clientWidth/2, y:ev.pageY-document.body.clientHeight/2};
-            }
-            return {
-                x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-                y:ev.clientY + document.body.scrollTop - document.body.clientTop
-            };
-        }
-        function mp() {
-            return{x:document.body.clientWidth,y:document.body.clientHeight};
-        }
-        document.onmousemove = mouseMove;
-        function mouseMove(ev) {
-            ev = ev||window.event;
-            var mousePos = mousePosition(ev);
-            document.getElementById("mousePosition").innerText = "X : " + mousePos.x +", Y : "+mousePos.y;
-            var d =document.getElementById("dynamicPic");
-            d.style.top = -mousePos.y/10-100+"px";
-            d.style.left = -mousePos.x/10-100+"px";
-        }
-        function man(name,age){
-            this.name=name;
-            this.age=age;
-            this.country="China";
-        }
-        var t = new man(15,12);
-    </script>
-    <script src="js/fmt.js"></script>
-    <script src="js/jquery-3.2.1.min.js"></script>
+    <div class="f-header">
+        <div class="adapter">
+            <img src="img/logo.png" class="f-logo">
+            <div class="f-options active">
+                <h3 style="">个人中心</h3>
+                <div></div>
+            </div>
+            <div class="f-options">
+                <h3 style="">查看地点</h3>
+                <div></div>
+            </div>
+            <div class="f-options">
+                <h3 style="">查看路线</h3>
+                <div></div>
+            </div>
+            <div class="f-options">
+                <h3 style="">关于FMT</h3>
+                <div></div>
+            </div>
+            <div class="f-user">
+                <img src="img/userFront.png">
+            </div>
+            <div class="f-search">
+                <input type="text" class="form-control">
+                <div>
+                    <img src="img/searchB1.png">
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/effectsCtrl.js"></script>
 </body>
 </html>

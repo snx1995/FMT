@@ -67,7 +67,7 @@ login.addEventListener("click",function () {
     var username = document.getElementById('userName').value;
     var passwd = document.getElementById('password').value;
     if(username==""||passwd==""){
-        enLoginOverly(true,"用户名密码错误!!",function () {
+        enLoginOverly(true,"请输入用户名或密码!",function () {
             document.getElementById("loginOverly").style.visibility = "hidden";
         });
     }else{
@@ -78,7 +78,7 @@ login.addEventListener("click",function () {
             if(loginXhr.readyState===4&&loginXhr.status===200){
                 if(loginXhr.responseText==="success"){
                     enLoginOverly(false,"登陆成功，正在跳转...",function () {
-                        window.location.href="gomain.php?username="+username.value;
+                        window.location.href="gomain.php?username="+username;
                     });
                 }else{
                     enLoginOverly(false,loginXhr.responseText,function () {

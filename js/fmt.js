@@ -470,7 +470,7 @@ function confirmNewStory(){
             filmid:movieSelected.id,
             placedes:document.getElementById("placeDescriptionNew").value,
             details:document.getElementById("storyDetailsNew").value,
-            keywords:document.getElementById("storyDetailsNew").value,
+            keywords:document.getElementById("keywordNew").value,
             user:username,
             filmtitle:movieSelected.title
         },

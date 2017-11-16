@@ -216,39 +216,35 @@
                 <p></p>
                 <span></span>
             </div>
-            <div class="map-header">
-                <img src="img/menuTmp2.png" class="logo" alt="logo">
-                <ul class="my-nav">
-                    <li>
+            <div class="f-header">
+                <div class="adapter">
+                    <img src="img/logo.png" class="f-logo">
+                    <div class="f-options active">
+                        <h3 style="">个人中心</h3>
+                        <div></div>
+                    </div>
+                    <div class="f-options">
+                        <h3 style="">查看地点</h3>
+                        <div></div>
+                    </div>
+                    <div class="f-options" onclick="getAllPaths()">
+                        <h3 style="">查看路线</h3>
+                        <div></div>
+                    </div>
+                    <div class="f-options">
+                        <h3 style="">关于FMT</h3>
+                        <div></div>
+                    </div>
+                    <div class="f-user">
+                        <img src="img/userFront.png">
+                    </div>
+                    <div class="f-search">
+                        <input type="text" class="form-control">
                         <div>
-                            <span>个人中心</span>
-                            <div onclick="notice.showDialog('Hello\n Someone followed you path just now')"></div>
+                            <img src="img/searchB1.png">
                         </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span>我的地点</span>
-                            <div onclick="jump('info','my-fade',true)"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div onclick="getAllPaths()">
-                            <span>路线</span>
-                            <div></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span>关于FMT</span>
-                            <div></div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="film-search">
-                    <input type="text" class="form-control" id="search" placeholder="输入电影名/导演/主演..来搜索...">
-                    <img src="img/searchBtn.png" alt="Click to search~" onclick="searchMovie(document.getElementById('search').value)">
+                    </div>
                 </div>
-                
             </div>
             <div id="googleMap"></div>
             <div id="shade"></div>

@@ -19,7 +19,7 @@
     $filmid = $_GET["filmid"];
     $placedes = $_GET["placedes"];
     $details = $_GET["details"];
-    $keywords = $_GET["details"];
+    $keywords = $_GET["keywords"];
     $user = $_GET["user"];
     $pointid = $_GET["pointid"];
     $filmtitle = $_GET["filmtitle"];
