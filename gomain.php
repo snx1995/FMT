@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Follow</title>
+    <title>跟着电影去旅行</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/fmt.css">
 </head>
@@ -219,19 +219,19 @@
             <div class="f-header">
                 <div class="adapter">
                     <img src="img/logo.png" class="f-logo">
-                    <div class="f-options active">
+                    <div class="f-options" data-index="0">
                         <h3 style="">个人中心</h3>
                         <div></div>
                     </div>
-                    <div class="f-options">
-                        <h3 style="">查看地点</h3>
+                    <div class="f-options active" data-index="1">
+                        <h3 style="">地图</h3>
                         <div></div>
                     </div>
-                    <div class="f-options" onclick="getAllPaths()">
-                        <h3 style="">查看路线</h3>
+                    <div class="f-options" data-index="2">
+                        <h3 style="">动态</h3>
                         <div></div>
                     </div>
-                    <div class="f-options">
+                    <div class="f-options" data-index="3">
                         <h3 style="">关于FMT</h3>
                         <div></div>
                     </div>
@@ -239,12 +239,21 @@
                         <img src="img/userFront.png">
                     </div>
                     <div class="f-search">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="search">
                         <div>
-                            <img src="img/searchB1.png">
+                            <img src="img/searchB1.png" onclick="searchMovie(document.getElementById('search').value)">
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="about">
+                <h1>This is the about page</h1>
+            </div>
+            <div id="dynamicInfo">
+                <h1>This is the dynamic info page</h1>
+            </div>
+            <div id="userCenter">
+                <h1>This is the user center page</h1>
             </div>
             <div id="googleMap"></div>
             <div id="shade"></div>
@@ -258,10 +267,9 @@
             </div>
         </div>
     </div>
-
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBXUVPlSWsNh2fpMJYsjur-zHd8n04vDVM&sensor=true"></script>
     <script src="js/fmt.js"></script>
-    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
         document.onmousemove = storyDetailsWindow;

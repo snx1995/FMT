@@ -524,3 +524,50 @@ function storyDetailsWindow(ev){
     swin.style.top = (mousePos.y-2)+"px";
     swin.style.left = (mousePos.x+2)+"px";
 }
+var navCtrl = {
+    navOptions:document.getElementsByClassName("f-options"),
+    preOption:1,
+    navTabs:[
+      // document.getElementById("userCenter"),
+      // document.getElementById("googleMap"),
+      // document.getElementById("dynamicInfo"),
+      // document.getElementById("about")
+        $("#userCenter"),
+        $("#googleMap"),
+        $("#dynamicInfo"),
+        $("#about")
+    ],
+    change:function (n) {
+        var nav=this;
+        n = parseInt(n);
+        if(n!==nav.preOption){
+            if(n!==1) $("#mapOptions").css("visibility","hidden");
+            else $("#mapOptions").css("visibility","visible");
+            var preTab = nav.navTabs[nav.preOption];
+            var newTab = nav.navTabs[n];
+            this.navOptions[this.preOption].classList.remove("active");
+            this.navOptions[n].classList.add("active");
+            if(n>nav.preOption){
+                newTab.css({"left":"-100%"});
+                preTab.animate({left:"100%",opacity:"0"},500);
+                newTab.animate({left:"0",opacity:"1"},500);
+            }else{
+                newTab.css("left","100%");
+                preTab.animate({left:"-100%",opacity:"0"},500);
+                newTab.animate({left:"0",opacity:"1"},500);
+            }
+            this.preOption=n;
+        }
+
+
+    },
+    init:function (){
+        for(var i=0;i<this.navOptions.length;i++){
+            var m = this.navOptions[i];
+            m.addEventListener("click",function () {
+                navCtrl.change(this.getAttribute("data-index"));
+            })
+        }
+    }
+};
+navCtrl.init();

@@ -503,13 +503,28 @@ a:hover{
     z-index: 1;
 
 }
-#googleMap{
+#googleMap,#userCenter,#about,#dynamicInfo{
     position: absolute;
     top: 80px;
     left: 0;
     width: 100%;
     min-height: 100%;
     z-index: 1;
+}
+#googleMap{
+    visibility: visible;
+}
+#about{
+    background-color: #0f0f0f;
+}
+#dynamicInfo{
+    background-color: #00b3ee;
+}
+#userCenter{
+    background-color: #3e8f3e;
+}
+#userCenter,#about,#dynamicInfo{
+    opacity: 0;
 }
 .film-search{
     position: absolute;
@@ -719,11 +734,11 @@ a:hover{
     background-color: rgba(256,256,256,0.6);
     overflow: auto;
     padding: 40px 10px 10px 10px;
-    width: 320px;
+    width: 350px;
     height: 90%;
     position: absolute;
     top: 80px;
-    right: 0;
+    right: 10px;
 }
 .search-result::-webkit-scrollbar{
     display: none;
@@ -1082,6 +1097,7 @@ a:hover{
     color: rgb(255,255,255);
 }
 .f-header{
+    z-index: 200;
     position: absolute;
     top: 0;
     left: 0;
