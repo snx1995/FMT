@@ -254,7 +254,10 @@
                 <h1>This is the dynamic info page</h1>
             </div>
             <div id="userCenter">
-                    <img src="img/AboutTime2.png" alt="" style="width: 100%;height: 150px">
+                <div style="width: 100%;min-height: 150px;overflow: hidden">
+                    <img src="img/userCenter.png" class="img-responsive">
+                </div>
+
                     <div style="margin: 30px auto;width: 70%;height: 600px;background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                         <div style="height: 100%;width: 150px;border: 1px dotted gray;">
                             <div class="user-center-header">
