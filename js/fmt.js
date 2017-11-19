@@ -528,10 +528,6 @@ var navCtrl = {
     navOptions:document.getElementsByClassName("f-options"),
     preOption:1,
     navTabs:[
-      // document.getElementById("userCenter"),
-      // document.getElementById("googleMap"),
-      // document.getElementById("dynamicInfo"),
-      // document.getElementById("about")
         $("#userCenter"),
         $("#googleMap"),
         $("#dynamicInfo"),
@@ -541,8 +537,15 @@ var navCtrl = {
         var nav=this;
         n = parseInt(n);
         if(n!==nav.preOption){
-            if(n!==1) $("#mapOptions").css("visibility","hidden");
-            else $("#mapOptions").css("visibility","visible");
+            if(n!==1){
+                closeAllJumpWindow();
+                $("#mapOptions").css("visibility","hidden");
+                $("#movieSelect").css("visibility","hidden");
+            }
+            else{
+                $("#mapOptions").css("visibility","visible");
+                if(movieSelected!==null) $("#movieSelect").css("visibility","visible");
+            }
             var preTab = nav.navTabs[nav.preOption];
             var newTab = nav.navTabs[n];
             this.navOptions[this.preOption].classList.remove("active");
@@ -570,4 +573,34 @@ var navCtrl = {
         }
     }
 };
-navCtrl.init();
+function closeAllJumpWindow(){
+    $("#searchResult").css("visibility","hidden");
+    $("#routeBrowser").css("visibility","hidden");
+    $("#movieInfo").css("visibility","hidden");
+    $("#tips").css("visibility","hidden");
+    $("#info").css("visibility","hidden");
+    $("#newStory").css("visibility","hidden");
+    $("#addNewPath").css("visibility","hidden");
+}
+
+var userCenterCtrl = {
+    userOptions:document.getElementsByClassName("user-center-btn"),
+    preOption:0,
+    change:function (n) {
+        this.userOptions[this.preOption].classList.remove("active");
+        this.userOptions[n].classList.add("active");
+        this.preOption=n;
+    },
+    init:function () {
+        for(var i=0;i<this.userOptions.length;i++){
+            this.userOptions[i].addEventListener("click",function () {
+                userCenterCtrl.change(this.getAttribute("data-index"));
+            })
+        }
+    }
+};
+function ctrlInit(){
+    navCtrl.init();
+    userCenterCtrl.init();
+}
+ctrlInit();

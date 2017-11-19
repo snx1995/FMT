@@ -16,6 +16,10 @@ textarea{
 a:hover{
     cursor: pointer;
 }
+h1,h2,h3,h4,h5,h6{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
 .main{
     min-width: 100%;
     min-height: 100%;
@@ -503,6 +507,16 @@ a:hover{
     z-index: 1;
 
 }
+#test{
+    overflow: auto;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: 1;
+    background-color: rgb(250,250,250);
+}
 #googleMap,#userCenter,#about,#dynamicInfo{
     position: absolute;
     top: 80px;
@@ -521,7 +535,7 @@ a:hover{
     background-color: #00b3ee;
 }
 #userCenter{
-    background-color: #3e8f3e;
+    background-color: rgb(250,250,250);
 }
 #userCenter,#about,#dynamicInfo{
     opacity: 0;
@@ -1172,5 +1186,30 @@ a:hover{
     width: 100%;
     height: 100%;
 }
-
+.user-center-btn,.user-center-header{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+}
+.user-center-header{
+    border-bottom: 1px dotted gray;
+}
+.user-center-btn:hover{
+    background-color: #f4f4f4;
+}
+.user-center-btn.active{
+    background-color: #00b3ee;
+    color: white;
+}
+.user-center-btn h4,.user-center-header h4{
+    line-height: 60px;
+    text-align: center;
+    width: 100%;
+}
+.user-center-btn h4{
+    cursor: pointer;
+}
+.user-center-header h4{
+    cursor: default;
+}
 

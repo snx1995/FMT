@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>跟着电影去旅行</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/fmt.css">
 </head>
 <body>
@@ -253,7 +254,38 @@
                 <h1>This is the dynamic info page</h1>
             </div>
             <div id="userCenter">
-                <h1>This is the user center page</h1>
+                    <img src="img/AboutTime2.png" alt="" style="width: 100%;height: 150px">
+                    <div style="margin: 30px auto;width: 70%;height: 600px;background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                        <div style="height: 100%;width: 150px;border: 1px dotted gray;">
+                            <div class="user-center-header">
+                                <h4>个人中心</h4>
+                            </div>
+                            <div class="user-center-btn active" data-index="0">
+                                <h4><i class="fa fa-home">&nbsp;&nbsp;</i>首页</h4>
+                            </div>
+                            <div class="user-center-btn" data-index="1">
+                                <h4><i class="fa fa-user">&nbsp;&nbsp;</i>我的信息</h4>
+                            </div>
+                            <div class="user-center-btn" data-index="2">
+                                <h4><i class="fa fa-heart">&nbsp;&nbsp;</i>我的关注</h4>
+                            </div>
+                            <div class="user-center-btn" data-index="3">
+                                <h4><i class="fa fa-map-marker">&nbsp;&nbsp;</i>我的地点</h4>
+                            </div>
+                            <div class="user-center-btn" data-index="4">
+                                <h4><i class="fa fa-book">&nbsp;&nbsp;</i>我的故事</h4>
+                            </div>
+                            <div class="user-center-btn" data-index="5">
+                                <h4><i class="fa fa-map-signs">&nbsp;&nbsp;</i>我的路线</h4>
+                            </div>
+                            <div class="user-center-btn" data-index="6">
+                                <h4><i class="fa fa-shield">&nbsp;&nbsp;</i>账号管理</h4>
+                            </div>
+                            <div class="user-center-btn" data-index="7">
+                                <h4><i class="fa fa-share">&nbsp;&nbsp;</i>分享</h4>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div id="googleMap"></div>
             <div id="shade"></div>

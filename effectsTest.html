@@ -4,143 +4,73 @@
     <meta charset="UTF-8">
     <title>EffectsTest</title>
     <style>
-        .f-options{
-             float: left;
-             width: 90px;
-             height: 80px;
-             margin-left: 30px;
-             position: relative;
-             top: 0;
-             left: 0;
-         }
-        .f-options div{
+        .user-center-btn,.user-center-header{
             width: 100%;
-            height: 10px;
-            position: absolute;
-            top:80px;
-            left: 0;
-            background-color: rgb(10,175,241);
-            transition: top 0.3s;
+            height: 60px;
+            background-color: white;
         }
-        .f-options.active{
-            background-color: rgb(44,44,44);
+        .user-center-header{
+            border-bottom: 1px solid gray;
         }
-        .f-options.active div{
-            top: 70px;
+        .user-center-btn:hover{
+            background-color: #f4f4f4;
         }
-        .f-options:hover div{
-            top: 70px;
+        .user-center-btn.active{
+            background-color: #00b3ee;
+            color: white;
         }
-        .f-options h3{
-            padding:  0 0 0 0;
-            margin: 0 0 0 0;
-            font-size: 18px;
-            color: rgb(184,184,184);
-            width: 100%;
-            line-height: 80px;
+        .user-center-btn h4,.user-center-header h4{
+            line-height: 60px;
             text-align: center;
+            width: 100%;
+        }
+        .user-center-btn h4{
+            cursor: pointer;
+        }
+        .user-center-header h4{
             cursor: default;
         }
-        .f-options:hover h3{
-            color: rgb(255,255,255);
-        }
-        .f-header{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background-color: rgb(42,42,42);
-            box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            overflow: hidden;
-        }
-        .adapter{
-            width: 100%;
-            height: 100%;
-            position: relative
-        }
-        .f-logo{
-            margin-left: 40px;
-            width: 350px;
-            height: 80px;
-            margin-right: 40px;
-            float: left
-        }
-        .f-user{
-            float: right;
-            width: 30px;
-            height: 30px;
-            margin: 25px 25px 25px 25px;
-            background-color: white;
-        }
-        .f-user:hover{
-            background-color: #646464;
-        }
-        .f-user:active{
-            background-color: white;
-        }
-        .f-user img{
-            width: 100%;
-            height: 100%;
-        }
-        .f-search{
-            position: relative;
-            overflow: hidden;
-            width: 250px;
-            height: 40px;
-            float: right;
-            margin: 20px 0 20px 20px;
-        }
-        .f-search input{
-            border-radius: 20px;
-            color: white;
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: #343434;
-            background: linear-gradient(#444,#505050,#444);
-        }
-        .f-search div{
-            border-radius: 50%;
-            overflow: hidden;
-            background-color: white;
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            width: 30px;
-            height: 30px;
-        }
-        .f-search div:hover{
-            background-color: #646464;
-        }.f-search div:active{
-             background-color: white;
-         }
-        .f-search div img{
-            width: 100%;
-            height: 100%;
-        }
     </style>
-    <link rel="stylesheet" href="css/fmt.css">
+    <script>
+        var userCenterCtrl = {
+            userOptions:document.getElementsByClassName("user-center-btn"),
+            preOption:0,
+            change:function (n) {
+                this.userOptions[this.preOption].classList.remove("active");
+                this.userOptions[n].classList.add("active");
+                this.preOption=n;
+            },
+            init:function () {
+                for(var i=0;i<this.userOptions.length;i++){
+                    this.userOptions[i].addEventListener("click",function () {
+                        userCenterCtrl.change(this.getAttribute("data-index"));
+                    })
+                }
+            }
+        };
+        userCenterCtrl.init();
+    </script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fmt.css">
 </head>
 <body>
     <div class="f-header">
         <div class="adapter">
             <img src="img/logo.png" class="f-logo">
-            <div class="f-options active">
+            <div class="f-options" data-index="0">
                 <h3 style="">个人中心</h3>
                 <div></div>
             </div>
-            <div class="f-options">
-                <h3 style="">查看地点</h3>
+            <div class="f-options active" data-index="1">
+                <h3 style="">地图</h3>
                 <div></div>
             </div>
-            <div class="f-options">
-                <h3 style="">查看路线</h3>
+            <div class="f-options" data-index="2">
+                <h3 style="">动态</h3>
                 <div></div>
             </div>
-            <div class="f-options">
+            <div class="f-options" data-index="3">
                 <h3 style="">关于FMT</h3>
                 <div></div>
             </div>
@@ -151,6 +81,40 @@
                 <input type="text" class="form-control">
                 <div>
                     <img src="img/searchB1.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="test">
+        <img src="img/AboutTime2.png" alt="" style="width: 100%;height: 150px">
+        <div style="margin: 30px auto;width: 70%;height: 600px;background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <div style="height: 100%;width: 150px;border: 1px dotted gray;">
+                <div class="user-center-header">
+                    <h4>个人中心</h4>
+                </div>
+                <div class="user-center-btn active" data-index="0">
+                    <h4><i class="fa fa-home">&nbsp;&nbsp;</i>首页</h4>
+                </div>
+                <div class="user-center-btn" data-index="1">
+                    <h4><i class="fa fa-user">&nbsp;&nbsp;</i>我的信息</h4>
+                </div>
+                <div class="user-center-btn" data-index="2">
+                    <h4><i class="fa fa-heart">&nbsp;&nbsp;</i>我的关注</h4>
+                </div>
+                <div class="user-center-btn" data-index="3">
+                    <h4><i class="fa fa-map-marker">&nbsp;&nbsp;</i>我的地点</h4>
+                </div>
+                <div class="user-center-btn" data-index="4">
+                    <h4><i class="fa fa-book">&nbsp;&nbsp;</i>我的故事</h4>
+                </div>
+                <div class="user-center-btn" data-index="5">
+                    <h4><i class="fa fa-map-signs">&nbsp;&nbsp;</i>我的路线</h4>
+                </div>
+                <div class="user-center-btn" data-index="6">
+                    <h4><i class="fa fa-shield">&nbsp;&nbsp;</i>账号管理</h4>
+                </div>
+                <div class="user-center-btn" data-index="7">
+                    <h4><i class="fa fa-share">&nbsp;&nbsp;</i>分享</h4>
                 </div>
             </div>
         </div>
