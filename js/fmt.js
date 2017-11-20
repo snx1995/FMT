@@ -586,10 +586,12 @@ function closeAllJumpWindow(){
 var userCenterCtrl = {
     userOptions:document.getElementsByClassName("user-center-btn"),
     preOption:0,
+    text:["首页","我的信息","我的关注","我的地点","我的故事","我的路线","账号管理","分享"],
     change:function (n) {
         this.userOptions[this.preOption].classList.remove("active");
         this.userOptions[n].classList.add("active");
         this.preOption=n;
+        document.getElementsByClassName("uci-header")[0].innerHTML="<h4>"+this.text[n]+"</h4>";
     },
     init:function () {
         for(var i=0;i<this.userOptions.length;i++){

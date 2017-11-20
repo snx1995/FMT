@@ -1139,6 +1139,7 @@ h1,h2,h3,h4,h5,h6{
     height: 30px;
     margin: 25px 25px 25px 25px;
     background-color: white;
+    transition: background-color 0.3s;
 }
 .f-user:hover{
     background-color: #646464;
@@ -1176,6 +1177,7 @@ h1,h2,h3,h4,h5,h6{
     right: 10px;
     width: 30px;
     height: 30px;
+    transition: background-color 0.3s;
 }
 .f-search div:hover{
     background-color: #646464;
@@ -1212,4 +1214,35 @@ h1,h2,h3,h4,h5,h6{
 .user-center-header h4{
     cursor: default;
 }
-
+.uc-content{
+    margin: 30px auto;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.uco-content{
+    float: left;
+    height: 100%;
+    width: 150px;
+    border-left: 1px dotted gray;
+    border-right: 1px dotted gray;
+}
+.uci-header{
+    float: left;
+    width: 850px;
+    height: 60px;
+    border-bottom: 1px dotted grey;
+    padding-left: 50px;
+}
+.uci-header h4{
+    color: rgb(166,162,180);
+    text-align: left;
+    line-height: 60px;
+}
+.uci-content{
+    float: left;
+    height: 540px;
+    width: 850px;
+    overflow: auto;
+}
