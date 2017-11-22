@@ -1060,8 +1060,8 @@ h1,h2,h3,h4,h5,h6{
 #storyDetailWindow{
     border-radius: 10px;;
     padding: 20px 20px 20px 20px;
-    border: 1px solid rgb(100,100,100);
-    background-color: rgba(244,244,244,0.8);
+    border: 1px dotted rgb(100,100,100);
+    background-color: rgba(250,250,250,0.8);
     width: 500px;
     height: 200px;
     position: absolute;
@@ -1106,6 +1106,7 @@ h1,h2,h3,h4,h5,h6{
     line-height: 80px;
     text-align: center;
     cursor: default;
+    transition: color 0.3s;
 }
 .f-options:hover h3{
     color: rgb(255,255,255);
@@ -1215,6 +1216,8 @@ h1,h2,h3,h4,h5,h6{
     cursor: default;
 }
 .uc-content{
+    overflow: hidden;
+    border-radius: 10px;
     margin: 30px auto;
     width: 1000px;
     height: 600px;
@@ -1222,6 +1225,7 @@ h1,h2,h3,h4,h5,h6{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .uco-content{
+    overflow: hidden;
     float: left;
     height: 100%;
     width: 150px;
@@ -1241,8 +1245,69 @@ h1,h2,h3,h4,h5,h6{
     line-height: 60px;
 }
 .uci-content{
+    padding: 20px 20px 20px 20px;
     float: left;
     height: 540px;
     width: 850px;
     overflow: auto;
+}
+.uci-item{
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px dotted grey;
+}
+.uci-user-img{
+    float: left;
+    width: 80px;
+    height: 100%;
+    padding: 50px 0 60px 0;
+}
+.uci-user-img img{
+    border-radius: 40px;width: 80px;height: 80px;
+}
+.uci-item-content{
+    float: left;
+    height: 100%;
+    padding: 35px 0 0 20px;
+}
+.uci-item-content h3{
+    font-weight: bold;
+    float: left
+}
+.experience-level{
+    line-height: 30px;
+    color: white;
+    margin-left: 10px;
+}
+.user-experience{
+    border:1px solid #449d44;
+    width: 400px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 40px;
+}
+.user-experience div{
+    width: 79%;
+    height: 100%;
+    background-color: #449d44;
+    border-radius: inherit
+}
+.record-sign{
+    float: left;
+    margin-left: 20px;
+    color: #00b3ee;
+    font-size: 16px;
+}
+.user-statistics{
+    width:100%;
+    height: 100%;
+    padding-top: 30px;
+}
+.user-achievement{
+    width: 80px;
+    height: 90px;
+    border: 1px dotted grey;
+    margin-left: 20px;
+    float: left;
 }

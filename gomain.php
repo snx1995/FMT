@@ -290,7 +290,7 @@
                     <div class="uci-header">
                         <h4>首页</h4>
                     </div>
-                    <div class="uci-content">
+                    <div class="uci-content" id="uciContent">
 
                     </div>
                 </div>
@@ -308,7 +308,7 @@
         </div>
     </div>
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBXUVPlSWsNh2fpMJYsjur-zHd8n04vDVM&sensor=true"></script>
+    <script src="http://maps.google.cn/maps/api/js?key=AIzaSyBXUVPlSWsNh2fpMJYsjur-zHd8n04vDVM"></script>
     <script src="js/fmt.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
@@ -398,13 +398,6 @@
             });
         }
         google.maps.event.addDomListener(window, 'load', initialize);
-        var search = document.getElementById('search');
-        search.addEventListener('keydown',function () {
-            if(event.keyCode === 13){
-                var m = document.getElementById('search').value;
-                searchMovie(m);
-            }
-        });
     </script>
 </body>
 </html>

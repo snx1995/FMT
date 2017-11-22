@@ -105,14 +105,7 @@ function changeMode(mod,p) {
             break;
     }
 }
-function showRoute(mp) {
-    /*无效方法，已废弃*/
-    var points = [];
-    for(var i =0;i<route.length;i++){
-        points.push(route[i].position);
-    }
-    return points;
-}
+
 function arrayContains(a,p) {
     for(var i=0;i<a.length;i++){
         if(a[i]===p) return i;
@@ -130,6 +123,7 @@ function confirmMovie(){
     movieSelected = movieDisplay;
     document.getElementById('movieInUse').innerHTML = "已选择：<strong>"+movieSelected.title+"</strong>";
     jump("movieSelect","movie-select-drop");
+    jumpClose('searchResult','result-sld-re');
     jumpClose('movieInfo','my-fade-reverse');
 }
 function showMovieInfo(data,type){
@@ -155,11 +149,16 @@ function showMovieInfo(data,type){
     movieDisplay = data;
 }
 function searchMovie(key){
-    $.ajax({
-        url:"https://api.douban.com/v2/movie/search?q="+key,
-        dataType:'jsonp',
-        success:showSearchResult
-    });
+    if(key!=""){
+        $.ajax({
+            url:"https://api.douban.com/v2/movie/search?q="+key,
+            dataType:'jsonp',
+            success:showSearchResult
+        });
+    }else{
+        notice.showDialog("\n请输入要搜索的内容~\n")
+    }
+
 }
 function imgLoadError(el) {
     el.src='img/imgLoadError.png';
@@ -550,7 +549,7 @@ var navCtrl = {
             var newTab = nav.navTabs[n];
             this.navOptions[this.preOption].classList.remove("active");
             this.navOptions[n].classList.add("active");
-            if(n>nav.preOption){
+            if(n<nav.preOption){
                 newTab.css({"left":"-100%"});
                 preTab.animate({left:"100%",opacity:"0"},500);
                 newTab.animate({left:"0",opacity:"1"},500);
@@ -592,6 +591,7 @@ var userCenterCtrl = {
         this.userOptions[n].classList.add("active");
         this.preOption=n;
         document.getElementsByClassName("uci-header")[0].innerHTML="<h4>"+this.text[n]+"</h4>";
+        showUserCenterTab(n);
     },
     init:function () {
         for(var i=0;i<this.userOptions.length;i++){
@@ -601,6 +601,82 @@ var userCenterCtrl = {
         }
     }
 };
+function showUserCenterTab(n){
+    switch(n){
+        case '0':
+            getUserInfo();
+            break;
+        case '1':
+            testBlank();
+            break;
+        case '2':
+            testBlank();
+            break;
+        case '3':
+            testBlank();
+            break;
+        case '4':
+            testBlank();
+            break;
+        case '5':
+            testBlank();
+            break;
+        case '6':
+            testBlank();
+            break;
+        case '7':
+            testBlank();
+            break;
+        default:
+            break;
+    }
+}
+function getUserInfo() {
+    var w = document.getElementById("uciContent");
+    // language=HTML
+    w.innerHTML = "<div class='uci-item'>" +
+        "<div class='uci-user-img'>" +
+        "<img src='img/userPicTmp.png'>" +
+        "</div>" +
+        "<div class='uci-item-content'>" +
+        "<h3>长风茗宇</h3>" +
+        "<span style='float: left;margin-left: 10px;color: #00b3ee' class='fa fa-male fa-2x'></span>" +
+        "<div class='user-experience'>" +
+        "<div>" +
+        "<h4 class='experience-level'>Lv.50</h4>" +
+        "</div>" +
+        "</div>" +
+        "<div style='margin-top: 20px;'>" +
+        "<p class='record-sign'><i class='fa fa-map-marker' title='我的地点'>&nbsp;&nbsp;</i>56</p>" +
+        "<p class='record-sign'><i class='fa fa-map-signs' title='我的路线'>&nbsp;&nbsp;</i>18</p>" +
+        "<p class='record-sign'><i class='fa fa-book' title='我的故事'>&nbsp;&nbsp;</i>32</p>" +
+        "<p class='record-sign'><i class='fa fa-heart' title='粉丝'>&nbsp;&nbsp;</i>226</p>" +
+        "</div>" +
+        "</div>" +
+        "</div>"+
+        "<div class=\"uci-item\">" +
+        "<div class=\"user-statistics\">" +
+        "<p style=\"font-size: 14px;color: #8c8c8c;\">您来到FMT已经6年零5月27天啦, 领先98.6%的朋友哦~</p>" +
+        "<h4>获得的成就：</h4>" +
+        "<div style=\"width: 100%;margin-top: 20px;\">" +
+        "<div class=\"user-achievement\">" +
+        "</div>" +
+        "<div class=\"user-achievement\">" +
+        "</div>" +
+        "<div class=\"user-achievement\">" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>"
+    ;
+}
+function testBlank() {
+    var w = document.getElementById("uciContent");
+    w.innerHTML="";
+}
+
+
+
 function ctrlInit(){
     navCtrl.init();
     userCenterCtrl.init();

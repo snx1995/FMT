@@ -3,53 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>EffectsTest</title>
-    <style>
-        .user-center-btn,.user-center-header{
-            width: 100%;
-            height: 60px;
-            background-color: white;
-        }
-        .user-center-header{
-            border-bottom: 1px solid gray;
-        }
-        .user-center-btn:hover{
-            background-color: #f4f4f4;
-        }
-        .user-center-btn.active{
-            background-color: #00b3ee;
-            color: white;
-        }
-        .user-center-btn h4,.user-center-header h4{
-            line-height: 60px;
-            text-align: center;
-            width: 100%;
-        }
-        .user-center-btn h4{
-            cursor: pointer;
-        }
-        .user-center-header h4{
-            cursor: default;
-        }
-    </style>
-    <script>
-        var userCenterCtrl = {
-            userOptions:document.getElementsByClassName("user-center-btn"),
-            preOption:0,
-            change:function (n) {
-                this.userOptions[this.preOption].classList.remove("active");
-                this.userOptions[n].classList.add("active");
-                this.preOption=n;
-            },
-            init:function () {
-                for(var i=0;i<this.userOptions.length;i++){
-                    this.userOptions[i].addEventListener("click",function () {
-                        userCenterCtrl.change(this.getAttribute("data-index"));
-                    })
-                }
-            }
-        };
-        userCenterCtrl.init();
-    </script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/fmt.css">
@@ -86,9 +39,9 @@
         </div>
     </div>
     <div id="test">
-        <img src="img/AboutTime2.png" alt="" style="width: 100%;height: 150px">
-        <div style="margin: 30px auto;width: 70%;height: 600px;background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-            <div style="height: 100%;width: 150px;border: 1px dotted gray;">
+        <img src="img/userCenter.png" alt="" style="width: 100%;height: 150px">
+        <div class="uc-content">
+            <div class="uco-content">
                 <div class="user-center-header">
                     <h4>个人中心</h4>
                 </div>
@@ -115,6 +68,48 @@
                 </div>
                 <div class="user-center-btn" data-index="7">
                     <h4><i class="fa fa-share">&nbsp;&nbsp;</i>分享</h4>
+                </div>
+            </div>
+            <div class="uci-header">
+                <h4>首页</h4>
+            </div>
+            <div class="uci-content" id="uciContent">
+                <div class="uci-item">
+                    <div class="uci-user-img">
+                        <img src="img/userPicTmp.png">
+                    </div>
+                    <div class="uci-item-content">
+                        <h3>长风茗宇</h3>
+                        <span style="float: left;margin-left: 10px;color: #00b3ee" class="fa fa-male fa-2x"></span>
+                        <div class="user-experience">
+                            <div>
+                                <h4 class="experience-level">Lv.50</h4>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <p class="record-sign"><i class="fa fa-map-marker" title="我的地点">&nbsp;&nbsp;</i>56</p>
+                            <p class="record-sign"><i class="fa fa-map-signs" title="我的路线">&nbsp;&nbsp;</i>18</p>
+                            <p class="record-sign"><i class="fa fa-book" title="我的故事">&nbsp;&nbsp;</i>32</p>
+                            <p class="record-sign"><i class="fa fa-heart" title="粉丝">&nbsp;&nbsp;</i>226</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uci-item">
+                    <div class="user-statistics">
+                        <p style="font-size: 14px;color: #8c8c8c;">您来到FMT已经6年零5月27天啦, 领先98.6%的朋友哦~</p>
+                        <h4>获得的成就：</h4>
+                        <div style="width: 100%;margin-top: 20px;">
+                            <div class="user-achievement">
+
+                            </div>
+                            <div class="user-achievement">
+
+                            </div>
+                            <div class="user-achievement">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
