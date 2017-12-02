@@ -1,5 +1,3 @@
-
-
 var signup = document.getElementById("signup");
 var login = document.getElementById("login");
 signup.addEventListener("click",function () {
@@ -51,7 +49,8 @@ signup.addEventListener("click",function () {
             if(signupXhr.readyState===4 && signupXhr.status ===200){
                 if(signupXhr.responseText === "success"){
                     enLoginOverly(false,"注册成功，正在登陆...",function () {
-                        window.location.href="gomain.php?username="+username;
+                        Cookies.set("username",username,{expires:1,path:''});
+                        window.location.href="main.html";
                     });
                 }else{
                     enLoginOverly(false,signupXhr.responseText,function () {
@@ -78,7 +77,8 @@ login.addEventListener("click",function () {
             if(loginXhr.readyState===4&&loginXhr.status===200){
                 if(loginXhr.responseText==="success"){
                     enLoginOverly(false,"登陆成功，正在跳转...",function () {
-                        window.location.href="gomain.php?username="+username;
+                        Cookies.set("username",username,{expires:1,path:''});
+                        window.location.href="main.html";
                     });
                 }else{
                     enLoginOverly(false,loginXhr.responseText,function () {

@@ -1,14 +1,14 @@
 <?php
     $servername = "localhost";
     $username = "root";
-    $password = "zk199707021";
+    $password = "123456789";
     $dbname = "fmt";
     $conn = new mysqli($servername,$username,$password,$dbname);
     $filmid = $_GET["filmid"];
     if($conn->connect_error){
         die("Connection failed: ".$conn->connect_error);
     }
-    $sql = "select * from stories where filmid='".$filmid."'";
+    $sql = "select * from stories where filmid=".$filmid;
      $result = $conn->query($sql);
      $row = $result->fetch_assoc();
      $film = array(
