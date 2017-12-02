@@ -95,8 +95,8 @@ function changeMode(mod,p) {
             notice.showDialog("\nSwitch mode to route.\n");
             p.clear();
             break;
-        case "other":
-            notice.showDialog("\n这是备用按钮\n");
+        case "routeExplore":
+            getAllPaths();
             route.clear();
             p.clear();
             break;
@@ -674,8 +674,6 @@ function testBlank() {
     var w = document.getElementById("uciContent");
     w.innerHTML="";
 }
-
-
 
 function ctrlInit(){
     navCtrl.init();

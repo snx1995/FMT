@@ -89,27 +89,27 @@
             <div class="jump-window window-lg abs-center" id="movieInfo">
                 <div class="window-header">
                     <a class="btn glyphicon glyphicon-remove b-close" onclick="jumpClose('movieInfo','my-fade-reverse')"></a>
-                    <h1>Movie Info</h1>
+                    <h1>电影详情</h1>
                 </div>
                 <div class="movieInfoContent">
                     <table class="table">
-                        <tr><td colspan="3"><h1 id="movieTitle" style="text-align: center">机器人9号</h1></td></tr>
+                        <tr><td colspan="3"><h1 id="movieTitle" style="text-align: center"></h1></td></tr>
                         <tr>
                             <td rowspan="6"><img src="" onerror="imgLoadError(this)" alt="1" id="moviePic" class="movieInfoPic" style="width: 225px;height: 300px"></td>
                             <td>导演：</td>
-                            <td id="movieDirectors">导演</td>
+                            <td id="movieDirectors"></td>
                         </tr>
                         <tr>
                             <td>主演：</td>
-                            <td id="movieCasts">主演，主演，主演，主演，主演，主演...</td>
+                            <td id="movieCasts"></td>
                         </tr>
                         <tr>
                             <td>类型：</td>
-                            <td id="movieGenres">动作，科幻，悬疑</td>
+                            <td id="movieGenres"></td>
                         </tr>
                         <tr>
                             <td>地区：</td>
-                            <td id="movieCountry">欧美</td>
+                            <td id="movieCountry"></td>
                         </tr>
                         <tr>
                             <td>年代：</td>
@@ -121,18 +121,7 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <p id="movieSummary">机器人9号（伊利亚•伍德 Elijah Wood 饰）突然醒来，
-                                    发现身边的世界充满危机，四处残败，一片末世景象。
-                                    9号带着一个画有三个奇怪符号的圆形物体逃到街上，
-                                    幸遇发明家机器人2号（马丁•兰道 Martin Landau 饰）给自己装上了声音，
-                                    但2号却不幸被机器怪兽抓走。9号找到了老兵1号（克里斯托弗•普卢默
-                                    Christopher Plummer 饰）、机械工5号（约翰•雷利 John C. Reilly 饰）、
-                                    疯癫画家6号（克里斯品•格拉夫 Crispin Glover 饰）和大力士8号
-                                    （弗雷德•塔塔绍尔 Fred Tatasciore 饰）。9号与5号擅自出行援救2号，
-                                    危急时被女武士7号（詹妮佛•康纳利 Jennifer Connelly 饰）救下，
-                                    但无意中9号却令终极机器兽复活。带着自己从哪里来以及生存使命的问题，
-                                    9号决定想尽办法制服机器兽，.
-                                </p>
+                                <p id="movieSummary"></p>
                             </td>
                         </tr>
                     </table>
@@ -161,10 +150,10 @@
                                 <input type="text" id="pos_y" class="form-control input-md" readonly style="float: left;width: 35%;margin-left: 10px;">
                             </div>
                             <input type="text" class="form-control input-lg bg-transparent" id="placeDescription" style="margin-top: 20px;" placeholder="Place description here...">
-                            <textarea id="storyDetails" class="form-control bg-transparent" id="storyDetails" cols="30" rows="7" style="width: 100%;" placeholder="The story details here..."></textarea>
+                            <textarea class="form-control bg-transparent" id="storyDetails" cols="30" rows="7" style="width: 100%;" placeholder="The story details here..."></textarea>
                         </div>
                     </div>
-                    <input type="text" id="keyword" class="form-control input-lg bg-transparent" id="keyword" style="margin-top: 20px;" placeholder="输入关键词，以空格分割">
+                    <input type="text"class="form-control input-lg bg-transparent" id="keyword" style="margin-top: 20px;" placeholder="输入关键词，以空格分割">
                     <div style="width: 100%;padding-top: 20px;">
                         <button style="margin:auto;display: block" class="b-btn b-blue b-md" onclick="addNewPoint()">确认</button>
                     </div>
@@ -248,10 +237,19 @@
                 </div>
             </div>
             <div id="about">
-                <h1>This is the about page</h1>
+                <div class="content">
+                </div>
             </div>
             <div id="dynamicInfo">
-                <h1>This is the dynamic info page</h1>
+                <div class="duser">
+
+                </div>
+                <div class="dinfo">
+                    <div class="header">
+                        <h4 class="title">用户动态</h4>
+                        <i class="fa fa-refresh fa-2x b-refresh"></i>
+                    </div>
+                </div>
             </div>
             <div id="userCenter">
                 <div style="width: 100%;min-height: 150px;overflow: hidden">
@@ -301,7 +299,7 @@
                 <div>
                     <img src="img/exploreBtn.png" alt="1" onclick="changeMode('exploring',pointsAdded)" title="浏览模式">
                     <img src="img/routeBtn.png" alt="1" onclick="changeMode('route',pointsAdded)" title="路径模式">
-                    <img src="img/addBtn.png" alt="1" onclick="changeMode('other',pointsAdded)" title="备用按钮">
+                    <img src="img/routeExplore.png" alt="1" onclick="changeMode('routeExplore',pointsAdded)" title="看看大家分享的路线">
                     <img src="img/addBtn2.png" alt="1" onclick="changeMode('add',pointsAdded)" title="标记新的地点">
                 </div>
             </div>
