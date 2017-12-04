@@ -7,7 +7,7 @@
  */
     $servername = "localhost";
     $username = "root";
-    $password = "950714";
+    $password = "123456789";
     $dbname = "fmt";
 
     $conn = new mysqli($servername,$username,$password,$dbname);
@@ -47,6 +47,7 @@
         echo 'Insert into stories error: '.$conn->error;
     }
 
+    //$sql = "insert into dynamic(user,details,date,time)values("
     echo "success";
 
     $conn->close();

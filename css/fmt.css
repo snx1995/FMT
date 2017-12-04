@@ -289,18 +289,11 @@ h1,h2,h3,h4,h5,h6{
     background-color: rgb(42,42,42);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.window-header h1{
+.window-header h1,.window-header h2,.window-header h3{
     color: white;
     display: inline-block;
     width: 100%;
-    line-height: 100%;
-    text-align: center;
-}
-.window-header h3{
-    color: white;
-    display: inline-block;
-    width: 100%;
-    line-height: 100%;
+    line-height: inherit;
     text-align: center;
 }
 .window-header{
@@ -520,22 +513,25 @@ h1,h2,h3,h4,h5,h6{
 #googleMap,#userCenter,#about,#dynamicInfo{
     position: absolute;
     top: 80px;
-    left: 0;
     width: 100%;
     min-height: 100%;
     z-index: 1;
 }
 #googleMap{
+    left: 0;
     visibility: visible;
 }
-#about{
-    background-color: #0f0f0f;
-}
 #dynamicInfo{
-    background-color: #00b3ee;
+    left: -100%;
+    background-image: url(../img/dynamicBG.png);
 }
 #userCenter{
+    left: -100%;
     background-color: rgb(250,250,250);
+}
+#about{
+    background-color: #f0f0f0;
+    left: -100%;
 }
 #userCenter,#about,#dynamicInfo{
     opacity: 0;
@@ -652,10 +648,10 @@ h1,h2,h3,h4,h5,h6{
     height: 40px;
 }
 #mapOptions{
-    border-radius: 20px;
+    border-radius: 30px;
     z-index: 99;
     width: 300px;
-    height: 40px;
+    height: 60px;
     position: absolute;
     left: 0;
     right: 0;
@@ -672,8 +668,8 @@ h1,h2,h3,h4,h5,h6{
     top: 0;
     left: 0;
     opacity: 0.5;
-    width: 38px;
-    height: 38px;
+    width: 58px;
+    height: 58px;
     transition: all 0.2s;
 }
 #mapOptions img:hover{
@@ -692,8 +688,8 @@ h1,h2,h3,h4,h5,h6{
     left: 0;
     right: 0;
     margin: auto;
-    width: 170px;
-    height: 40px;
+    width: 250px;
+    height: 60px;
 }
 .jump-window h2{
     width: 100%;
@@ -1229,7 +1225,6 @@ h1,h2,h3,h4,h5,h6{
     float: left;
     height: 100%;
     width: 150px;
-    border-left: 1px dotted gray;
     border-right: 1px dotted gray;
 }
 .uci-header{
@@ -1310,4 +1305,150 @@ h1,h2,h3,h4,h5,h6{
     border: 1px dotted grey;
     margin-left: 20px;
     float: left;
+}
+
+.b-refresh{
+    float: left;
+    color: #646464;
+    width: 20px;
+    height: 20px;
+    margin: 20px 20px 20px 20px;
+}
+.b-refresh:hover{
+    color: #AAA;
+}
+.dinfo{
+    overflow: hidden;
+    width: 800px;
+    height: 700px;
+    background-color: white;
+    float: left;
+    margin: 40px 0 0 30px;
+    border-radius: 10px;
+    position: relative;
+}
+.dinfo .header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #fafafa;
+    border-bottom: 1px dotted gray;
+}
+.dinfo .header .title{
+    float: left;
+    border-right: 1px dotted gray;
+    text-align: center;
+    width: 150px;
+    display: inline-block;
+    line-height: 60px;
+    color: #646464;
+}
+.dinfo .content{
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 640px;
+    overflow: auto;
+}
+.dinfo .content .item{
+    position: relative;
+    width: 95%;
+    height: 150px;
+    margin: 20px auto;
+    border: 1px dotted #00b3ee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.userpic-round{
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+.dinfo .content .item .userpic-round,.duser .userpic-round{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.dinfo .content .item .username,.duser .username{
+    position: absolute;
+    top: 20px;
+    left: 90px;
+    font-weight: bold;
+    color: white;
+}
+.dinfo .content .item .datetime{
+    position: absolute;
+    top: 60px;
+    left: 90px;
+    color: #aaa;
+}
+.dinfo .content .item .header,.duser .header{
+    width: 100%;
+    height: 50px;
+    border-radius: 0;
+}
+.dinfo .content .item .header{
+    background-color: #00b3ee;
+}
+.duser .header{
+    background-color: #419641;
+}
+.dinfo .content .item .details{
+    position: absolute;
+    top: 80px;
+    color: #777;
+    left: 100px;
+}
+.duser{
+    position: relative;
+    border-radius: 10px;
+    width: 250px;
+    height: 180px;
+    margin: 55px 0 0 100px;
+    float: left;
+    background-color: white;
+    overflow: hidden;
+}
+.duser .follow{
+    width: 80px;
+    height: 60px;
+    position: absolute;
+    bottom: 10px;
+    left: 40px;
+}
+.duser .fans{
+    width: 80px;
+    height: 60px;
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
+}
+.duser .follow h5,.duser .fans h5{
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    color: #00b3ee;
+}
+#about .content{
+    overflow: hidden;
+    background-color: #fafafa;
+    width: 1000px;
+    height: 700px;
+    margin: 50px auto;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#about .content .header{
+    width: 100%;
+    height: 160px;
+    background-color: #00b3ee;
+}
+#about .content .header img{
+    margin: 20px 250px 20px 250px;
+    width: 500px;
+    height: 120px;
 }
