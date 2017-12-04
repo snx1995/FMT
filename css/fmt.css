@@ -392,7 +392,6 @@ h1,h2,h3,h4,h5,h6{
 }
 .abs-center{
     position: absolute;
-    overflow: auto;
     margin: auto;
     top: 0;
     left: 0;
@@ -1451,4 +1450,191 @@ h1,h2,h3,h4,h5,h6{
     margin: 20px 250px 20px 250px;
     width: 500px;
     height: 120px;
+}
+#uciContent .content{
+    padding: 00px 40px 40px 40px;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    color: #5e5e5e;
+}
+#uciContent .content .input-md{
+    width: 250px;
+}
+#uciContent .content textarea{
+    width: 300px;
+    height: 80px;
+    color: #5e5e5e;
+    font-size: 14px;
+}
+#uciContent .content select{
+    width: 60px;
+    height: 30px;
+    color: #5e5e5e;
+}
+.explore-search{
+    border-radius: 10px;
+    z-index: 100;
+    width: 310px;
+    height: 50px;
+    position: absolute;
+    bottom: -100%;
+    left: -100%;
+    opacity: 0;
+    background-color: rgba(42,42,42,0.5);
+}
+.explore-options{
+    cursor: pointer;
+    background-color: rgba(42,42,42,0.6);
+    float: left;
+    width: 90px;
+    height: 50px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+.explore-options:hover,.explore-search div.active{
+    background-color: rgba(42,42,42,0.8);
+}
+.explore-options:active{
+    background-color: rgba(42,42,42,0.6);
+}
+.explore-search h4{
+    color: rgb(171,171,171);
+    line-height: 50px;
+    width: 100%;
+    text-align: center;
+    transition: color 0.3s;
+}
+.explore-options:hover h4,.explore-options.active h4{
+    color: rgb(240,240,240);
+}
+.explore-options:active h4{
+    color: rgb(171,171,171);
+}
+#filmToShow{
+    color: rgb(244,244,244);
+    background-color: rgba(42,42,42,0.6);
+    width: 100%;
+    height: 100%;
+}
+#filmToShow option{
+    color: rgb(244,244,244);
+    background-color: rgba(42,42,42,0.6);
+    display: block;
+    height: 30px;
+    width: 100%;
+    text-align: center;
+}
+#filmToShow option:hover{
+    background-color: rgba(42,42,42,0.8);
+}
+#eoContent{
+    z-index: 99;
+    width: 310px;
+    height: 50px;
+    position: absolute;
+    bottom: 75px;
+    left: 55px;
+    opacity: 0;
+}
+#byFilm,#byKeyword{
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+}
+#byKeyword input{
+    float: left;
+    color: white;
+    display: inline-block;
+    background-color: rgba(42,42,42,0.6);
+    width: 240px;
+    height: 100%;
+}
+#byKeyword .button{
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    float: left;
+    width: 55px;
+    height: 100%;
+    margin-left: 3px;
+    background-color: rgba(42,42,42,0.6);
+    transition: background-color 0.3s;
+    color: white;
+}
+#byKeyword .button:hover{
+    background-color: rgba(42,42,42,0.8);
+}
+#byKeyword .button:active{
+    background-color: rgba(42,42,42,0.6);
+}
+.relative-parent{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.f-select{
+    cursor: pointer;
+    width: 300px;
+    height: 50px;
+    border: 1px solid rgba(0,179,238,0.6);
+    background-color: rgba(42,42,42,0.6);
+    border-radius: 10px;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: background-color 0.3s;
+}
+.f-select:hover{
+    background-color: rgba(42,42,42,0.8);
+}
+.f-select:active{
+    background-color: rgba(42,42,42,0.6);
+}
+.f-select .content{
+    overflow: auto;
+    position: relative;
+    bottom: 350px;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(42,42,42,0.6);
+    visibility: hidden;
+}
+.f-select .content::-webkit-scrollbar{
+    display: none;
+}
+.f-select .content ul{
+    padding: 0 10px 0 10px;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+}
+.f-select .content li{
+    cursor: pointer;
+    line-height: 40px;
+    margin-top: 10px;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 40px;
+    /*background-color: rgba(42,42,42,0.7);*/
+    text-align: center;
+    transition: background-color 0.3s;
+}
+.f-select .content li:hover{
+    background-color: rgba(42,42,42,0.8);
+}
+.f-selected{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    text-align: center;
+    color: #f4f4f4;
 }

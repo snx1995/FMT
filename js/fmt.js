@@ -81,21 +81,22 @@ function changeMode(mod,p) {
     mode = mod;
     switch(mode){
         case "add":
-            notice.showDialog("\nSwitch mode to add.\n");
             PointsOnMap.show();
             route.clear();
+            exploreOptCtrl.hide();
             break;
         case "exploring":
-            notice.showDialog("\nSwitch mode to exploring.\n");
-            showPoints(map);
+            exploreMode(true);
+            //showPoints(map);
             route.clear();
             p.clear();
             break;
         case "route":
-            notice.showDialog("\nSwitch mode to route.\n");
+            exploreOptCtrl.hide();
             p.clear();
             break;
         case "routeExplore":
+            exploreOptCtrl.hide();
             getAllPaths();
             route.clear();
             p.clear();
@@ -599,15 +600,28 @@ var userCenterCtrl = {
                 userCenterCtrl.change(this.getAttribute("data-index"));
             })
         }
+        getMainUserInfo();
     }
 };
 function showUserCenterTab(n){
     switch(n){
         case '0':
-            getUserInfo();
+            getMainUserInfo();
             break;
         case '1':
-            testBlank();
+            var w = document.getElementById("uciContent");
+            w.innerHTML = "<div class='content'>" +
+                "<table class='table'>" +
+                "<tr><td>昵称：</td><td><input type='text' class='form-control input-md'></td></tr>" +
+                "<tr><td>FMTID：</td><td>12345678</td></tr>" +
+                "<tr><td>生日：</td><td><input type='date' class='form-control input-md'></td></tr>" +
+                "<tr><td>性别：</td><td><select name='sex'><option value='1'>男</option>" +
+                "<option value='0'>女</option>" +
+                "<option value='2'>保密</option></select></td></tr>" +
+                "<tr><td>所在地：</td><td><input type='text' class='form-control input-md'></td></tr>" +
+                "<tr><td>个人简介：</td><td><textarea name='self-introduction' id='selfIntroduction' cols='30' rows='5'></textarea></td></tr>"+
+                "</table>"+
+                "</div>";
             break;
         case '2':
             testBlank();
@@ -631,9 +645,8 @@ function showUserCenterTab(n){
             break;
     }
 }
-function getUserInfo() {
+function getMainUserInfo() {
     var w = document.getElementById("uciContent");
-    // language=HTML
     w.innerHTML = "<div class='uci-item'>" +
         "<div class='uci-user-img'>" +
         "<img src='img/userPicTmp.png'>" +
@@ -670,13 +683,111 @@ function getUserInfo() {
         "</div>"
     ;
 }
+function getUserInfo(id){
+    $.ajax({
+        url:"getUserInfo.php?userid="+id,
+        dataType:"json",
+        success:function (data){
+            var w = document.getElementById("uciContent");
+            w.innerHTML = "<div class='content'>" +
+                "<table class='table'>" +
+                "<tr><td>昵称：</td><td><input type='text' class='form-control input-md'></td></tr>" +
+                "<tr><td>生日：</td><td><input type='date' class='form-control input-md'></td></tr>" +
+                "<tr><td>性别：</td><td><select name='sex'><option value='1'>男</option>" +
+                "<option value='0'>女</option>" +
+                "<option value='2'>保密</option></select></td></tr>" +
+                "<tr><td>所在地：</td><td><input type='text' class='form-control input-md'></td></tr>" +
+                "</table>"+
+                "</div>";
+        }
+    })
+}
+function exploreMode(flag){
+    var searchBar = $("#exploreSearch");
+    if(flag){
+        searchBar.animate({bottom:"20px",left:"50px",opacity:1},500);
+    }
+    else{
+        searchBar.animate({bottom:"-100%",left:"-100%",opacity:0},500);
+    }
+}
 function testBlank() {
     var w = document.getElementById("uciContent");
     w.innerHTML="";
 }
-
+var exploreOptCtrl = {
+    options:document.getElementsByClassName("explore-options"),
+    preOption:0,
+    init:function () {
+        for(var i=0;i<this.options.length;i++){
+            this.options[i].addEventListener("click",function () {
+               exploreOptCtrl.changeTo(this.getAttribute("data-index"));
+            })
+        }
+    },
+    changeTo:function (n) {
+        if(n!==this.preOption) {
+            exploreOptCtrl.options[n].classList.add("active");
+            exploreOptCtrl.options[exploreOptCtrl.preOption].classList.remove("active");
+            exploreOptCtrl.preOption = n;
+        }
+        this.show(n);
+    },
+    show:function (n) {
+        var a1 = $("#eoContent");
+        var a2 = $("#byFilm");
+        var a3 = $("#byKeyword");
+        switch(n){
+            case '0':
+                showPoints(map);
+                a1.animate({opacity:'0'},300);
+                a1.css("visibility","hidden");
+                a2.css({visibility:"hidden"});
+                a3.css({visibility:"hidden"});
+                break;
+            case '1':
+                a1.css("visibility","visible");
+                a2.css({visibility:"visible",top:"0"});
+                a3.css({visibility:"hidden",top:"-100%"});
+                a1.animate({opacity:'1'},300);
+                break;
+            case '2':
+                a1.css("visibility","visible");
+                a2.css({visibility:"hidden",top:"-100%"});
+                a3.css({visibility:"visible",top:"0"});
+                a1.animate({opacity:1,transform:"scale(1)",webkitTransform:"scale(1)"},300);
+                break;
+            default:
+                alert("Something goes wrong about explore-options-control.")
+        }
+    },
+    hide:function () {
+        exploreMode(false);
+        var a1 = $("#eoContent");
+        var a2 = $("#byFilm");
+        var a3 = $("#byKeyword");
+        a1.css("visibility","hidden");
+        a2.css({visibility:"hidden"});
+        a3.css({visibility:"hidden"});
+    }
+};
+var fSelectCtrl = {
+    selects:$(".f-select"),
+    init:function (){
+        this.selects.on('click',function (e) {
+            e.stopPropagation();
+            $(this).children().filter(".content").css("visibility","visible");
+        });
+        this.selects.children().children().children().filter("li").click(function (e) {
+            e.stopPropagation();
+            $(this).parent().parent().parent().children().filter('.f-selected').text($(this).text());
+            $(this).parent().parent().parent().children().filter('.content').css("visibility","hidden");
+        })
+    }
+};
 function ctrlInit(){
     navCtrl.init();
     userCenterCtrl.init();
+    exploreOptCtrl.init();
+    fSelectCtrl.init();
 }
-ctrlInit();

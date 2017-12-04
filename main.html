@@ -202,6 +202,40 @@
             <p></p>
             <span></span>
         </div>
+        <div id="eoContent">
+            <div class="relative-parent">
+                <div id="byFilm">
+                    <div class="f-select">
+                        <div class="f-selected">
+                            请选择--
+                        </div>
+                        <div class="content">
+                            <ul>
+                                <li data-value="0">加勒比海盗1</li>
+                                <li data-value="1">加勒比海盗2</li>
+                                <li data-value="2">加勒比海盗3</li>
+                                <li data-value="3">加勒比海盗4</li>
+                                <li data-value="4">加勒比海盗5</li>
+                                <li data-value="0">加勒比海盗1</li>
+                                <li data-value="1">加勒比海盗2</li>
+                                <li data-value="2">加勒比海盗3</li>
+                                <li data-value="3">加勒比海盗4</li>
+                                <li data-value="4">加勒比海盗5</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="byKeyword">
+                    <input type="text" class="form-control" placeholder="输入关键词来搜索..">
+                    <div class="button">GO</div>
+                </div>
+            </div>
+        </div>
+        <div class="explore-search" id="exploreSearch">
+            <div class="explore-options active" data-index="0"><h4>全部</h4></div>
+            <div class="explore-options" data-index="1"><h4>按电影</h4></div>
+            <div class="explore-options" data-index="2"><h4>关键词</h4></div>
+        </div>
         <div class="f-header">
             <div class="adapter">
                 <img src="img/logo.png" class="f-logo">
@@ -371,7 +405,12 @@
 <script src="js/js.cookie.js"></script>
 <script>
     $(document).ready(function () {
+        ctrlInit();
+        $(document).on('click',function (e) {
+            $('.f-select .content').css("visibility","hidden");
+        });
        document.getElementById("username").innerText = Cookies.get("username");
+        changeMode("exploring",pointsAdded);
     });
     document.onmousemove = storyDetailsWindow;
     var map;
