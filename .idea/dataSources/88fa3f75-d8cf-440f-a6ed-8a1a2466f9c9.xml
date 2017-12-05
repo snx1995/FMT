@@ -14,149 +14,165 @@
     <schema id="8" parent="1" name="sys"/>
     <schema id="9" parent="1" name="world"/>
     <table id="10" parent="2" name="dynamic"/>
-    <table id="11" parent="2" name="path"/>
-    <table id="12" parent="2" name="points"/>
-    <table id="13" parent="2" name="stories"/>
-    <table id="14" parent="2" name="users"/>
-    <column id="15" parent="10" name="user">
+    <table id="11" parent="2" name="films"/>
+    <table id="12" parent="2" name="path"/>
+    <table id="13" parent="2" name="points"/>
+    <table id="14" parent="2" name="stories"/>
+    <table id="15" parent="2" name="users"/>
+    <column id="16" parent="10" name="user">
       <Position>1</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="10" name="details">
+    <column id="17" parent="10" name="details">
       <Position>2</Position>
       <DataType>varchar(1000)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="17" parent="10" name="date">
+    <column id="18" parent="10" name="date">
       <Position>3</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="18" parent="10" name="time">
+    <column id="19" parent="10" name="time">
       <Position>4</Position>
       <DataType>time|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="19" parent="10" name="id">
+    <column id="20" parent="10" name="id">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <key id="20" parent="10" name="PRIMARY">
+    <key id="21" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="21" parent="11" name="id">
+    <column id="22" parent="11" name="filmid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="11" name="filmtitle">
+      <Position>2</Position>
+      <DataType>varchar(500)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="24" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>filmid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="25" parent="12" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="22" parent="11" name="pathinfo">
+    <column id="26" parent="12" name="pathinfo">
       <Position>2</Position>
       <DataType>varchar(1000)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="11" name="pathdes">
+    <column id="27" parent="12" name="pathdes">
       <Position>3</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="11" name="user">
+    <column id="28" parent="12" name="user">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="25" parent="11" name="PRIMARY">
+    <key id="29" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="26" parent="12" name="id">
+    <column id="30" parent="13" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="27" parent="12" name="posx">
+    <column id="31" parent="13" name="posx">
       <Position>2</Position>
       <DataType>double|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="28" parent="12" name="posy">
+    <column id="32" parent="13" name="posy">
       <Position>3</Position>
       <DataType>double|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="12" name="user">
+    <column id="33" parent="13" name="user">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="30" parent="12" name="PRIMARY">
+    <key id="34" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="31" parent="13" name="filmid">
+    <column id="35" parent="14" name="filmid">
       <Position>1</Position>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="32" parent="13" name="placedes">
+    <column id="36" parent="14" name="placedes">
       <Position>2</Position>
       <DataType>varchar(300)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="33" parent="13" name="details">
+    <column id="37" parent="14" name="details">
       <Position>3</Position>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="34" parent="13" name="keywords">
+    <column id="38" parent="14" name="keywords">
       <Position>4</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="35" parent="13" name="user">
+    <column id="39" parent="14" name="user">
       <Position>5</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="13" name="pointid">
+    <column id="40" parent="14" name="pointid">
       <Position>6</Position>
       <DataType>int(10) unsigned|0</DataType>
     </column>
-    <column id="37" parent="13" name="filmtitle">
+    <column id="41" parent="14" name="filmtitle">
       <Position>7</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="38" parent="13" name="storyid">
+    <column id="42" parent="14" name="storyid">
       <Position>8</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <key id="39" parent="13" name="PRIMARY">
+    <key id="43" parent="14" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>storyid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="40" parent="14" name="username">
+    <column id="44" parent="15" name="username">
       <Position>1</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="41" parent="14" name="password">
+    <column id="45" parent="15" name="password">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="42" parent="14" name="PRIMARY">
+    <key id="46" parent="15" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

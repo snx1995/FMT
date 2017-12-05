@@ -574,6 +574,7 @@ var navCtrl = {
     }
 };
 function closeAllJumpWindow(){
+    exploreOptCtrl.hide();
     $("#searchResult").css("visibility","hidden");
     $("#routeBrowser").css("visibility","hidden");
     $("#movieInfo").css("visibility","hidden");
@@ -777,6 +778,7 @@ var fSelectCtrl = {
         this.selects.on('click',function (e) {
             e.stopPropagation();
             $(this).children().filter(".content").css("visibility","visible");
+            if($(this).attr("id")=="allFilms") getAllFilmDB();
         });
         this.selects.children().children().children().filter("li").click(function (e) {
             e.stopPropagation();
@@ -785,6 +787,30 @@ var fSelectCtrl = {
         })
     }
 };
+function getAllFilmDB(){
+    $.ajax({
+        url:"getAllFilms.php",
+        dataType:"json",
+        success:function (data) {
+            function compare(w1,w2) {
+                return w1.filmtitle.localeCompare(w2.filmtitle,"ch");
+            }
+            var options = "";
+            data.sort(compare);
+            for(var i=0;i<data.length;i++){
+                options += "<li data-index='" + data[i].filmid+
+                    "'>" + data[i].filmtitle +
+                    "</li>"
+            }
+            $("#allFilms ul").html(options);
+            $("#allFilms li").on("click",function (e) {
+                e.stopPropagation();
+                $(this).parent().parent().parent().children().filter('.f-selected').text($(this).text());
+                $(this).parent().parent().parent().children().filter('.content').css("visibility","hidden");
+            })
+        }
+    })
+}
 function ctrlInit(){
     navCtrl.init();
     userCenterCtrl.init();
