@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Follow Movie to Travel</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fmt.css">
+</head>
+<body>
+    <div id="container" data-PageSwitch>
+        <div class="sections">
+            <div class="section active" id="section0" onmouseenter="playAnimation('sDrop0','drop-down')">
+                <div id="sDrop0" class="abs-center"  style="width: 800px; height: 600px;visibility: hidden;">
+                    <div style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(200,200,200,0.3);box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"></div>
+                </div>
+            </div>
+            <div class="section" id="section1" onmouseenter="routePointsDropDown()">
+                <div class="abs-center" style="width: 900px;height: 300px">
+                    <img src="img/triangle.png" class="route-point" id="1" alt="" style="float: left;opacity: 0.3;filter: blur(4px)">
+                    <img src="img/triangle.png" class="route-point" id="2" alt="" style="float: left">
+                    <img src="img/triangle.png" class="route-point" id="3" alt="" style="float: left">
+                    <img src="img/triangle.png" class="route-point" id="4" alt="" style="float: left">
+                </div>
+            </div>
+            <div class="section" id="section2">
+                <div class="abs-center drop-down" style="width: 400px;height: 200px;background-color: white">
+
+                </div>
+            </div>
+            <div class="section" id="section3">
+                <div class="login-board">
+                    <h1>请登录或注册</h1>
+                    <div>
+                        <input type="text" class="form-control input-lg" id="userName" placeholder="用户名:由英文字母+数字构成">
+                        <span id="ustip"></span>
+                        <input type="password" class="form-control input-lg" id="password" placeholder="密码:6-16位英文字母+数字">
+                        <span id="pdtip"></span>
+                        <input type="password" class="form-control input-lg" id="passwordRe" placeholder="重复密码">
+                        <span id="pdrtip"></span>
+                        <div>
+                            <button class="b-btn b-default b-lg" id="signup">注册</button>
+                            <button class="b-btn b-default b-lg pull-right" id="login">登录</button>
+                        </div>
+                        <div id="loginOverly">
+                            <h3 style="color: white;width: 100%;text-align: center;display: inline-block;height: 50px;" id="loginMsg">登陆中...</h3>
+                            <img src="img/loading.gif" class="abs-center" style="width: 100px;height: 100px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/fmt.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/pageswitch.js"></script>
+    <script src="js/js.cookie.js"></script>
+    <script type="text/javascript">
+        function mousePosition(ev) {
+            /*
+            * 获取鼠标定位，相对于窗口中间
+            * */
+            if(ev.pageX || ev.pageY){
+                return {x:ev.pageX-document.body.clientWidth/2, y:ev.pageY-document.body.clientHeight/2};
+            }
+            return {
+                x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                y:ev.clientY + document.body.scrollTop - document.body.clientTop
+            };
+        }
+        $("#container").PageSwitch({
+            index: 0,    //页面开始的索引，0是第一页。
+            easing:"linear",   //动画效果。  ease
+            duration:500,      //动画执行时间
+            loop:true,         //是否循环切换
+            pagination:true,   //是否进行分页
+            keybosrd:true,     //是否出发键盘事件
+            direction : "vertical",    //滑动方向：vertical（竖版）。horizontal（横板）
+            callback:function(){
+                $("h1").addClass("slide");
+            }
+        });
+    </script>
+
+</body>
+</html>

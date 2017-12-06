@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e94b16b-ab03-4ef3-9876-d3baf1810e52" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addNewPoint.php" afterPath="$PROJECT_DIR$/addNewPoint.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/fmt.css" afterPath="$PROJECT_DIR$/css/fmt.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/fmt.js" afterPath="$PROJECT_DIR$/js/fmt.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
-    </list>
+    <list default="true" id="6e94b16b-ab03-4ef3-9876-d3baf1810e52" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -495,7 +487,7 @@
       <workItem from="1512546007787" duration="9642000" />
       <workItem from="1512563097843" duration="3086000" />
       <workItem from="1512568436628" duration="4097000" />
-      <workItem from="1512572760834" duration="14000" />
+      <workItem from="1512572760834" duration="66000" />
     </task>
     <task id="LOCAL-00001" summary="php test included~">
       <created>1510295133208</created>
@@ -630,14 +622,22 @@
       <option name="project" value="LOCAL" />
       <updated>1512479737731</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="new login comes online!!">
+      <created>1512572808915</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1512572808915</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220719000" />
+    <option name="totallyTimeSpent" value="220771000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="434" y="64" width="1500" height="986" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Key Promoter X" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -694,7 +694,8 @@
     <MESSAGE value="all page frames were almost completed, functions completing is gong to begin.." />
     <MESSAGE value="Get points by keyword and film name front completed." />
     <MESSAGE value="Get points by keyword and film name functions completed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Get points by keyword and film name functions completed." />
+    <MESSAGE value="new login comes online!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="new login comes online!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -978,6 +979,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="51" column="76" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="76" />
+          <folding />
         </state>
       </provider>
     </entry>
