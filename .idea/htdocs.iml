@@ -8,27 +8,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHP" type="php">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../php" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../../../php" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHARS">
-        <CLASSES>
-          <root url="phar://$MODULE_DIR$/../../../php/pharcommand.phar/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="phar://$MODULE_DIR$/../../../php/pharcommand.phar/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
