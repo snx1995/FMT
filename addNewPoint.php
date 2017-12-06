@@ -48,6 +48,12 @@
     }
 
     //$sql = "insert into dynamic(user,details,date,time)values("
+    $sql = "select * from films where filmid=".$filmid;
+    $result = $conn->query($sql);
+    if($result->num_rows==0){
+        $sql = "insert into films(filmid, filmtitle)VALUES(".$filmid.",'".$filmtitle."')";
+        if($conn->query($sql)!==true) echo "Insert into films error";
+    }
     echo "success";
 
     $conn->close();

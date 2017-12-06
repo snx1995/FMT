@@ -49,7 +49,7 @@ signup.addEventListener("click",function () {
             if(signupXhr.readyState===4 && signupXhr.status ===200){
                 if(signupXhr.responseText === "success"){
                     enLoginOverly(false,"注册成功，正在登陆...",function () {
-                        Cookies.set("username",username,{expires:1,path:''});
+                        Cookies.set("FMTUser",username,{expires:1,path:''});
                         window.location.href="main.html";
                     });
                 }else{
@@ -77,7 +77,7 @@ login.addEventListener("click",function () {
             if(loginXhr.readyState===4&&loginXhr.status===200){
                 if(loginXhr.responseText==="success"){
                     enLoginOverly(false,"登陆成功，正在跳转...",function () {
-                        Cookies.set("username",username,{expires:1,path:''});
+                        Cookies.set("FMTUser",username,{expires:1,path:''});
                         window.location.href="main.html";
                     });
                 }else{

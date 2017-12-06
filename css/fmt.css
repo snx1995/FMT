@@ -1638,3 +1638,78 @@ h1,h2,h3,h4,h5,h6{
     text-align: center;
     color: #f4f4f4;
 }
+#storyDetailsNew{
+    margin-top: 40px;
+}
+#loginOverlyMain{
+    z-index: 500;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(42,42,42,0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+}
+.loginMain{
+    border-radius: 10px;
+    overflow: hidden;
+    position: absolute;
+    width: 500px;
+    height: 350px;
+    background-color: rgba(244,244,244,0.8);
+    top: 0;left: 0;right: 0;bottom: 0;
+    margin: auto;
+}
+.loginMain .header{
+    width: 100%;
+    height: 60px;
+    background-color: rgb(42,42,42);
+}
+.loginMain .header h3{
+    line-height: 60px;
+    text-align: center;
+    color: white;
+    width: 100%;
+}
+.loginMain .content{
+    position: relative;
+    margin: 0 auto;
+    padding:40px 50px;
+    width: 80%;
+    height: 290px;
+}
+.loginMain tr{
+    height: 50px;
+    width: 100%;
+}
+.btn-content{
+    width: 100%;
+    height: auto;
+    padding: 20px 40px;
+}
+.loginMain .loading{
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(244,244,244,0.6);
+}
+.loginMain .loading img{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+
+}
+.loginMain .loading h4{
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
