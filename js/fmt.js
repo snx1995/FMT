@@ -159,7 +159,6 @@ function searchMovie(key){
     }else{
         notice.showDialog("\n请输入要搜索的内容~\n")
     }
-
 }
 function imgLoadError(el) {
     el.src='img/imgLoadError.png';
@@ -234,9 +233,10 @@ function addNewPoint() {
 var PointsOnMap = {
     points:[],
     delete:function (){
+        this.hide();
       this.points=[];
     },
-    clear:function (){
+    hide:function (){
         for(var i=0;i<this.points.length;i++){
             this.points[i].setVisible(false);
         }
@@ -358,7 +358,36 @@ function point(id,posx,posy,user,m){
         }
     })
 }
-
+function getPointsByFilmId(id,m) {
+    notice.showDialog("\n加载中，请稍后...");
+    $.ajax({
+        url:"getPointsByFilmId.php?filmid="+id,
+        dataType:"json",
+        success:function (data) {
+            PointsOnMap.delete();
+            for(var i=0;i<data.length;i++){
+                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                PointsOnMap.push(p);
+            }
+            notice.showDialog("\n切换完成,共有"+data.length+"个相关地点~");
+        }
+    })
+}
+function getPointsByKeyword(key,m){
+    notice.showDialog("\n查询中，请稍后...");
+    $.ajax({
+        url:"getPointsByKeyword.php?keyword="+key,
+        dataType:"json",
+        success:function (data) {
+            PointsOnMap.delete();
+            for(var i=0;i<data.length;i++){
+                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                PointsOnMap.push(p);
+            }
+            notice.showDialog("\n搜索完成,共有"+data.length+"个相关地点~");
+        }
+    })
+}
 function showPoints(m){
     $.ajax({
         url:"getAllPoints.php",
@@ -366,8 +395,8 @@ function showPoints(m){
         success:function (data){
             PointsOnMap.delete();
             for(var i=0;i<data.length;i++){
-                    var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
-                    PointsOnMap.push(p);
+                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                PointsOnMap.push(p);
             }
         }
     })
@@ -787,13 +816,14 @@ var exploreOptCtrl = {
 };
 var fSelectCtrl = {
     selects:$(".f-select"),
-    init:function (){
-        this.selects.on('click',function (e) {
+    init:function (m){
+        this.map = m;
+        this.selects.bind('click',function (e) {
             e.stopPropagation();
             $(this).children().filter(".content").css("visibility","visible");
             if($(this).attr("id")=="allFilms") getAllFilmDB();
         });
-        this.selects.children().children().children().filter("li").click(function (e) {
+        this.selects.children().children().children().filter("li").bind("click",function (e) {
             e.stopPropagation();
             $(this).parent().parent().parent().children().filter('.f-selected').text($(this).text());
             $(this).parent().parent().parent().children().filter('.content').css("visibility","hidden");
@@ -820,6 +850,7 @@ function getAllFilmDB(){
                 e.stopPropagation();
                 $(this).parent().parent().parent().children().filter('.f-selected').text($(this).text());
                 $(this).parent().parent().parent().children().filter('.content').css("visibility","hidden");
+                getPointsByFilmId($(this).attr("data-index"),fSelectCtrl.map);
             })
         }
     })
@@ -889,9 +920,9 @@ function logout(){
     Cookies.set("FMTUser","####",{expires:1,path:''});
     location.reload(true);
 }
-function ctrlInit(){
+function ctrlInit(m){
     navCtrl.init();
     userCenterCtrl.init();
     exploreOptCtrl.init();
-    fSelectCtrl.init();
+    fSelectCtrl.init(m);
 }

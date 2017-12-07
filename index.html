@@ -217,13 +217,13 @@
                     </div>
                 </div>
                 <div id="byKeyword">
-                    <input type="text" class="form-control" placeholder="输入关键词来搜索..">
-                    <div class="button">GO</div>
+                    <input type="text" class="form-control" placeholder="输入关键词来搜索.." id="skeyword">
+                    <div class="button" id="keySearch">GO</div>
                 </div>
             </div>
         </div>
         <div class="explore-search" id="exploreSearch">
-            <div class="explore-options active" data-index="0"><h4>全部</h4></div>
+            <div class="explore-options active" data-index="0" id="allPoints"><h4>全部</h4></div>
             <div class="explore-options" data-index="1"><h4>按电影</h4></div>
             <div class="explore-options" data-index="2"><h4>关键词</h4></div>
         </div>
@@ -383,25 +383,9 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="http://maps.google.cn/maps/api/js?key=AIzaSyBXUVPlSWsNh2fpMJYsjur-zHd8n04vDVM"></script>
 <script src="js/fmt.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/bootstrap.min.js"></script>-->
 <script src="js/js.cookie.js"></script>
 <script>
-    $(document).ready(function () {
-        ctrlInit();
-        $("#signup").click(signup);
-        $("#login").click(login);
-        $(document).on('click',function (e) {
-            $('.f-select .content').css("visibility","hidden");
-        });
-        var usern = Cookies.get("FMTUser");
-        if(usern&&usern!="####"){
-            document.getElementById("username").innerText = usern;
-            username = usern;
-        }else{
-            document.getElementById("loginOverlyMain").style.visibility = "visible";
-        }
-       changeMode("exploring",pointsAdded);
-    });
     document.onmousemove = storyDetailsWindow;
     var map;
     var myCenter = new google.maps.LatLng(46.195042108660154,126.73828125);
@@ -427,6 +411,7 @@
         };
         map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
         showPoints(map);
+        ctrlInit(map);
         google.maps.event.addListener(map,'click',function (event) {
             infowindow.close();
             if(mode==="add"){
@@ -486,6 +471,28 @@
         });
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+    $(document).ready(function () {
+        $("#signup").click(signup);
+        $("#login").click(login);
+        $("#allPoints").click(function (e) {
+           e.stopPropagation();
+           showPoints(map);
+        });
+        $("#keySearch").click(function () {
+            getPointsByKeyword($("#skeyword").val(),map);
+        });
+        $(document).on('click',function (e) {
+            $('.f-select .content').css("visibility","hidden");
+        });
+        var usern = Cookies.get("FMTUser");
+        if(usern&&usern!="####"){
+            document.getElementById("username").innerText = usern;
+            username = usern;
+        }else{
+            document.getElementById("loginOverlyMain").style.visibility = "visible";
+        }
+        changeMode("exploring",pointsAdded);
+    });
 </script>
 </body>
 </html>
