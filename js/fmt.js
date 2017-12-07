@@ -850,6 +850,7 @@ function signup() {
                     document.getElementById("loginOverlyMain").style.visibility = "hidden";
                     notice.showDialog("\n欢迎回来，"+usr+"!\n");
                     document.getElementById("username").innerText = usr;
+                    username = usr;
                 }
                 else alert(data);
                 loading.style.visibility = "hidden";
@@ -876,6 +877,7 @@ function login(){
                     document.getElementById("loginOverlyMain").style.visibility = "hidden";
                     notice.showDialog("\n欢迎回来，"+usr+"!\n");
                     document.getElementById("username").innerText = usr;
+                    username = usr;
                 }
                 else alert(data);
                 loading.style.visibility = "hidden";
