@@ -159,7 +159,6 @@ function searchMovie(key){
     }else{
         notice.showDialog("\n请输入要搜索的内容~\n")
     }
-
 }
 function imgLoadError(el) {
     el.src='img/imgLoadError.png';
@@ -206,32 +205,38 @@ function addNewPoint() {
     var placeDescription = document.getElementById("placeDescription").value;
     var storyDetails = document.getElementById("storyDetails").value;
     var keyword = document.getElementById("keyword").value;
-    var xhr = new XMLHttpRequest();
-    var request = "addNewPoint.php?offsetX="+offsetx+"&offsetY="+offsety+"&filmid="+filmid+"&placeDescription="+
+    if(placeDescription&&storyDetails&&keyword){
+        var xhr = new XMLHttpRequest();
+        var request = "addNewPoint.php?offsetX="+offsetx+"&offsetY="+offsety+"&filmid="+filmid+"&placeDescription="+
             placeDescription+"&storyDetails="+storyDetails+"&keyword="+keyword+"&username="+username+"&filmtitle="+filmtitle;
-    xhr.open("GET",request,true);
-    xhr.onreadystatechange = function () {
-        if(xhr.readyState===4&&xhr.status===200){
-            if(xhr.responseText==="success"){
-                notice.showDialog("\n添加成功！\n");
-                jumpClose("info","my-fade-reverse");
-                showPoints(map);
-                pointsAdded.clear();
+        xhr.open("GET",request,true);
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState===4&&xhr.status===200){
+                if(xhr.responseText==="success"){
+                    notice.showDialog("\n添加成功！\n");
+                    jumpClose("info","my-fade-reverse");
+                    showPoints(map);
+                    pointsAdded.clear();
+                }
+                else{
+                    notice.showDialog(xhr.responseText);
+                }
             }
-            else{
-                notice.showDialog(xhr.responseText);
-            }
-        }
-    };
-    xhr.send();
+        };
+        xhr.send();
+    }else{
+        notice.showDialog("\n请将每一项都填写完整~\n");
+    }
+
 }
 
 var PointsOnMap = {
     points:[],
     delete:function (){
+        this.hide();
       this.points=[];
     },
-    clear:function (){
+    hide:function (){
         for(var i=0;i<this.points.length;i++){
             this.points[i].setVisible(false);
         }
@@ -353,7 +358,36 @@ function point(id,posx,posy,user,m){
         }
     })
 }
-
+function getPointsByFilmId(id,m) {
+    notice.showDialog("\n加载中，请稍后...");
+    $.ajax({
+        url:"getPointsByFilmId.php?filmid="+id,
+        dataType:"json",
+        success:function (data) {
+            PointsOnMap.delete();
+            for(var i=0;i<data.length;i++){
+                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                PointsOnMap.push(p);
+            }
+            notice.showDialog("\n切换完成,共有"+data.length+"个相关地点~");
+        }
+    })
+}
+function getPointsByKeyword(key,m){
+    notice.showDialog("\n查询中，请稍后...");
+    $.ajax({
+        url:"getPointsByKeyword.php?keyword="+key,
+        dataType:"json",
+        success:function (data) {
+            PointsOnMap.delete();
+            for(var i=0;i<data.length;i++){
+                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                PointsOnMap.push(p);
+            }
+            notice.showDialog("\n搜索完成,共有"+data.length+"个相关地点~");
+        }
+    })
+}
 function showPoints(m){
     $.ajax({
         url:"getAllPoints.php",
@@ -361,8 +395,8 @@ function showPoints(m){
         success:function (data){
             PointsOnMap.delete();
             for(var i=0;i<data.length;i++){
-                    var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
-                    PointsOnMap.push(p);
+                var p = new point(data[i].id,data[i].posx,data[i].posy,data[i].user,m);
+                PointsOnMap.push(p);
             }
         }
     })
@@ -418,14 +452,14 @@ function getAllPaths(){
             var pathsInner = "";
             for(var i=0;i<data.length;i++){
                 pathsInner+="<div class='item-route'>" +
-                    "<h3>Contributed by <strong>" + data[i].user +
-                    "</strong></h3>" +
-                    "<h5>路径中共有" + data[i].points.length +
-                    "个地点，他说这条路线：</h5>"+
+                    "<h3>用户：<strong>" + data[i].user +
+                    "</strong>创建</h3>" +
+                    "<h5>路线中共有" + data[i].points.length +
+                    "个地点，TA说这条路线：</h5>"+
                     "<p style='font-size: 16px'>" + data[i].pathdes+
                     "</p>" +
                     "<a class='pull-right' onclick='pathShowOnMap(" +i+
-                    ")'>Show on map>></a>"+
+                    ")'>在地图上查看>></a>"+
                     "</div>"
             }
             pathContent.innerHTML = pathsInner;
@@ -463,29 +497,37 @@ function addNewStory(pointid) {
 
 }
 function confirmNewStory(){
-    $.ajax({
-        url:"addNewStory.php",
-        data:{
-            pointid:pointIdOfNewStory,
-            filmid:movieSelected.id,
-            placedes:document.getElementById("placeDescriptionNew").value,
-            details:document.getElementById("storyDetailsNew").value,
-            keywords:document.getElementById("keywordNew").value,
-            user:username,
-            filmtitle:movieSelected.title
-        },
-        dataType:"text",
-        success:function (data) {
-            if(data==="success"){
-                notice.showDialog("\n添加成功！\n");
-                jumpClose("newStory","my-fade-reverse");
-                getAllStories(pointIdOfNewStory,map,PointsOnMap.getPoint(pointIdOfNewStory).marker);
+    var des = document.getElementById("placeDescriptionNew").value;
+    var det = document.getElementById("storyDetailsNew").value;
+    var key = document.getElementById("keywordNew").value;
+    if(!des || !det || !key){
+        notice.showDialog("\n请将每一项都填写完整~\n");
+    }
+    else{
+        $.ajax({
+            url:"addNewStory.php",
+            data:{
+                pointid:pointIdOfNewStory,
+                filmid:movieSelected.id,
+                placedes:document.getElementById("placeDescriptionNew").value,
+                details:document.getElementById("storyDetailsNew").value,
+                keywords:document.getElementById("keywordNew").value,
+                user:username,
+                filmtitle:movieSelected.title
+            },
+            dataType:"text",
+            success:function (data) {
+                if(data==="success"){
+                    notice.showDialog("\n添加成功！\n");
+                    jumpClose("newStory","my-fade-reverse");
+                    getAllStories(pointIdOfNewStory,map,PointsOnMap.getPoint(pointIdOfNewStory).marker);
+                }
+                else{
+                    notice.showDialog(data);
+                }
             }
-            else{
-                notice.showDialog(data);
-            }
-        }
-    })
+        })
+    }
 }
 
 function showStoryDetail(storyid) {
@@ -774,13 +816,14 @@ var exploreOptCtrl = {
 };
 var fSelectCtrl = {
     selects:$(".f-select"),
-    init:function (){
-        this.selects.on('click',function (e) {
+    init:function (m){
+        this.map = m;
+        this.selects.bind('click',function (e) {
             e.stopPropagation();
             $(this).children().filter(".content").css("visibility","visible");
             if($(this).attr("id")=="allFilms") getAllFilmDB();
         });
-        this.selects.children().children().children().filter("li").click(function (e) {
+        this.selects.children().children().children().filter("li").bind("click",function (e) {
             e.stopPropagation();
             $(this).parent().parent().parent().children().filter('.f-selected').text($(this).text());
             $(this).parent().parent().parent().children().filter('.content').css("visibility","hidden");
@@ -807,13 +850,79 @@ function getAllFilmDB(){
                 e.stopPropagation();
                 $(this).parent().parent().parent().children().filter('.f-selected').text($(this).text());
                 $(this).parent().parent().parent().children().filter('.content').css("visibility","hidden");
+                getPointsByFilmId($(this).attr("data-index"),fSelectCtrl.map);
             })
         }
     })
 }
-function ctrlInit(){
+function signup() {
+    var usr = document.getElementById("usr-main").value;
+    var pass = document.getElementById("pass-main").value;
+    var passre = document.getElementById("passre-main").value;
+    var ureg = /^[\u4e00-\u9fff\w]{4,25}$/;
+    var preg = /^[a-zA-Z0-9]{4,16}$/;
+    if(!usr||!pass) alert("请输入用户名和密码！");
+    else if(!passre) alert("请确认密码！");
+    else if(!ureg.test(usr)) alert("不合法的用户名,请不要包含特殊符号！");
+    else if(!preg.test(pass)) alert("不合法的密码！");
+    else if(pass!=passre) alert("两次输入不一致！");
+    else{
+        var loading = document.getElementById("loading");
+        loading.style.visibility = "visible";
+        $.ajax({
+            url:"signup.php",
+            data:{
+                username:usr,
+                password:pass
+            },
+            success:function (data) {
+                if(data=="success"){
+                    Cookies.set("FMTUser",usr,{expires:1,path:''});
+                    document.getElementById("loginOverlyMain").style.visibility = "hidden";
+                    notice.showDialog("\n欢迎回来，"+usr+"!\n");
+                    document.getElementById("username").innerText = usr;
+                    username = usr;
+                }
+                else alert(data);
+                loading.style.visibility = "hidden";
+            }
+        })
+    }
+}
+function login(){
+    var usr = document.getElementById("usr-main").value;
+    var pass = document.getElementById("pass-main").value;
+    if(!usr||!pass) alert("请输入用户名或密码");
+    else{
+        var loading = document.getElementById("loading");
+        loading.style.visibility = "visible";
+        $.ajax({
+            url:"login.php",
+            data:{
+                username:usr,
+                password:pass
+            },
+            success:function (data) {
+                if(data=="success"){
+                    Cookies.set("FMTUser",usr,{expires:1,path:''});
+                    document.getElementById("loginOverlyMain").style.visibility = "hidden";
+                    notice.showDialog("\n欢迎回来，"+usr+"!\n");
+                    document.getElementById("username").innerText = usr;
+                    username = usr;
+                }
+                else alert(data);
+                loading.style.visibility = "hidden";
+            }
+        })
+    }
+}
+function logout(){
+    Cookies.set("FMTUser","####",{expires:1,path:''});
+    location.reload(true);
+}
+function ctrlInit(m){
     navCtrl.init();
     userCenterCtrl.init();
     exploreOptCtrl.init();
-    fSelectCtrl.init();
+    fSelectCtrl.init(m);
 }
