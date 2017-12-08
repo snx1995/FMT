@@ -160,9 +160,6 @@ function searchMovie(key){
         notice.showDialog("\n请输入要搜索的内容~\n")
     }
 }
-function imgLoadError(el) {
-    el.src='img/imgLoadError.png';
-}
 function showSearchResult(data) {
     var sresult = document.getElementById('searchResult');
     var fid;
