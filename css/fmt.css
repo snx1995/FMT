@@ -696,7 +696,7 @@ h1,h2,h3,h4,h5,h6{
 }
 #info textarea{
     position: relative;
-    top: 30px;
+    top: 20px;
 }
 .filmPic{
     width: 35%;
@@ -1047,6 +1047,7 @@ h1,h2,h3,h4,h5,h6{
     -webkit-transform: translateX(-50%);
 }
 .movie-select h4{
+    cursor: default;
     width: 100%;
     height: 100%;
     line-height: 80px;
@@ -1639,7 +1640,7 @@ h1,h2,h3,h4,h5,h6{
     color: #f4f4f4;
 }
 #storyDetailsNew{
-    margin-top: 40px;
+    margin-top: 20px;
 }
 #loginOverlyMain{
     z-index: 500;
