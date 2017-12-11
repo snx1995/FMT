@@ -24,24 +24,25 @@
     $keyword = $_GET["keyword"];
     $user = $_GET["username"];
     $filmtitle = $_GET["filmtitle"];
+    $userid = $_GET["userid"];
 
-    $sql = "insert into points(posx,posy,user)values(".$posx.",".$posy.",'".$user."')";
+    $sql = "insert into points(posx,posy,user,userid)values(".$posx.",".$posy.",'".$user."',".$userid.")";
     if($conn->query($sql) !== true){
         echo 'Insert into points error: '.$conn->error;
     }
     $pointid=-1;
-    $sql = "select * from points where posx=".$posx." and posy=".$posy." and user='".$user."'";
+    $sql = "select max(id) from points";
     $result = $conn->query($sql);
 
     if($result->num_rows>0){
         $row = $result->fetch_assoc();
-        $pointid = $row["id"];
+        $pointid = $row["max(id)"];
     }else{
         echo "0 results";
     }
 
-    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid,filmtitle)values".
-        "(".$filmid.",'".$place."','".$story."','".$keyword."','".$user."',".$pointid.",'".$filmtitle."')";
+    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid,filmtitle,userid)values".
+        "(".$filmid.",'".$place."','".$story."','".$keyword."','".$user."',".$pointid.",'".$filmtitle."',".$userid.")";
 
     if($conn->query($sql) !== true){
         echo 'Insert into stories error: '.$conn->error;

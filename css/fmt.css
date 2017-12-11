@@ -696,7 +696,7 @@ h1,h2,h3,h4,h5,h6{
 }
 #info textarea{
     position: relative;
-    top: 20px;
+    top: 30px;
 }
 .filmPic{
     width: 35%;
@@ -764,13 +764,12 @@ h1,h2,h3,h4,h5,h6{
     -webkit-transition: -webkit-transform 0.3s;
 }
 .item-route{
-    padding: 20px 20px 20px 20px;
+    padding: 20px 20px 3px 20px;
     margin: 10px auto;
     border-radius: 10px;
     border: 1px solid rgb(100,100,100);
     width: 80%;
-    min-height: 180px;
-    max-height: 300px;
+    height: auto;
     overflow: auto;
 }
 .item-route a{
@@ -1024,8 +1023,9 @@ h1,h2,h3,h4,h5,h6{
     overflow: auto;
 }
 .story-item{
+    height: auto;
     margin-top: 10px;
-    padding: 0 20px 10px 20px;
+    padding: 10px 20px 3px 20px;
     border: 1px solid rgb(200,200,200);
     border-radius: 10px;
 }
@@ -1047,7 +1047,6 @@ h1,h2,h3,h4,h5,h6{
     -webkit-transform: translateX(-50%);
 }
 .movie-select h4{
-    cursor: default;
     width: 100%;
     height: 100%;
     line-height: 80px;
@@ -1640,7 +1639,7 @@ h1,h2,h3,h4,h5,h6{
     color: #f4f4f4;
 }
 #storyDetailsNew{
-    margin-top: 20px;
+    margin-top: 40px;
 }
 #loginOverlyMain{
     z-index: 500;
@@ -1650,7 +1649,7 @@ h1,h2,h3,h4,h5,h6{
     position: absolute;
     top: 0;
     left: 0;
-    visibility: hidden;
+    visibility: visible;
 }
 .loginMain{
     border-radius: 10px;
@@ -1713,4 +1712,48 @@ h1,h2,h3,h4,h5,h6{
     left: 0;
     width: 100%;
     text-align: center;
+}
+#completeInfo{
+    visibility: hidden;
+    position: absolute;
+    top: 0;left: 0;right: 0;bottom: 0;
+    margin: auto;
+    width: 800px;
+    height: 700px;
+    background-color: rgba(244,244,244,0.8);
+}
+#completeInfo .header{
+    width: 100%;
+    height: 60px;
+    background-color: rgb(42,42,42);
+}
+#completeInfo .header h3{
+    line-height: 60px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+#completeInfo tr{
+    height: 80px;
+}
+#IAddress{
+    width: 100%;
+}
+#completeInfo textarea{
+    width: 100%;
+    height: 100px;
+}
+.story-btn{
+    cursor: pointer;
+    color: lightgray;
+    float: right;
+    margin-right: 20px;
+
+}
+.story-btn:hover{
+    color: #00b3ee;
+}
+.story-btn-c{
+    width: 100%;
+    height: 25px;
 }

@@ -38,6 +38,7 @@ for($i=0;$i<count($pids);$i++){
             "posx"=>$row["posx"],
             "posy"=>$row["posy"],
             "user"=>$row["user"],
+            "userid"=>$row["userid"],
         );
         $points[] = $point;
     }

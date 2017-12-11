@@ -36,7 +36,8 @@ $password = "123456789";
                 "keywords"=>$row["keywords"],
                 "user"=>$row["user"],
                 "pointid"=>$row["pointid"],
-                "filmtitle"=>$row["filmtitle"]
+                "filmtitle"=>$row["filmtitle"],
+                "userid"=>$row["userid"],
             );
             $stories[]=$story;
         }

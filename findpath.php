@@ -7,7 +7,7 @@
  */
     $servername = "localhost";
     $username = "root";
-$password = "123456789";
+    $password = "123456789";
     $dbname = "fmt";
     $conn = new mysqli($servername,$username,$password,$dbname);
     if($conn->connect_error){
@@ -36,12 +36,14 @@ $password = "123456789";
                 "posx"=> $row2["posx"],
                 "posy"=> $row2["posy"],
                 "user"=> $row2["user"],
+                "userid"=>$row2["userid"],
             );
             $points[]=$point;
         }
         $path=array(
             "points"=>$points,
             "user"=>$row["user"],
+            "userid"=>$row["userid"],
             "pathdes"=>$row["pathdes"],
         );
         $paths[]= $path;

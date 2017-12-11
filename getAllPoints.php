@@ -28,6 +28,7 @@
                 "posx"=>$row["posx"],
                 "posy"=>$row["posy"],
                 "user"=>$row["user"],
+                "userid"=>$row["userid"],
             );
             $json[]=$point;
         }

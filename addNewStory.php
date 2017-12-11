@@ -23,8 +23,9 @@
     $user = $_GET["user"];
     $pointid = $_GET["pointid"];
     $filmtitle = $_GET["filmtitle"];
+    $userid = $_GET["userid"];
 
-    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid,filmtitle)values(".$filmid.",'".$placedes."','".$details."','".$keywords."','".$user."',".$pointid.",'".$filmtitle."')";
+    $sql = "insert into stories(filmid,placedes,details,keywords,user,pointid,filmtitle,userid)values(".$filmid.",'".$placedes."','".$details."','".$keywords."','".$user."',".$pointid.",'".$filmtitle."',".$userid.")";
 
     if($conn->query($sql)!==true) echo $sql;
     else{

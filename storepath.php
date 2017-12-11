@@ -7,7 +7,7 @@
  */
     $servername = "localhost";
     $username = "root";
-$password = "123456789";
+    $password = "123456789";
     $dbname = "fmt";
     $conn = new mysqli($servername,$username,$password,$dbname);
     if($conn->connect_error){
@@ -16,11 +16,12 @@ $password = "123456789";
     $pathinfo=$_GET["pathinfo"];
     $user=$_GET["user"];
     $pathdes=$_GET["pathdes"];
+    $userid = $_GET["userid"];
 
-    $sql="insert into path(pathinfo,user,pathdes)values('".$pathinfo."','".$user."','".$pathdes."')";
+    $sql="insert into path(pathinfo,user,pathdes,userid)values('".$pathinfo."','".$user."','".$pathdes."',".$userid.")";
     if($conn->query($sql)===true){
         echo "success";
     }
     else{
-        echo "数据库错误！".$conn->error.$user.$passwd;
+        echo "数据库错误！".$conn->error;
     }

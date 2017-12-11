@@ -34,7 +34,8 @@
             "keywords"=>$row["keywords"],
             "user"=>$row["user"],
             "pointid"=>$row["pointid"],
-            "filmtitle"=>$row["filmtitle"]
+            "filmtitle"=>$row["filmtitle"],
+            "userid"=>$row["userid"],
         );
         echo json_encode($story);
     }

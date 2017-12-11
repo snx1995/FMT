@@ -7,7 +7,7 @@
  */
     $servername = "localhost";
     $username = "root";
-$password = "123456789";
+    $password = "123456789";
     $dbname = "fmt";
 
     $conn = new mysqli($servername,$username,$password,$dbname);
@@ -18,22 +18,26 @@ $password = "123456789";
 
     $user = $_GET["username"];
     $passwd = $_GET["password"];
-    $sql = "select * from users where username='".$user."'";
-    $result = $conn->query($sql);
-    if($result->num_rows>0){
-        echo "用户名已存在，请重试..";
-    }
+    $response = array();
+    $sql = "insert into users(username, password)values('".$user."','".$passwd."')";
 
-    else{
-        $sql = "insert into users(username,password)values('".$user."','".$passwd."')";
-
-        if($conn->query($sql)===true){
-            echo "success";
+    if($conn->query($sql)!==true){
+        $response["result"] = $conn->error;
+    }else{
+        $sql = "select max(userid) from users";
+        $result = $conn->query($sql);
+        if($result->num_rows>0){
+            $row = $result->fetch_row();
+            $response["id"] = $row[0];
+            $response["result"] = "success";
         }
         else{
-            echo "数据库错误！".$conn->error.$user.$passwd;
+            $response["result"] = "Get max id error!";
         }
     }
+
+
+    echo json_encode($response);
 
 
 
